@@ -1,0 +1,244 @@
+﻿@page "/agent/top-up"
+
+<PageTitle>Top Up</PageTitle>
+<SectionContent SectionName="@NavConstants.TbLeft">
+    <Breadcrumb Slash="true"></Breadcrumb>
+    <Breadcrumb>Top-up</Breadcrumb>
+</SectionContent>
+<SectionContent SectionName="@NavConstants.TbRight">
+    <input @bind="DateRange" class="form-control form-control-sm w-200px" placeholder="Pick date range" id="RangeDate"/>
+    <button class="btn btn-sm btn-primary" @onclick="GetData">Get Data</button>
+</SectionContent>
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<Card Title="List of Top-up">
+    <ToolbarRight>
+        <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new TopUpDto(), 0)">
+            <i class="fa fa-plus-square"></i>Add new
+        </button>
+    </ToolbarRight>
+    <ChildContent>
+        @if (_items == null || IsLoading)
+        {
+            <Loading/>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
+                    <thead>
+                    <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Approve Amount</th>
+                        <th>Status</th>
+                        <th>Note</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in _items)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.Status == 0)
+                                {
+                                    <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
+                                            @onclick="(e) => FormAction(item, 1)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
+                                            @onclick="@(() => FormAction(item, 2))">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-warning"
+                                            @onclick="@(() => FormAction(item, 4))">
+                                        <i class="fas fa-envelope"></i>
+                                    </button>
+                                }
+                            </td>
+                            <td>@item.RequestDate.ToLocalTime().ToDmy()</td>
+                            <td>@item.RequestAmount.ToString("N2")</td>
+                            <td>@item.ApproveAmount.ToString("N2")</td>
+                            <td>@item.Status.ToTopUpStatus()</td>
+                            <td class="w-50">
+                                @item.Note
+                                @if (item.ApproveNote.NotIsNullOrEmpty())
+                                {
+                                    <p>Approve Note: @item.ApproveNote</p>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </ChildContent>
+</Card>
+<CustomModal Title="@($"{Title} Top-up")" OnClickCallback="SaveData">
+    <EditForm Model="data" class="form">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+        <div class="row mb-7">
+            <div class="col-md-6">
+                <label class="required">Date (mm/dd/yyyy)</label>
+                <InputDate @bind-Value="@data!.RequestDate" class="form-control" data-control="date-picker"/>
+                <ValidationMessage For="@(() => data.RequestDate)"/>
+            </div>
+            <div class="col-md-6">
+                <label class="required">Amount</label>
+                <input type="text" @bind="@data.RequestAmount" class="form-control numberinputmask"/>
+                <ValidationMessage For="@(() => data.RequestAmount)"/>
+            </div>
+        </div>
+        <div class="row mb-7">
+            <label class="required">Note</label>
+            <InputTextArea type="text" @bind-Value="@data!.Note" class="form-control maxlength" maxlength="500"/>
+            <ValidationMessage For="@(() => data.Note)"/>
+        </div>
+        <div class="row">
+            <div class="form-check form-switch form-check-custom form-check-warning form-check-solid me-6 mt-9">
+                <input class="form-check-input" type="checkbox"
+                       @bind="@data.IsDeposit" id="flexSwitchShareRoom"/>
+                <label class="form-check-label" for="flexSwitchShareRoom">
+                    Is Deposit
+                </label>
+            </div>
+        </div>
+    </EditForm>
+</CustomModal>
+
+@code {
+    private List<TopUpDto>? _items = [];
+    private TopUpDto? data = new();
+    private int iAction { get; set; } = 0;
+    private string Title { get; set; } = "Add new";
+    private FluentValidationValidator _fluentValidationValidator = default!;
+    [CascadingParameter] private UserInfo? ShareUserInfo { get; set; }
+
+    private GetReportRequest _request = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        DateRange = "".InitDateRange();
+        _request.UserId = ShareUserInfo?.UserId;
+        await GetData();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CallInitRangeDate();
+        }
+
+        if (InitDataTable)
+        {
+            InitDataTable = false;
+            await CallInitialDataTable();
+        }
+    }
+
+    private async Task GetData()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        _request.DateRange = DateRange;
+        _items = await _httpService.PostAsync<List<TopUpDto>>($"{ShareEndpoints.TopUp}{ActionController.Get}", _request);
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+    }
+
+    private async Task FormAction(TopUpDto item, int action)
+    {
+        iAction = action;
+        data = item.Adapt<TopUpDto>();
+        switch (action)
+        {
+            case 4:
+                data.Status = 1;
+                break;
+            case 0:
+                data.UserId = ShareUserInfo?.UserId;
+                data.DisplayName = ShareUserInfo?.FullName;
+                data.RequestDate = DateTime.Today;
+                break;
+            default:
+                data.RequestDate = data.RequestDate.ToLocalTime();
+                break;
+        }
+
+        Title = action switch
+        {
+            1 => "Edit",
+            2 => "Delete",
+            4 => "Send Request Approve",
+            _ => "Add new"
+        };
+        await ToggleModal();
+        await InitDatePicker2M();
+        await SetTextNum();
+    }
+
+    private async Task SaveData()
+    {
+        var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
+        if (!isValid) return;
+        IsLoading = true;
+        StateHasChanged();
+        if (data!.RequestDate != data.RequestDate.ToUniversalTime())
+        {
+            data.RequestDate = data.RequestDate.ToUniversalTime();
+        }
+
+        var result = new ResultClient<Guid>();
+        switch (iAction)
+        {
+            case 2:
+                if (data != null)
+                {
+                    result = await _httpService.DeleteAsync<ResultClient<Guid>>($"{ShareEndpoints.TopUp}{ActionController.Delete}{data.Id}");
+                    if (result.Succeeded)
+                    {
+                        _items = _items?.Where(w => w.Id != data!.Id).ToList();
+                    }
+                }
+
+                break;
+            default:
+                result = await _httpService.PostAsync<ResultClient<Guid>>($"{ShareEndpoints.TopUp}{ActionController.AddEdit}", new AddEditDataRequest<TopUpDto>()
+                {
+                    Data = data!,
+                    Action = iAction == 0 ? ActionCommandType.Add : ActionCommandType.Edit,
+                });
+                if (result.Succeeded)
+                {
+                    if (iAction == 0)
+                    {
+                        data!.Id = result.Data;
+                        _items?.Add(data);
+                    }
+                    else
+                    {
+                        var oFind = _items?.FirstOrDefault(w => w.Id == data?.Id);
+                        if (oFind != null)
+                        {
+                            data.Adapt(oFind);
+                        }
+                    }
+                }
+
+                break;
+        }
+
+        await ToggleModal();
+        await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+    }
+
+}

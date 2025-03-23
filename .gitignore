@@ -1,0 +1,10 @@
+.idea/*
+.vs/*
+.vscode/*
+bov/bin/*
+bov/obj/*
+bov.client/bin/*
+bov.client/obj/*
+bov.shared/bin/*
+bov.shared/obj/*
+**.txt

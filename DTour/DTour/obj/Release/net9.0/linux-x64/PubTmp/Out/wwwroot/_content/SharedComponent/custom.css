@@ -1,0 +1,1434 @@
+.cursor {
+    position: fixed;
+    top: -40px;
+    left: -40px;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+}
+.cursor:before {
+    content: "";
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(227, 135, 3, 0.77);
+    border: 1px solid white;
+    transition: all ease 0.15s;
+    transform: scale(0.15);
+}
+
+.cursor.light:before {
+    transform: scale(1);
+    background: transparent;
+}
+
+.cursor.drag {
+    mix-blend-mode: unset;
+}
+
+.cursor.drag:before {
+    transform: scale(1);
+    background: var(--bs-primary);
+    border-color: transparent;
+}
+
+.cursor.drag:before {
+    content: "\ea23";
+    font-family: "LineIcons";
+    font-size: 20px;
+    color: #fff;
+}
+.btn-custom, .btn-custom:active {
+    color: #fff !important
+}
+
+.BpkTicket_bpk-ticket__paper--with-notches:hover::after, .btn-custom:hover:before {
+    opacity: 1
+}
+
+.btn-custom {
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    background: #455a64 !important
+}
+
+.btn-custom:after, .btn-custom:before {
+    content: '';
+    position: absolute;
+    border-radius: 10px;
+    z-index: -1
+}
+
+.btn-custom:before {
+    background: linear-gradient(45deg, red, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, red);
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: 20s linear infinite glowing;
+    opacity: 0;
+    transition: opacity .3s ease-in-out
+}
+
+.btn-custom:active:after {
+    background: 0 0
+}
+
+.btn-custom:after {
+    width: 100%;
+    height: 100%;
+    background: #455a64;
+    left: 0;
+    top: 0
+}
+
+@keyframes glowing {
+    0%, 100% {
+        background-position: 0 0
+    }
+    50% {
+        background-position: 400% 0
+    }
+}
+
+.BpkTicket_bpk-ticket:after, .BpkTicket_bpk-ticket__paper--with-notches:after {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: opacity .2s ease-in-out;
+    border-radius: inherit;
+    box-shadow: 0 4px 14px 0 rgba(37, 32, 31, .25);
+    opacity: 0;
+    pointer-events: none
+}
+
+html[dir=rtl] .BpkTicket_bpk-ticket__main--horizontal, html[dir=rtl] .BpkTicket_bpk-ticket__main-inner--horizontal {
+    border-radius: 0 .375rem .375rem 0
+}
+
+.invalid {
+    outline: red solid 1px
+}
+
+.validation-message {
+    color: red
+}
+
+.LogoImage_container {
+    color: #68697f
+}
+
+.TicketLogo_image {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: .25rem
+}
+
+.LegDetails_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.LegLogo_logoContainer {
+    margin-top: .375rem;
+    flex: 1 1 22%
+}
+
+.LegLogo_legImage {
+    max-width: 3.75rem
+}
+
+.LegInfo_stopsTooltipTarget {
+    cursor: help
+}
+
+.LegInfo_routePartialCityTooltip {
+    color: #68697f;
+    cursor: help
+}
+
+.LegInfo_stopsLabelContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline
+}
+
+.LegInfo_stopsLabelRed {
+    color: #d1435b;
+    white-space: pre
+}
+
+.LegInfo_stopsLabelGreen {
+    color: #00a698;
+    white-space: pre
+}
+
+.LegInfo_routePartialDepart {
+    display: flex;
+    max-width: 32%;
+    padding-right: .375rem;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 0 1 32%;
+    text-align: right
+}
+
+.LegInfo_routePartialArrive {
+    display: flex;
+    max-width: 32%;
+    padding-left: .375rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 1 32%;
+    text-align: left
+}
+
+.Duration_duration, .LegInfo_routePartialTime, .LegInfo_stopStation {
+    color: #444560
+}
+
+.LegInfo_legInfo {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 1 78%;
+    text-align: center
+}
+
+.LegInfo_stopsContainer {
+    max-width: 36%;
+    padding: 0 .375rem;
+    flex: 0 1 36%;
+    text-align: center
+}
+
+.LegInfo_stopLine {
+    position: relative;
+    display: block;
+    width: 90%;
+    height: .125rem;
+    margin: .375rem auto;
+    padding: 0;
+    border-radius: .375rem;
+    background-color: #68697f;
+    line-height: 0;
+    text-align: center
+}
+
+.LegInfo_planeEnd {
+    position: absolute;
+    top: 50%;
+    right: -.375rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    margin-top: -.5rem;
+    padding-left: .25rem;
+    background-color: #fff
+}
+
+.LegInfo_stopDot {
+    position: relative;
+    top: -.125rem;
+    display: inline-block;
+    width: .375rem;
+    height: .375rem;
+    margin: 0 4%;
+    border-radius: .375rem;
+    background-color: #d1435b;
+    background-image: none;
+    line-height: 0;
+    box-shadow: 0 0 0 .125rem #fff;
+    zoom: 1
+}
+
+.BpkTicket_bpk-ticket__main-inner, .BpkTicket_bpk-ticket__stub-inner {
+    height: 100%;
+    overflow: hidden
+}
+
+.EcoTicketHeader_paddingLg, .LegInfo_dayOffsetMessage {
+    padding: .375rem
+}
+
+.LegInfo_dayOffset {
+    top: -.75rem;
+    left: .625rem
+}
+
+.LegInfo_highlight {
+    padding: 0 .375rem;
+    border-radius: .375rem;
+    background: rgba(209, 67, 91, .2)
+}
+
+.BpkTicket_bpk-ticket__main--padded, .BpkTicket_bpk-ticket__stub--padded {
+    padding: 1rem
+}
+
+.BpkTicket_bpk-ticket__paper, .BpkTicket_bpk-ticket__punchline {
+    position: relative;
+    background-color: #fff
+}
+
+.BpkTicket_bpk-ticket__punchline--fallback, .BpkTicket_bpk-ticket__punchline--vertical, .BpkTicket_bpk-ticket__punchline--vertical-with-notches {
+    background-image: linear-gradient(#dddde5, #dddde5);
+    background-repeat: repeat-y;
+    background-position: 50% 0;
+    background-size: .125rem .5rem
+}
+
+.BpkTicket_bpk-ticket {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    color: #111236;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 1px 3px 0 rgba(37, 32, 31, .3);
+    border-radius: .375rem;
+    z-index: 0
+}
+
+.BpkTicket_bpk-ticket:after {
+    position: absolute;
+    content: "";
+    display: block
+}
+
+.BpkTicket_bpk-ticket--with-notches {
+    box-shadow: none
+}
+
+.BpkTicket_bpk-ticket--with-notches:after {
+    content: none
+}
+
+.BpkTicket_bpk-ticket__paper--with-notches {
+    box-shadow: 0 1px 3px 0 rgba(37, 32, 31, .3);
+    z-index: 0
+}
+
+.BpkTicket_bpk-ticket__paper--with-notches:after {
+    position: absolute;
+    content: "";
+    display: block
+}
+
+.BpkTicket_bpk-ticket__main {
+    flex: 2 1 auto
+}
+
+.BpkTicket_bpk-ticket__main--horizontal {
+    border-radius: .375rem 0 0 .375rem
+}
+
+.BpkTicket_bpk-ticket__main--vertical {
+    border-radius: .375rem .375rem 0 0
+}
+
+.BpkTicket_bpk-ticket__main-inner--horizontal {
+    border-radius: .375rem 0 0 .375rem
+}
+
+.BpkTicket_bpk-ticket__main-inner--vertical {
+    border-radius: .375rem .375rem 0 0
+}
+
+.BpkTicket_bpk-ticket__stub {
+    flex: 1 1 auto
+}
+
+.BpkTicket_bpk-ticket__stub--horizontal {
+    min-width: 30%;
+    border-radius: 0 .375rem .375rem 0
+}
+
+.BpkTicket_bpk-ticket__stub--vertical {
+    border-radius: 0 0 .375rem .375rem
+}
+
+.BpkTicket_bpk-ticket__stub-inner--horizontal {
+    min-width: 30%;
+    border-radius: 0 .375rem .375rem 0
+}
+
+.BpkTicket_bpk-ticket__stub-inner--vertical {
+    border-radius: 0 0 .375rem .375rem
+}
+
+.BpkTicket_bpk-ticket__punchline {
+    z-index: 1;
+    flex: 0 0 auto
+}
+
+.BpkTicket_bpk-ticket__punchline--vertical {
+    width: .125rem
+}
+
+.BpkTicket_bpk-ticket__punchline--vertical-with-notches {
+    width: 1rem;
+    margin: .5rem auto;
+    padding: .5rem 0
+}
+
+.BpkTicket_bpk-ticket__punchline--fallback {
+    display: table-cell;
+    width: .125rem
+}
+
+.BpkTicket_bpk-ticket__notch {
+    position: absolute;
+    width: 1rem;
+    height: .5rem;
+    overflow: hidden
+}
+
+.BpkTicket_bpk-ticket__notch:after {
+    position: relative;
+    content: "";
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    transform: translateZ(0);
+    border: .5rem solid #fff;
+    border-radius: 1rem;
+    box-shadow: inset 0 1px 3px 0 rgba(37, 32, 31, .3)
+}
+
+.BpkTicket_bpk-ticket__notch--top {
+    top: -.5rem
+}
+
+.BpkTicket_bpk-ticket__notch--top:after {
+    right: -50%;
+    bottom: 200%;
+    left: -50%
+}
+
+.BpkTicket_bpk-ticket__notch--bottom {
+    bottom: -.5rem
+}
+
+.BpkTicket_bpk-ticket__notch--bottom:after {
+    right: -50%;
+    bottom: 100%;
+    left: -50%
+}
+
+@media (max-width: 53.125rem) {
+    .BpkTicket_bpk-ticket {
+        flex-direction: column
+    }
+
+    .BpkTicket_bpk-ticket__punchline--vertical {
+        height: .125rem
+    }
+
+    .BpkTicket_bpk-ticket__punchline--vertical, .BpkTicket_bpk-ticket__punchline--vertical-with-notches {
+        background-image: linear-gradient(#dddde5, #dddde5);
+        background-repeat: repeat-x;
+        background-position: 0 50%;
+        background-size: .5rem .125rem
+    }
+
+    .BpkTicket_bpk-ticket__punchline--vertical-with-notches {
+        height: 1rem;
+        width: auto;
+        margin: auto .5rem;
+        padding: 0 .5rem
+    }
+
+    .BpkTicket_bpk-ticket__notch--top {
+        top: auto;
+        left: -.5rem;
+        width: .5rem;
+        height: 1rem
+    }
+
+    .BpkTicket_bpk-ticket__notch--top:after {
+        left: auto;
+        right: 200%;
+        bottom: 50%
+    }
+
+    .BpkTicket_bpk-ticket__notch--bottom {
+        right: -.5rem;
+        width: .5rem;
+        height: 1rem;
+        bottom: auto
+    }
+
+    .BpkTicket_bpk-ticket__notch--bottom:after {
+        right: 100%;
+        bottom: 50%;
+        left: auto
+    }
+}
+
+.UpperTicketBody_container {
+    display: block;
+    flex-grow: 1
+}
+
+.UpperTicketBody_partnershipRow {
+    display: flex;
+    justify-content: space-between
+}
+
+.UpperTicketBody_sponsoredBadge {
+    align-self: flex-start
+}
+
+.UpperTicketBody_screenReaderOnly__YTY2Z:not(:focus):not(:active) {
+    position: absolute;
+    width: .0625rem;
+    height: .0625rem;
+    white-space: nowrap;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%)
+}
+
+.UpperTicketBody_screenReaderOnly > h2, .UpperTicketBody_screenReaderOnly > p {
+    font-size: 0;
+    line-height: 0
+}
+
+.UpperTicketBody_legsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly
+}
+
+.UpperTicketBody_ticketLogo {
+    display: flex;
+    margin-bottom: .75rem;
+    align-items: center
+}
+
+.UpperTicketBody_legLogo {
+    display: none
+}
+
+.UpperTicketBody_leg:not(:first-child) {
+    margin-top: .75rem
+}
+
+.ShimmerLeg_shimmerLeg {
+    min-width: 9.6875rem;
+    height: 100%;
+    min-height: 3.5rem
+}
+
+.EcoTicketWrapper_ecoContainer {
+    margin-bottom: .75rem;
+    padding: 0 .125rem .125rem;
+    border-radius: .375rem;
+    background-color: #d0eeec;
+    color: #02122c
+}
+
+.EcoTicketWrapper_itineraryContainer, .FlightsInline_link, .UnpricedBrandInline_link {
+    margin-bottom: .75rem
+}
+
+.FlightsTicket_container {
+    position: relative
+}
+
+.FlightsTicket_link {
+    display: block;
+    text-decoration: none
+}
+
+.TicketStub_horizontalStubContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center
+}
+
+.TicketStub_ctaButton {
+    margin-top: .375rem
+}
+
+.TicketStub_verticalStubContainerLeft {
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex: 0 0 100%
+}
+
+.TicketStub_verticalStubContainerRight {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    flex: 0 0 100%
+}
+
+.TicketStub_verticalStubInnerRowLeft {
+    width: 100%;
+    justify-content: space-between
+}
+
+.TicketStub_verticalStubInnerRowLeft, .TicketStub_verticalStubInnerRowRight {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center
+}
+
+.TicketStub_verticalStubInnerColumnLeft {
+    display: flex;
+    margin-right: .75rem;
+    flex-direction: column;
+    align-items: flex-start
+}
+
+.Logo_logoInline, .TicketStub_verticalStubInnerColumnRight {
+    margin-right: .75rem
+}
+
+.TicketStub_verticalPrice, .TicketStub_verticalStubInnerColumnRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end
+}
+
+.TicketStub_verticalSelfTransfer {
+    flex: 1 0 100%;
+    background-color: #dddde5;
+    border-radius: .25rem
+}
+
+.Ticket_stub {
+    display: flex;
+    padding: 1.125rem;
+    justify-content: center;
+    align-items: center
+}
+
+@media (min-width: 32.3125rem) {
+    .Ticket_stub {
+        flex: 0 0 32%
+    }
+}
+
+.FlightsTicketBody_container {
+    display: flex;
+    height: 100%;
+    flex-direction: column
+}
+
+.FlightsTicketBody_horizontalRule {
+    width: 100%;
+    height: .0625rem;
+    box-shadow: inset 0 1px 0 0 #dddde5
+}
+
+.FlightsTicketBody_bodyHorizontalRule {
+    margin-top: .375rem;
+    margin-bottom: .375rem
+}
+
+.FlightsTicketBody_lowerBodyContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.FlightsTicketBody_placeholder {
+    flex: 0 0 50%
+}
+
+.Logo_logo {
+    display: block;
+    width: 7.5rem
+}
+
+@media screen and (min-width: 30rem) and (max-width: 35rem) {
+    .UpperTicketBody_legsContainer {
+        height: 100%
+    }
+
+    .UpperTicketBody_ticketLogo {
+        display: none
+    }
+
+    .UpperTicketBody_legLogo {
+        display: initial
+    }
+
+    .Logo_logoInline {
+        display: block;
+        flex-shrink: 0
+    }
+}
+
+@media screen and (min-width: 41.25rem) and (max-width: 48.75rem) {
+    .UpperTicketBody_legsContainer {
+        height: 100%
+    }
+
+    .UpperTicketBody_ticketLogo {
+        display: none
+    }
+
+    .UpperTicketBody_legLogo {
+        display: initial
+    }
+
+    .Logo_logoInline {
+        display: block;
+        flex-shrink: 0
+    }
+}
+
+@media screen and (min-width: 53.125rem) {
+    .UpperTicketBody_legsContainer {
+        height: 100%
+    }
+
+    .UpperTicketBody_ticketLogo {
+        display: none
+    }
+
+    .UpperTicketBody_legLogo {
+        display: initial
+    }
+
+    .Logo_logoInline {
+        display: block;
+        flex-shrink: 0
+    }
+}
+
+.Logo_item {
+    margin-bottom: .375rem
+}
+
+.EcoTicketHeader_ecoHeader {
+    display: flex;
+    padding: 0 .375rem;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center
+}
+
+.EcoTicketHeader_ecoIconContainer {
+    display: flex;
+    padding: .375rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: #00a698
+}
+
+.EcoTicketHeader_paddingSm {
+    padding: .1875rem
+}
+
+.EcoTicketHeader_ecoIcon {
+    fill: #fff
+}
+
+.EcoTicketHeader_ecoHeaderText {
+    padding: .5rem .75rem;
+    flex-grow: 1;
+    text-align: left
+}
+
+.EcoTicketHeader_ecoInfoIconContainer {
+    display: flex;
+    align-items: center
+}
+
+.EcoTicketBody_ecoLearnMoreArrow, .EcoTicketHeader_ecoInfoIcon {
+    fill: #00a698
+}
+
+.EcoTicketBody_container {
+    display: flex;
+    max-height: 25rem;
+    padding: 0 .375rem;
+    flex-flow: column nowrap;
+    align-items: center;
+    transition: .4s;
+    background-color: #d0eeec;
+    overflow: hidden
+}
+
+.EcoTicketBody_collapsed {
+    visibility: hidden;
+    max-height: 0
+}
+
+.EcoTicketBody_ecoBodyImage {
+    width: 100%;
+    max-width: 16rem
+}
+
+.EcoTicketBody_ecoBodyDescriptionContainer {
+    padding-bottom: .75rem
+}
+
+.EcoTicketBody_ecoBodyText {
+    padding: .75rem
+}
+
+.EcoTicketBody_ecoLearnMore {
+    display: block;
+    padding: .75rem;
+    color: #00a698
+}
+
+@media screen and (min-width: 32.25rem) {
+    .EcoTicketBody_container {
+        padding: 0 2rem;
+        flex-flow: row-reverse nowrap;
+        justify-content: space-between
+    }
+
+    .EcoTicketBody_fullSizeBody {
+        padding: 0 2rem 0 2.7rem
+    }
+
+    .EcoTicketBody_ecoBodyImage {
+        width: 8rem;
+        padding-right: 1.125rem;
+        padding-bottom: 1.125rem
+    }
+
+    .EcoTicketBody_ecoBodyDescriptionContainer {
+        flex-basis: 70%;
+        text-align: left
+    }
+
+    .EcoTicketBody_ecoLearnMore {
+        padding-top: 0
+    }
+}
+
+.EcoTicketBody_ecoLearnMore:hover {
+    color: #fff;
+    text-decoration: underline
+}
+
+.EcoTicketBody_ecoLearnMore:visited {
+    color: #00a698
+}
+
+@keyframes BpkText_bpk-keyframe-spin {
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+.BpkText_bpk-text {
+    margin: 0
+}
+
+.BpkText_bpk-text--xs {
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--sm {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--lg {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--xxl {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 700
+}
+
+.BpkText_bpk-text--xxxl {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    font-weight: 700
+}
+
+.BpkText_bpk-text--xxxxl {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -.02em
+}
+
+.BpkText_bpk-text--xxxxxl {
+    font-size: 4rem;
+    line-height: 4.5rem;
+    font-weight: 700;
+    letter-spacing: -.02em
+}
+
+.BpkText_bpk-text--caption {
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--footnote {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--label-1 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700
+}
+
+.BpkText_bpk-text--label-2 {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 700
+}
+
+.BpkText_bpk-text--body-default {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--body-longform {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--subheading {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 400
+}
+
+.BpkText_bpk-text--heading-1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    font-weight: 700
+}
+
+.BpkText_bpk-text--heading-2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 700
+}
+
+@media (max-width: 32.25rem) {
+    .BpkText_bpk-text--heading-1 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 700
+    }
+
+    .BpkText_bpk-text--heading-2 {
+        font-size: 1.5rem;
+        line-height: 1.75rem;
+        font-weight: 700
+    }
+}
+
+.BpkText_bpk-text--heading-3 {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-weight: 700
+}
+
+.BpkText_bpk-text--heading-4 {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    font-weight: 700
+}
+
+@media (max-width: 32.25rem) {
+    .BpkText_bpk-text--heading-3 {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        font-weight: 700
+    }
+
+    .BpkText_bpk-text--heading-4 {
+        font-size: 1rem;
+        line-height: 1.25rem;
+        font-weight: 700
+    }
+}
+
+.BpkText_bpk-text--heading-5 {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 700
+}
+
+.BpkText_bpk-text--hero-1 {
+    font-size: 7.5rem;
+    line-height: 7.5rem;
+    font-weight: 700;
+    letter-spacing: -.02em
+}
+
+.BpkText_bpk-text--hero-2 {
+    font-size: 6rem;
+    line-height: 6rem;
+    font-weight: 700;
+    letter-spacing: -.02em
+}
+
+.BpkText_bpk-text--hero-3 {
+    font-size: 4.75rem;
+    line-height: 5.25rem;
+    font-weight: 700;
+    letter-spacing: -.02em
+}
+
+.BpkText_bpk-text--hero-4 {
+    font-size: 4rem;
+    line-height: 4.5rem;
+    font-weight: 700;
+    letter-spacing: -.02em
+}
+
+.BpkText_bpk-text--hero-5 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -.02em
+}
+
+.BpkText_bpk-text--bold {
+    font-weight: 700
+}
+
+.BpkText_bpk-text--black {
+    font-weight: 900
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden
+}
+
+.custom-file-input::before {
+    content: 'Select passport';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: 0;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt
+}
+
+.custom-file-input:hover::before {
+    border-color: #000
+}
+
+.custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9)
+}
+
+.flight-component {
+    --w: min(700px, 90vw);
+    width: var(--w);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    font-size: 1.25rem;
+}
+
+/*
+Didn't nest this one, in case I wanted to use the input by itself 
+without the div/span structure (in that case: add width!!)
+*/
+.flight-component input,
+input.flight {
+    --bg: #6c6c84;
+    --scale: clamp(1, calc(1 + 0.5 * sin(pi * var(--val) / 100)), 2);
+    --shadow: clamp(0.15em, calc(1em * sin(pi * var(--val) / 100)), 1em);
+    --opacity: clamp(0.2, calc(1 - sin(pi * var(--val) / 100)), 0.4);
+    --color: rgb(0 0 0 / var(--opacity));
+    --primary: #f0f4fc;
+    --secondary: #4b0d62;
+    --val: 0;
+    --height: 3em;
+    appearance: none;
+    container-type: inline-size;
+    flex: 1;
+    height: var(--height);
+    border: none; /* Firefox adds a default border */
+    border-radius: 10em;
+    position: relative;
+    background: radial-gradient(circle at 0.35em 50%, var(--bg) 0.35em, #0000 0) no-repeat,
+    radial-gradient(circle at calc(100% - 0.35em) 50%, var(--bg) 0.35em, #0000 0) no-repeat,
+    linear-gradient(#0000 45%, var(--bg) 0 55%, #0000 0) 50% 50% / 99% 100%,
+    #f000;
+    border: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+
+    /* 
+    the ::before and ::after won't work on Firefox for input range,
+    so only use for decoration on the other browsers 
+    */
+
+    &::before {
+        content: "";
+        width: calc(var(--val) * 1%);
+        min-width: 0.5em;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: radial-gradient(circle at 0.35em 50%, #000 0.35em, #0000 0) no-repeat,
+        linear-gradient(#0000 45%, #000 0 55%, #0000 0) 50% 50% / calc(100% - 1em) 100% no-repeat,
+        #f000;
+    }
+
+    &::after {
+        content: "";
+        width: 100%;
+        height: 12em;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        pointer-events: none;
+        background: /* cloud 1 */ radial-gradient(3% 20% at 50% 20%, #fff 40%, #0000 0),
+        radial-gradient(3% 20% at 52.5% 13%, #fff 40%, #0000 0),
+        radial-gradient(2% 20% at 51% 10%, #fff 40%, #0000 0),
+        radial-gradient(2.5% 20% at 51.5% 27%, #fff 50%, #0000 0),
+        radial-gradient(2% 20% at 53% 23%, #fff 60%, #0000 0),
+        radial-gradient(4% 40% at 55% 20%, #fff 40%, #0000 0),
+            /* cloud 2 */ radial-gradient(3% 20% at 40% 80%, #fff 40%, #0000 0),
+        radial-gradient(3% 20% at 42.5% 87%, #fff 40%, #0000 0),
+        radial-gradient(2% 20% at 41% 90%, #fff 40%, #0000 0),
+        radial-gradient(2.5% 20% at 41.5% 72%, #fff 50%, #0000 0),
+        radial-gradient(2% 20% at 43% 73%, #fff 60%, #0000 0),
+        radial-gradient(4% 40% at 40% 78%, #fff 40%, #0000 0);
+        background-size: 300% 100%;
+        background-position: calc(var(--val) * 1%) 0;
+        -webkit-mask: linear-gradient(90deg, #0000, #0008 35% 65%, #0000);
+        mask: linear-gradient(90deg, #0000, #0008 35% 65%, #0000);
+    }
+
+    /* track for Chrome and Safari (Firefox is ok) */
+
+    &::-webkit-slider-runnable-track {
+        height: 100%;
+        /* so the plane is aVnHolidaye the clouds */
+        position: relative;
+        z-index: 1;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+
+    /* Thumb for Chrome and Safari */
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        transform: translateY(calc(-50% + var(--height) / 2)) scale(var(--scale));
+        width: 4em;
+        aspect-ratio: 1;
+        pointer-events: none;
+        background: linear-gradient(var(--secondary) 0 0) 2% 50% / 13% 2.5% no-repeat,
+            /* main frame */ conic-gradient(at -40% 50%, #0000 84.75deg, var(--primary) 85deg 95deg, #0000 95.25deg) 0 0 / 80% 100%,
+            /* pilot */ radial-gradient(closest-side circle at calc(100% - 0.85em) 50%, #9cf 0.3em, #0000 0),
+        radial-gradient(20% 10% at 80% 50%, var(--primary) 99%, #0000),
+            /* tail */ conic-gradient(at 45% -45%, #0000 150deg, var(--secondary) 151deg 174deg, #0000 175deg) -50% 40% / 53% 20%,
+        conic-gradient(at 45% 145%, #0000 5deg, var(--secondary) 6deg 29deg, #0000 30deg) -50% 60% / 53% 20%,
+            /* wings */ conic-gradient(at 38% -45%, #0000 158deg, var(--secondary) 158.5deg 174deg, #0000 174.5deg) 0 0 / 100% 50%,
+        conic-gradient(at 38% 145%, #0000 5deg, var(--secondary) 5.5deg 21deg, #0000 21.5deg) 0 100% / 100% 50%,
+            /* engines */ radial-gradient(80% 50%, #000 99%, #0000) 51% 22% / 21% 11%,
+        radial-gradient(80% 50%, #000 99%, #0000) 51% 78% / 21% 11%;
+        background-repeat: no-repeat;
+        border-radius: 20% / 100%;
+        filter: drop-shadow(calc(var(--shadow) * 2) calc(var(--shadow) * 1.25) var(--shadow) var(--color));
+        box-shadow: none; /* Safari adds a box-shadow when using drop-shadow on iOS, remove manually */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Thumb for Firefox */
+
+    &::-moz-range-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        transform: scale(var(--scale));
+        width: 4em;
+        height: 4em;
+        border: none;
+        pointer-events: none;
+        background: linear-gradient(var(--secondary) 0 0) 2% 50% / 13% 2.5% no-repeat,
+            /* main frame */ conic-gradient(at -40% 50%, #0000 84.75deg, var(--primary) 85deg 95deg, #0000 95.25deg) 0 0 / 80% 100%,
+            /* pilot */ radial-gradient(closest-side circle at calc(100% - 0.85em) 50%, #9cf 0.3em, #0000 0),
+        radial-gradient(20% 10% at 80% 50%, var(--primary) 99%, #0000),
+            /* tail */ conic-gradient(at 45% -45%, #0000 150deg, var(--secondary) 151deg 174deg, #0000 175deg) -50% 40% / 53% 20%,
+        conic-gradient(at 45% 145%, #0000 5deg, var(--secondary) 6deg 29deg, #0000 30deg) -50% 60% / 53% 20%,
+            /* wings */ conic-gradient(at 38% -45%, #0000 158deg, var(--secondary) 158.5deg 174deg, #0000 174.5deg) 0 0 / 100% 50%,
+        conic-gradient(at 38% 145%, #0000 5deg, var(--secondary) 5.5deg 21deg, #0000 21.5deg) 0 100% / 100% 50%,
+            /* engines */ radial-gradient(80% 50%, #000 99%, #0000) 51% 22% / 21% 11%,
+        radial-gradient(80% 50%, #000 99%, #0000) 51% 78% / 21% 11%;
+        background-repeat: no-repeat;
+        border-radius: 20% / 100%;
+        filter: drop-shadow(calc(var(--shadow) * 2) calc(var(--shadow) * 1.25) var(--shadow) var(--color));
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+
+@media (prefers-contrast: more) {
+    .flight-component input,
+    input.flight {
+
+        &::-webkit-slider-runnable-track {
+            border: 2px solid #666;
+            height: 0;
+        }
+
+        &::-webkit-slider-thumb {
+            transform: translateY(-50%) scale(var(--scale));
+            box-sizing: border-box;
+            border: 2em solid Highlight;
+            clip-path: polygon(0.00% 47.00%, 3.00% 46.62%, 0.88% 31.62%, 5.38% 31.25%, 13.38% 45.75%, 44.38% 42.50%, 43.00% 29.50%, 40.25% 29.00%, 40.00% 21.50%, 42.75% 20.88%, 40.00% 0.00%, 47.12% 0.12%, 55.00% 19.88%, 60.88% 19.88%, 60.88% 29.12%, 58.88% 29.38%, 63.75% 40.62%, 81.75% 39.75%, 88.00% 40.38%, 93.00% 42.00%, 97.25% 44.38%, 99.25% 46.62%, 100.00% 50.00%, 99.25% 53.38%, 97.25% 55.62%, 93.00% 58.00%, 88.00% 59.62%, 81.75% 60.25%, 63.75% 59.38%, 58.88% 70.62%, 60.88% 70.88%, 60.88% 80.12%, 55.00% 80.12%, 47.12% 100.00%, 40.00% 100.00%, 42.75% 79.12%, 40.00% 78.50%, 40.25% 71.00%, 43.00% 70.50%, 44.38% 57.50%, 13.38% 54.25%, 5.38% 68.75%, 0.88% 68.38%, 3.00% 53.38%, 0.00% 53.00%);
+        }
+
+        &::-moz-range-track {
+            border: 2px solid #000;
+            height: 0;
+        }
+
+        &::-moz-range-thumb {
+            box-sizing: border-box;
+            border: 2em solid Highlight;
+            clip-path: polygon(0.00% 47.00%, 3.00% 46.62%, 0.88% 31.62%, 5.38% 31.25%, 13.38% 45.75%, 44.38% 42.50%, 43.00% 29.50%, 40.25% 29.00%, 40.00% 21.50%, 42.75% 20.88%, 40.00% 0.00%, 47.12% 0.12%, 55.00% 19.88%, 60.88% 19.88%, 60.88% 29.12%, 58.88% 29.38%, 63.75% 40.62%, 81.75% 39.75%, 88.00% 40.38%, 93.00% 42.00%, 97.25% 44.38%, 99.25% 46.62%, 100.00% 50.00%, 99.25% 53.38%, 97.25% 55.62%, 93.00% 58.00%, 88.00% 59.62%, 81.75% 60.25%, 63.75% 59.38%, 58.88% 70.62%, 60.88% 70.88%, 60.88% 80.12%, 55.00% 80.12%, 47.12% 100.00%, 40.00% 100.00%, 42.75% 79.12%, 40.00% 78.50%, 40.25% 71.00%, 43.00% 70.50%, 44.38% 57.50%, 13.38% 54.25%, 5.38% 68.75%, 0.88% 68.38%, 3.00% 53.38%, 0.00% 53.00%);
+        }
+    }
+}
+
+/* the clouds look bad in smaller screens, hide them */
+@container (max-width: 400px) {
+    .flight-component input,
+    input.flight {
+        &::after {
+            display: none;
+        }
+
+        /* replace the place with a helicopter */
+
+        &::-webkit-slider-thumb {
+            width: 3em;
+            background: /* rotors */ radial-gradient(closest-side circle at 50% 50%, var(--secondary) 10%, #0001 11% 90%, #0000 91%) 100% 50% / 90% 90%,
+            radial-gradient(closest-side circle at 50% 50%, #0000 0 20%, #0001 0 40%, #0000 0 60%, #0001 0 80%, #0000 0) 100% 50% / 91% 91%,
+                /* main frame */ conic-gradient(at -65% 50%, #0000 84.75deg, var(--primary) 85deg 95deg, #0000 95.25deg) 0 0 / 80% 100%,
+                /* pilot */ radial-gradient(farthest-side circle at calc(100% - 0.5em) 50%, #9cf 0.4em, #0000 0),
+            radial-gradient(25% 20% at 75% 50%, var(--primary) 99%, #0000),
+                /* tail */ conic-gradient(at 45% -45%, #0000 150deg, var(--secondary) 151deg 174deg, #0000 175deg) -49% 40% / 53% 25%,
+            conic-gradient(at 45% 145%, #0000 5deg, var(--secondary) 6deg 29deg, #0000 30deg) -49% 60% / 53% 25%,
+                /* legs? */ linear-gradient(#000 0 0) 100% 33% / 60% 4%,
+            linear-gradient(#000 0 0) 100% 67% / 60% 4%;
+            background-repeat: no-repeat;
+        }
+
+        &::-moz-range-thumb {
+            width: 3em;
+            height: 3em;
+            background: /* rotors */ radial-gradient(closest-side circle at 55% 50%, var(--secondary) 10%, #0001 11% 90%, #0000 91%),
+            radial-gradient(closest-side circle at 50% 50%, #0000 0 20%, #0001 0 40%, #0000 0 60%, #0001 0 80%, #0000 0) 50% 50% / 91% 91%,
+                /* main frame */ conic-gradient(at -65% 50%, #0000 84.75deg, var(--primary) 85deg 95deg, #0000 95.25deg) 0 0 / 80% 100%,
+                /* pilot */ radial-gradient(farthest-side circle at calc(100% - 0.5em) 50%, #9cf 0.4em, #0000 0),
+            radial-gradient(25% 20% at 75% 50%, var(--primary) 99%, #0000),
+                /* tail */ conic-gradient(at 45% -45%, #0000 150deg, var(--secondary) 151deg 174deg, #0000 175deg) -49% 40% / 53% 25%,
+            conic-gradient(at 45% 145%, #0000 5deg, var(--secondary) 6deg 29deg, #0000 30deg) -49% 60% / 53% 25%,
+                /* legs? */ linear-gradient(#000 0 0) 100% 33% / 60% 4%,
+            linear-gradient(#000 0 0) 100% 67% / 60% 4%;
+            background-repeat: no-repeat;
+        }
+    }
+}
+
+.flightLine {
+    position: relative;
+    width: 100%;
+    height: 0;
+    top: 10px;
+    border: 1px dashed #dee2e6;
+}
+
+.flightLine > * {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 100%;
+}
+
+.flightLine > *:nth-child(1) {
+    left: -2px;
+    border: 0.4rem solid var(--bs-primary);
+}
+
+.flightLine > *:nth-child(2) {
+    right: -2px;
+    border: 0.4rem solid #d09910;
+    transform: translate3d(50%, -50%, 0);
+}
+
+.flightLine.departure:before {
+    content: "\e975";
+    font-family: keenicons-duotone;
+    font-weight: 600;
+    font-size: calc(1.35rem + 1.2vw) !important;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(60deg);
+    top: 50%;
+    color: var(--bs-primary);
+    position: absolute;
+}
+
+.flightLine--stop {
+    border-radius: 100%;
+    box-sizing: content-box;
+    width: 0.8rem;
+    height: 0.8rem;
+    position: absolute;
+    top: 50%;
+    background-color: var(--bs-primary);
+    transform: translate3d(-50%, -50%, 0);
+}
+
+
+.loading-screen {
+    position: relative;
+}
+
+.loading-screen .loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .15s
+}
+
+.loading-screen .loading-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: #fffc;
+    overflow-y: auto
+}
+
+.loading-screen .loading-modal .loading-body {
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    align-items: center;
+    padding: 0
+}
+
+.loading-screen .loading-modal .rotating-image {
+    animation: loading-screen_rotate 2s linear infinite;
+    width: 10vw
+}
+
+@media (max-width: 600px) {
+    .loading-screen .loading-modal .rotating-image {
+        width: 50vw
+    }
+}
+
+@keyframes loading-screen_rotate {
+    0% {
+        transform: rotate(0)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+
+.svg-calLoader {
+    width: 230px; height: 230px;
+    transform-origin: 115px 115px;
+    animation: 2.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane { fill: #5c00e6; }
+.cal-loader__path { stroke: #f59527; animation: 2.4s ease-in-out infinite loader-path; }
+
+@keyframes loader-spin {
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes loader-path {
+    0%{
+        stroke-dasharray:  0, 580, 0, 0, 0, 0, 0, 0, 0;
+    }
+    50%{
+        stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+    }
+    100%{
+        stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+    }
+}

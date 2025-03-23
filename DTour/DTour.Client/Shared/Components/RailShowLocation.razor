@@ -1,0 +1,70 @@
+﻿@{
+    var mS = Item.stations?.Length > 1 ? "ms-10" : "";
+    if (Item.stations is { Length: > 1 })
+    {
+        <div
+            class="d-flex align-Items-center p-3 rounded-3 border-hover border border-dashed border-gray-300 cursor-pointer mb-1"
+            @onclick="async () => { await SetData(Item.city_slug, Item.city_name, Item.country_code); }">
+            <div
+                class="symbol symbol-35px symbol-circle me-5">
+                <span
+                    class="symbol-label bg-light-success fw-semibold">
+                    <i class="fas fa-location text-success"></i>
+                </span>
+            </div>
+            <div class="fs-6 text-gray-800 me-2">
+                @Item.city_name,
+                <span class="text-muted">@Item.country_code</span>
+                <span class="badge badge-light-primary">All Station</span>
+            </div>
+        </div>
+    }
+
+    foreach (var iStation in Item.stations!)
+    {
+        <div
+            class="d-flex align-Items-center p-3 rounded-3 border-hover border border-dashed border-gray-300 cursor-pointer mb-1 @mS"
+            @onclick="async () => { await SetData(iStation.station_slug, iStation.station_name, Item.country_code); }">
+            <div
+                class="symbol symbol-35px symbol-circle me-5">
+                <span
+                    class="symbol-label bg-light-success fw-semibold">
+                    @if (iStation.station_type == "airport")
+                    {
+                        <i class="fas fa-plane-departure text-info"></i>
+                    }
+                    else if (iStation.station_main)
+                    {
+                        <i class="fas fa-home text-primary"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-subway text-success"></i>
+                    }
+                </span>
+            </div>
+            <div class="fw-semibold">
+                <span
+                    class="fs-6 text-gray-800 me-2">@iStation.station_name,</span>
+                <span
+                    class="text-muted">@iStation.country_code</span>
+                @if (iStation.station_main)
+                {
+                    <span class="badge badge-light-primary">All Station</span>
+                }
+            </div>
+        </div>
+    }
+}
+
+@code {
+    [Parameter] public RailLocationOnline Item { get; set; } = new();
+    [Parameter] public bool IsDep { get; set; } = true;
+    [Parameter] public EventCallback<(string slug, string name, string countryCode, bool isDep)> CallBack { get; set; }
+
+    private async Task SetData(string? slug, string? name, string? countryCode)
+    {
+        await CallBack.InvokeAsync((slug, name, countryCode, IsDep)!);
+    }
+
+}

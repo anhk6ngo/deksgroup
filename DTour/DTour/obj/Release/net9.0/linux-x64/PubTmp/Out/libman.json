@@ -1,0 +1,14 @@
+{
+  "version": "3.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "moment.js@2.30.1",
+      "destination": "wwwroot/plugins/moment.js/"
+    },
+    {
+      "library": "bootstrap-daterangepicker@3.0.5",
+      "destination": "wwwroot/plugins/bootstrap-daterangepicker/"
+    }
+  ]
+}

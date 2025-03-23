@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Home" xml:space="preserve">
+        <value>Trang chủ</value>
+    </data>
+    <data name="Remember me" xml:space="preserve">
+        <value>Ghỉ nhớ tôi</value>
+    </data>
+    <data name="Forgot your password" xml:space="preserve">
+        <value>Quên mật khẩu</value>
+    </data>
+    <data name="Go Home" xml:space="preserve">
+        <value>Về trang chủ</value>
+    </data>
+    <data name="Change Password" xml:space="preserve">
+        <value>Thay đổi mật khẩu</value>
+    </data>
+    <data name="Confirm Password" xml:space="preserve">
+        <value>Xác nhận mật khẩu</value>
+    </data>
+    <data name="Old Password" xml:space="preserve">
+        <value>Mật khẩu cũ</value>
+    </data>
+    <data name="New Password" xml:space="preserve">
+        <value>Mật khẩu mới</value>
+    </data>
+    <data name="Reset Password" xml:space="preserve">
+        <value>Khôi phục mật khẩu</value>
+    </data>
+    <data name="Reset" xml:space="preserve">
+        <value>Khôi phục</value>
+    </data>
+    <data name="Please enter your password" xml:space="preserve">
+        <value>Nhập mật khẩu mới</value>
+    </data>
+    <data name="Use 8 or more characters with a mix of letters, numbers, symbols" xml:space="preserve">
+        <value>Mật khẩu có độ dài tối thiểu 8 ký tự bao gồm chữ, số, ký tự đặc biệt</value>
+    </data>
+    <data name="Permissions" xml:space="preserve">
+        <value>Phân quyền</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Đăng ký mới</value>
+    </data>
+    <data name="Users" xml:space="preserve">
+        <value>Người sử dụng</value>
+    </data>
+    <data name="User Management" xml:space="preserve">
+        <value>Quán lý người dùng</value>
+    </data>
+    <data name="Administrator" xml:space="preserve">
+        <value>Quán trị</value>
+    </data>
+    <data name="Commission" xml:space="preserve">
+        <value>Hoa hồng</value>
+    </data>
+    <data name="Approve Top-up" xml:space="preserve">
+        <value>Phê duyệt nạp tiền</value>
+    </data>
+    <data name="Top-up" xml:space="preserve">
+        <value>Nạp tiền</value>
+    </data>
+    <data name="Currency" xml:space="preserve">
+        <value>Tiền tệ</value>
+    </data>
+    <data name="Dash board" xml:space="preserve">
+        <value>Thông tin tổng hợp</value>
+    </data>
+    <data name="Operation" xml:space="preserve">
+        <value>Điều hành khai thác</value>
+    </data>
+    <data name="Buy Tickets" xml:space="preserve">
+        <value>Mua vé</value>
+    </data>
+    <data name="Exchange rate" xml:space="preserve">
+        <value>Tỉ giá ngoại tệ</value>
+    </data>
+    <data name="Contact Us" xml:space="preserve">
+        <value>Liên hệ chúng tôi</value>
+    </data>
+    <data name="From" xml:space="preserve">
+        <value>Từ</value>
+    </data>
+    <data name="To" xml:space="preserve">
+        <value>Đến</value>
+    </data>
+    <data name="One Way" xml:space="preserve">
+        <value>Một chiều</value>
+    </data>
+    <data name="Round Trip" xml:space="preserve">
+        <value>Khứ hồi</value>
+    </data>
+    <data name="Find tickets" xml:space="preserve">
+        <value>Tìm vé</value>
+    </data>
+    <data name="Adults" xml:space="preserve">
+        <value>Người lớn</value>
+    </data>
+    <data name="Log in" xml:space="preserve">
+        <value>Đăng nhập</value>
+    </data>
+    <data name="Sign out" xml:space="preserve">
+        <value>Đăng xuất</value>
+    </data>
+    <data name="Agent" xml:space="preserve">
+        <value>Đại lý</value>
+    </data>
+    <data name="Tour By Requested" xml:space="preserve">
+        <value>Du lịch theo yêu cầu</value>
+    </data>
+    <data name="Gallery" xml:space="preserve">
+        <value>Thư viện ảnh</value>
+    </data>
+    <data name="DTour News" xml:space="preserve">
+        <value>Tin tức của DTour</value>
+    </data>
+    <data name="News" xml:space="preserve">
+        <value>Tin tức</value>
+    </data>
+    <data name="Careers" xml:space="preserve">
+        <value>Tuyển dụng</value>
+    </data>
+    <data name="Our Company" xml:space="preserve">
+        <value>Công ty chúng tôi</value>
+    </data>
+    <data name="Services" xml:space="preserve">
+        <value>Dịch vụ</value>
+    </data>
+    <data name="India Nepal" xml:space="preserve">
+        <value>Ấn độ - Nepal</value>
+    </data>
+    <data name="Korea" xml:space="preserve">
+        <value>Hàn quốc</value>
+    </data>
+    <data name="Japan" xml:space="preserve">
+        <value>Nhật bản</value>
+    </data>
+    <data name="China" xml:space="preserve">
+        <value>Trung Quốc</value>
+    </data>
+    <data name="Asia" xml:space="preserve">
+        <value>Đông Nam Á</value>
+    </data>
+    <data name="Destination" xml:space="preserve">
+        <value>Điểm đến</value>
+    </data>
+    <data name="Ancillary" xml:space="preserve">
+        <value>Dịch vụ sân bay</value>
+    </data>
+    <data name="Quick Links" xml:space="preserve">
+        <value>Liên kết nhanh</value>
+    </data>
+    <data name="Our Service" xml:space="preserve">
+        <value>Dịch vụ của chúng tôi</value>
+    </data>
+    <data name="Terms of Service" xml:space="preserve">
+        <value>Điều khoản dịch vụ</value>
+    </data>
+    <data name="Ha Noi" xml:space="preserve">
+        <value>Hà nội</value>
+    </data>
+    <data name="Ho Chi Minh" xml:space="preserve">
+        <value>Hồ Chí Minh</value>
+    </data>
+    <data name="Copyright" xml:space="preserve">
+        <value>Bản quyền</value>
+    </data>
+    <data name="We Accept" xml:space="preserve">
+        <value>Chúng tôi chấp thuận</value>
+    </data>
+    <data name="Travel Guide" xml:space="preserve">
+        <value>Cẩm nang du lịch</value>
+    </data>
+    <data name="Air" xml:space="preserve">
+        <value>Máy bay</value>
+    </data>
+    <data name="Train" xml:space="preserve">
+        <value>Tàu</value>
+    </data>
+    <data name="Tour" xml:space="preserve">
+        <value>Du lịch</value>
+    </data>
+    <data name="Child" xml:space="preserve">
+        <value>Trẻ em</value>
+    </data>
+    <data name="Age" xml:space="preserve">
+        <value>Tuổi</value>
+    </data>
+    <data name="About Us" xml:space="preserve">
+        <value>Về chúng tôi</value>
+    </data>
+    <data name="Children/Youths" xml:space="preserve">
+        <value>Trẻ em/Thanh thiếu niên</value>
+    </data>
+    <data name="Not found. Please try again" xml:space="preserve">
+        <value>Không tìm thấy. Xin hãy thử lại lần nữa</value>
+    </data>
+    <data name="Search" xml:space="preserve">
+        <value>Tìm kiếm</value>
+    </data>
+    <data name="Get In Touch" xml:space="preserve">
+        <value>Liên hệ</value>
+    </data>
+    <data name="From: City, Airport, Station" xml:space="preserve">
+        <value>Từ: Thành phố, sân bay, nhà ga</value>
+    </data>
+    <data name="To: City, Airport, Station" xml:space="preserve">
+        <value>Đến: Thành phố, sân bay, nhà ga</value>
+    </data>
+    <data name="English" xml:space="preserve">
+        <value>Tiếng Anh</value>
+    </data>
+    <data name="Vietnamese" xml:space="preserve">
+        <value>Tiếng Việt</value>
+    </data>
+    <data name="Your Tickets Save the World" xml:space="preserve">
+        <value>Vé của bạn cứu thế giới</value>
+    </data>
+    <data name="Help us help!" xml:space="preserve">
+        <value>Trợ giúp chúng tôi</value>
+    </data>
+    <data name="24/7 Customer service" xml:space="preserve">
+        <value>Dịch vụ khách hàng 24/7</value>
+    </data>
+    <data name="In your country, language, time zone" xml:space="preserve">
+        <value>Trong nước ban, ngô ngữ, múi giờ</value>
+    </data>
+    <data name="Free Virtual City Guide" xml:space="preserve">
+        <value>Miễn phí hướng thành phố</value>
+    </data>
+    <data name="cities in your hand" xml:space="preserve">
+        <value>thành phố trong tay</value>
+    </data>
+    <data name="4.8 Stars | 10000+ Reviews" xml:space="preserve">
+        <value>4.8 sao | 10000+ Đánh giá</value>
+    </data>
+    <data name="Select" xml:space="preserve">
+        <value>Chọn</value>
+    </data>
+    <data name="See itinerary details" xml:space="preserve">
+        <value>Xem hành trình</value>
+    </data>
+    <data name="Operator" xml:space="preserve">
+        <value>Điều hành bởi</value>
+    </data>
+    <data name="Switch" xml:space="preserve">
+        <value>Chuyển đổi</value>
+    </data>
+    <data name="Train number" xml:space="preserve">
+        <value>Tàu số</value>
+    </data>
+    <data name="Transaction Status" xml:space="preserve">
+        <value>Trạng thái giao dịch</value>
+    </data>
+    <data name="Completed" xml:space="preserve">
+        <value>Hoàn thành</value>
+    </data>
+    <data name="Thank you" xml:space="preserve">
+        <value>Cảm ơn bạn</value>
+    </data>
+    <data name="Booking Is Successfully" xml:space="preserve">
+        <value>Đặt chỗ hoàn thành</value>
+    </data>
+    <data name="Route" xml:space="preserve">
+        <value>Chặng</value>
+    </data>
+    <data name="Pax's Name" xml:space="preserve">
+        <value>Tên hành khách</value>
+    </data>
+    <data name="Date" xml:space="preserve">
+        <value>Ngày</value>
+    </data>
+    <data name="Coach" xml:space="preserve">
+        <value>Toa</value>
+    </data>
+    <data name="Transport No" xml:space="preserve">
+        <value>Số</value>
+    </data>
+    <data name="Seat" xml:space="preserve">
+        <value>Ghế</value>
+    </data>
+    <data name="Ticket" xml:space="preserve">
+        <value>Vé</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>Tải về</value>
+    </data>
+    <data name="stop" xml:space="preserve">
+        <value>điểm dừng</value>
+    </data>
+    <data name="Non-stop" xml:space="preserve">
+        <value>Không dừng</value>
+    </data>
+    <data name="3 steps away from your trip" xml:space="preserve">
+        <value>3 bước nữa để bắt đầu chuyến đi của bạn</value>
+    </data>
+    <data name="Departure time" xml:space="preserve">
+        <value>Thời gian khởi hành</value>
+    </data>
+    <data name="Fare, Class Selection" xml:space="preserve">
+        <value>Chọn giá vé, hạng dịch vụ</value>
+    </data>
+    <data name="Passenger Details" xml:space="preserve">
+        <value>Thông tin hành khách</value>
+    </data>
+    <data name="Select Outbound" xml:space="preserve">
+        <value>Chọn vé một chiều</value>
+    </data>
+    <data name="Select Inbound" xml:space="preserve">
+        <value>Chọn vé khứ hồi</value>
+    </data>
+    <data name="Cheapest" xml:space="preserve">
+        <value>Rẻ nhất</value>
+    </data>
+    <data name="Fastest" xml:space="preserve">
+        <value>Nhanh nhất</value>
+    </data>
+    <data name="Direct train" xml:space="preserve">
+        <value>Tàu không dừng</value>
+    </data>
+    <data name="Choose Class and Fare" xml:space="preserve">
+        <value>Chọn giá và hạng vé</value>
+    </data>
+    <data name="Duration" xml:space="preserve">
+        <value>Tổng thời gian</value>
+    </data>
+    <data name="Step 1 of 2" xml:space="preserve">
+        <value>Bước 1/2</value>
+    </data>
+    <data name="Your class" xml:space="preserve">
+        <value>Hạng vé</value>
+    </data>
+    <data name="Selected" xml:space="preserve">
+        <value>Lựa chọn</value>
+    </data>
+    <data name="Select your Fare" xml:space="preserve">
+        <value>Chọn giá vé của bạn</value>
+    </data>
+    <data name="Step 2 of 2" xml:space="preserve">
+        <value>Bước 2/2</value>
+    </data>
+    <data name="Ticket Options" xml:space="preserve">
+        <value>Tùy chọn vé</value>
+    </data>
+    <data name="Buyer Information" xml:space="preserve">
+        <value>Thông tin người mua</value>
+    </data>
+    <data name="These fields are required" xml:space="preserve">
+        <value>Các trường thông tin bắt buộc</value>
+    </data>
+    <data name="First Name" xml:space="preserve">
+        <value>Tên</value>
+    </data>
+    <data name="Last Name" xml:space="preserve">
+        <value>Họ</value>
+    </data>
+    <data name="Phone number" xml:space="preserve">
+        <value>Điện thoại</value>
+    </data>
+    <data name="International format, like" xml:space="preserve">
+        <value>Định dạng quốc tế như</value>
+    </data>
+    <data name="Passenger Information" xml:space="preserve">
+        <value>Thông tin hành khách</value>
+    </data>
+    <data name="Use Contact Details" xml:space="preserve">
+        <value>Sử dụng thông tin người mua</value>
+    </data>
+    <data name="Email Address" xml:space="preserve">
+        <value>Địa chỉ email</value>
+    </data>
+    <data name="Birthdate" xml:space="preserve">
+        <value>Ngày sinh</value>
+    </data>
+    <data name="Your Tickets" xml:space="preserve">
+        <value>Vé của bạn</value>
+    </data>
+    <data name="Select an option from the list" xml:space="preserve">
+        <value>Chọn chuyến đi từ danh sách</value>
+    </data>
+    <data name="Please select a ticket from the list" xml:space="preserve">
+        <value>Xin vui lòng chọn vé từ danh sách</value>
+    </data>
+    <data name="Edit" xml:space="preserve">
+        <value>Chỉnh sửa</value>
+    </data>
+    <data name="Ticket Conditions" xml:space="preserve">
+        <value>Điều kiện vé</value>
+    </data>
+    <data name="Tickets" xml:space ="preserve">
+        <value>Vé</value>
+    </data>
+    <data name="Tax and fees" xml:space="preserve">
+        <value>Thuế, phí</value>
+    </data>
+    <data name="Pay with Card" xml:space="preserve">
+        <value>Thanh toán thẻ</value>
+    </data>
+    <data name="Pay with Cash" xml:space="preserve">
+        <value>Thanh toán tiền mặt</value>
+    </data>
+    <data name="No train found between these two stations" xml:space="preserve">
+        <value>Không có tàu giữa hai trạm</value>
+    </data>
+    <data name="Please select other stations or dates" xml:space="preserve">
+        <value>Xin lựa chọn chuyến khác hoặc ngày khác</value>
+    </data>
+    <data name="Are you sure you want to update the outbound ticket?" xml:space="preserve">
+        <value>Bạn có chắc bạn muốn thay đổi thông tin vé</value>
+    </data>
+    <data name="Optional" xml:space="preserve">
+        <value>Tùy chọn</value>
+    </data>
+    <data name="OUT" xml:space="preserve">
+        <value>Một chiều</value>
+    </data>
+    <data name="Dear" xml:space="preserve">
+        <value>Kính gửi</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Mật khẩu</value>
+    </data>
+    <data name="Use a local account to log in" xml:space="preserve">
+        <value>Sử dụng tài khoản cá nhân để đăng nhập</value>
+    </data>
+    <data name="Here are your booking details. We thank you for your purchase." xml:space="preserve">
+        <value>Đây là thông tin đặt chỗ chi tiết. Chúng tôi xin cảm ơn bạn đã mua dịch vụ của chúng tôi.</value>
+    </data>
+</root>

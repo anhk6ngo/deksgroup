@@ -1,0 +1,14 @@
+﻿global using DTour.Client.Shared.Dtos.Response;
+global using SharedExtension.Interfaces;
+global using SharedExtension;
+global using DTour.Client.Infrastructure.Interfaces;
+global using DTour.Client.Shared.Dtos.Requests;
+global using FluentValidation;
+global using SharedExtension.Contracts;
+global using SharedExtension.Enums;
+global using DTour.Client.Infrastructure.Implements;
+global using DTour.Client.Handlers;
+global using DTour.Client.Shared.Dtos.Data;
+global using Blazored.FluentValidation;
+global using DTour.Client.Shared.Dtos.Interfaces;
+global using Microsoft.AspNetCore.Components;

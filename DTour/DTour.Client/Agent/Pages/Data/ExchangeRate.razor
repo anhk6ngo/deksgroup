@@ -1,0 +1,198 @@
+﻿@page "/agent/exchange-rate"
+
+@attribute [Authorize(Roles = $"{RoleConstants.AccountingRole}")]
+<PageTitle>ExchangeRate</PageTitle>
+<SectionContent SectionName="@NavConstants.TbLeft">
+    <Breadcrumb Slash="true"></Breadcrumb>
+    <Breadcrumb TextMuted="true">ExchangeRate</Breadcrumb>
+</SectionContent>
+<SectionContent SectionName="@NavConstants.TbRight">
+    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new ExchangeRateDto(), 0)">
+        <i class="fa fa-plus-square"></i>Add new
+    </button>
+</SectionContent>
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<Card Title="List of Exchange Rate">
+    @if (_items == null || IsLoading)
+    {
+        <Loading/>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
+                <thead>
+                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                    <th>Action</th>
+                    <th>Currency</th>
+                    <th>Rate</th>
+                    <th>From</th>
+                    <th>To</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in _items)
+                {
+                    <tr>
+                        <td>
+                            <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
+                                    @onclick="@(() => FormAction(item, 1))">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
+                                    @onclick="@(() => FormAction(item, 2))">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                        <td>@item.Currency</td>
+                        <td>@item.Rate</td>
+                        <td>@item.From.ToDmy()</td>
+                        <td>@item.To.ToDmy()</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</Card>
+<CustomModal Title="@($"{Title} ExchangeRate")" OnClickCallback="SaveData">
+    <EditForm Model="data" class="form">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+        <div class="row mb-7">
+            <div class="col-md-6">
+                <label class="required">Currency</label>
+                <select class="form-select bg-light-warning" data-control="select2" data-id="cus"
+                        data-dropdown-parent="#@UiConstants.GetModalNameDefault">
+                    <option value="">Select Item</option>
+                    @foreach (var indexEntity in _currencies!)
+                    {
+                        <option value="@indexEntity.Code"
+                                selected="@(data!.Currency == indexEntity.Code)">@indexEntity.Code</option>
+                    }
+                </select>
+                <ValidationMessage For="@(() => data!.Currency)"/>
+            </div>
+            <div class="col-md-6">
+                <label class="required">Rate</label>
+                <input class="form-control form-control-sm numberinputmask"
+                       @bind="@data!.Rate"/>
+                <ValidationMessage For="@(() => data.Rate)"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="required">From (mm/dd/yyyy)</label>
+                <InputDate @bind-Value="@data!.From" class="form-control" data-control="date-picker"/>
+                <ValidationMessage For="@(() => data.From)"/>
+            </div>
+            <div class="col-md-6">
+                <label class="required">To (mm/dd/yyyy)</label>
+                <InputDate @bind-Value="@data!.To" class="form-control" data-control="date-picker"/>
+                <ValidationMessage For="@(() => data.To)"/>
+            </div>
+        </div>
+    </EditForm>
+</CustomModal>
+
+@code {
+    private List<ExchangeRateDto>? _items;
+    private List<CurrencyDto>? _currencies;
+    private ExchangeRateDto? data = new();
+    private int iAction { get; set; } = 0;
+    private string Title { get; set; } = "Add new";
+    private FluentValidationValidator _fluentValidationValidator = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _items = await _httpService.GetAsync<List<ExchangeRateDto>>($"{ShareEndpoints.ExchangeRate}");
+        _currencies= await _httpService.GetAsync<List<CurrencyDto>>($"{ShareEndpoints.Currency}");
+        InitDataTable = true;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (InitDataTable)
+        {
+            InitDataTable = false;
+            await CallInitialDataTable();
+        }
+    }
+    [JSInvokable]
+    public void UpdateSelect2(string value, string controlId)
+    {
+        data!.Currency = value;
+    }
+
+    private async Task FormAction(ExchangeRateDto item, int action)
+    {
+        data = new ExchangeRateDto();
+        item.Adapt(data);
+        iAction = action;
+        Title = action switch
+        {
+            1 => "Edit",
+            2 => "Delete",
+            _ => "Add new"
+        };
+        await ToggleModal();
+        await SetSelectTextNum();
+        await InitDatePicker2M();
+    }
+
+    private async Task SaveData()
+    {
+        var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
+        if (!isValid) return;
+        IsLoading = true;
+        StateHasChanged();
+        var result = new ResultClient<Guid>();
+        switch (iAction)
+        {
+            case 2:
+                if (data != null)
+                {
+                    result = await _httpService.DeleteAsync<ResultClient<Guid>>($"{ShareEndpoints.ExchangeRate}/{data.Id}");
+                    if (result.Succeeded)
+                    {
+                        _items?.Remove(data);
+                    }
+                }
+
+                break;
+            default:
+                result = await _httpService.PostAsync<ResultClient<Guid>>(ShareEndpoints.ExchangeRate, new AddEditDataRequest<ExchangeRateDto>()
+                {
+                    Data = data!,
+                    Action = iAction == 0 ? ActionCommandType.Add : ActionCommandType.Edit,
+                });
+                if (result.Succeeded)
+                {
+                    if (iAction == 0)
+                    {
+                        data!.Id = result.Data;
+                        _items?.Add(data);
+                    }
+                    else
+                    {
+                        var oFind = _items!.FirstOrDefault(w => w.Id == data!.Id);
+                        if (oFind != null)
+                        {
+                            data.Adapt(oFind);
+                        }
+                    }
+                }
+
+                break;
+        }
+
+        await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+        await ToggleModal();
+    }
+
+}

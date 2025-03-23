@@ -1,0 +1,256 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <base href="/"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Montez&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="plugins/datatables/datatables.bundle.css" media="none"
+          onload="if(media!='all')media='all'">
+    <noscript>
+        <link rel="stylesheet" href="plugins/datatables/datatables.bundle.css">
+    </noscript>
+    <link rel="stylesheet" href="@Assets["plugins/global/plugins.bundle.css"]"/>
+    <link rel="stylesheet" href="@Assets["css/style.bundle.css"]"/>
+    <link rel="stylesheet" href="@Assets["css/fontawesome.min.css"]"/>
+    <link rel="stylesheet" href="@Assets["css/magnific-popup.min.css"]"/>
+    <link rel="stylesheet" href="@Assets["css/swiper-bundle.min.css"]"/>
+    <link rel="stylesheet" href="@Assets["css/custom.css"]"/>
+    <link rel="stylesheet" href="@Assets["_content/SharedComponent/custom.css"]"/>
+    <ImportMap/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <HeadOutlet @rendermode="PageRenderMode"/>
+</head>
+
+<body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" class="app-default">
+<Routes @rendermode="PageRenderMode"/>
+<div class="scroll-top">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+              style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+        </path>
+    </svg>
+</div>
+<script src="/plugins/global/plugins.bundle.js"></script>
+<script src="/js/scripts.bundle.js"></script>
+<script src="plugins/datatables/datatables.bundle.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="/js/swiper-bundle.min.js"></script>
+<script src="js/circle-progress.js"></script>
+<script src="/js/app.js"></script>
+<script src="_content/SharedComponent/customJsInterop.js"></script>
+<script src="_framework/blazor.web.js"></script>
+<script>
+    window.clickItem = (id) => {
+        $('#' + id).click();
+    }
+    window.initFixTable = (e, cs = 1, ce = 0) => {
+        $('#' + e).DataTable({
+            fixedColumns: {
+                start: cs,
+                end: ce
+            },
+            fixedHeader: true,
+            ordering: false,
+            page: false,
+            search: true,
+            scrollCollapse: true,
+            scrollX: true,
+            scrollY: 300,
+            "displayLength": 50,
+            dom: "<'row'<'col-sm-6 d-flex align-items-center justify-content-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>"
+        });
+    }
+    window.initChartLine = (id, data, cat) => {
+        let element = document.getElementById(id);
+
+        let height = parseInt(KTUtil.css(element, 'height'));
+        let labelColor = KTUtil.getCssVariableValue("--bs-gray-500");
+        let borderColor = KTUtil.getCssVariableValue('--bs-gray-200');
+        let baseColor = KTUtil.getCssVariableValue("--bs-success");
+        let lightColor = KTUtil.getCssVariableValue('--bs-success-light');
+        if (!element) {
+            return;
+        }
+
+        let options = {
+            series: data,
+            chart: {
+                fontFamily: 'inherit',
+                type: 'area',
+                height: height,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {},
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            fill: {
+                type: 'solid',
+                opacity: 1
+            },
+            stroke: {
+                curve: 'smooth',
+                show: true,
+                width: 3,
+                colors: [baseColor]
+            },
+            xaxis: {
+                categories: cat,
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: labelColor,
+                        fontSize: '12px'
+                    }
+                },
+                crosshairs: {
+                    position: 'front',
+                    stroke: {
+                        color: baseColor,
+                        width: 1,
+                        dashArray: 3
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    formatter: undefined,
+                    offsetY: 0,
+                    style: {
+                        fontSize: '12px'
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: labelColor,
+                        fontSize: '12px'
+                    }
+                }
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px'
+                },
+                y: {
+                    formatter: function (val) {
+                        return '$' + val
+                    }
+                }
+            },
+            colors: [lightColor],
+            grid: {
+                borderColor: borderColor,
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            },
+            markers: {
+                strokeColor: baseColor,
+                strokeWidth: 3
+            }
+        };
+
+        let chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    window.initChartDotNut = (id, data, cat) => {
+        let element = document.getElementById(id);
+        if (!element) {
+            return;
+        }
+        let options = {
+            series: data,
+            chart: {
+                width: 380,
+                fontFamily: "inherit",
+                type: "donut",
+            },
+            labels: cat,
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: "50%",
+                        labels: {
+                            value: {
+                                fontSize: "10px"
+                            }
+                        }
+                    }
+                }
+            },
+            stroke: {
+                width: 0
+            }
+        };
+
+        let chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    window.appCulture = {
+        get: () => window.localStorage['AppCulture'],
+        set: (value) => window.localStorage['AppCulture'] = value
+    };
+</script>
+</body>
+
+</html>
+
+@code {
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+
+    private IComponentRenderMode? PageRenderMode =>
+        HttpContext.AcceptsInteractiveRouting() ? new InteractiveWebAssemblyRenderMode(prerender: false) : null;
+
+    protected override void OnInitialized()
+    {
+        HttpContext?.Response.Cookies.Append(
+            CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(
+                new RequestCulture("vi-VN", "vi-VN")));
+    }
+}

@@ -1,0 +1,219 @@
+﻿@page "/agent/agent"
+
+@attribute [Authorize(Roles = $"{RoleConstants.AccountingRole}")]
+<PageTitle>Agent</PageTitle>
+<SectionContent SectionName="@NavConstants.TbLeft">
+    <Breadcrumb Slash="true"></Breadcrumb>
+    <Breadcrumb TextMuted="true">Agent</Breadcrumb>
+</SectionContent>
+<SectionContent SectionName="@NavConstants.TbRight">
+    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new AgentDto(), 0)">
+        <i class="fa fa-plus-square"></i>Add new
+    </button>
+</SectionContent>
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<Card Title="List of Agent">
+    @if (_items == null || IsLoading)
+    {
+        <Loading/>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
+                <thead>
+                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                    <th>Action</th>
+                    <th>Code</th>
+                    <th>Name</th> 
+                    <th>Email</th> 
+                    <th>Phone</th> 
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in _items)
+                {
+                    <tr>
+                        <td>
+                            <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
+                                    @onclick="@(() => FormAction(item, 1))">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
+                                    @onclick="@(() => FormAction(item, 2))">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                        <td>@item.Code</td>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.Phone</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</Card>
+<CustomModal Title="@($"{Title} Agent")" OnClickCallback="SaveData" ModalClass="3">
+    <EditForm Model="data" class="form">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+        <div class="row mb-7">
+            <div class="col-md-3">
+                <label class="form-label required">Code</label>
+                <InputText type="text" @bind-Value="@data!.Code" class="form-control maxlength" maxlength="36"/>
+                <ValidationMessage For="@(() => data.Code)"/>
+            </div>
+            <div class="col-md-9">
+                <div class="row mb-7">
+                    <label class="form-label required">Name</label>
+                    <InputText type="text" @bind-Value="@data.Name" class="form-control maxlength" maxlength="255"/>
+                    <ValidationMessage For="@(() => data.Name)"/>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-7">
+            <div class="col-md-3">
+                <label class="form-label required">Phone</label>
+                <InputText type="text" @bind-Value="@data!.Phone" class="form-control maxlength" maxlength="36"/>
+                <ValidationMessage For="@(() => data.Phone)"/>
+            </div>
+            <div class="col-md-9">
+                <div class="row mb-7">
+                    <label class="form-label required">Email</label>
+                    <InputText type="text" @bind-Value="@data.Email" class="form-control maxlength" maxlength="500"/>
+                    <ValidationMessage For="@(() => data.Email)"/>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-7">
+            <div class="col-md-3">
+                <label class="required">Sign Date (mm/dd/yyyy)</label>
+                <InputDate @bind-Value="@data!.SignContract" class="form-control" data-control="date-picker"/>
+                <ValidationMessage For="@(() => data.SignContract)"/>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">MST</label>
+                <InputText type="text" @bind-Value="@data!.TaxNo" class="form-control maxlength" maxlength="36"/>
+                <ValidationMessage For="@(() => data.TaxNo)"/>
+            </div>
+            <div class="col-md-6">
+                <div class="row mb-7">
+                    <label class="form-label">Contact Personal</label>
+                    <InputText type="text" @bind-Value="@data.ContactPerson" class="form-control maxlength" maxlength="255"/>
+                    <ValidationMessage For="@(() => data.ContactPerson)"/>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-7">
+            <div class="col-md-3">
+                <label class="form-label">Bank No</label>
+                <InputText type="text" @bind-Value="@data!.BankAccount" class="form-control maxlength" maxlength="36"/>
+                <ValidationMessage For="@(() => data.BankAccount)"/>
+            </div>
+            <div class="col-md-9">
+                <div class="row mb-7">
+                    <label class="form-label">Bank Name</label>
+                    <InputText type="text" @bind-Value="@data.BankName" class="form-control maxlength" maxlength="255"/>
+                    <ValidationMessage For="@(() => data.BankName)"/>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+</CustomModal>
+
+@code {
+    private List<AgentDto>? _items;
+    private AgentDto? data = new();
+    private int iAction { get; set; } = 0;
+    private string Title { get; set; } = "Add new";
+    private FluentValidationValidator _fluentValidationValidator = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _items = await _httpService.GetAsync<List<AgentDto>>($"{ShareEndpoints.Agent}");
+        InitDataTable = true;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (InitDataTable)
+        {
+            InitDataTable = false;
+            await CallInitialDataTable();
+        }
+    }
+
+    private async Task FormAction(AgentDto item, int action)
+    {
+        data = new AgentDto();
+        item.Adapt(data);
+        iAction = action;
+        Title = action switch
+        {
+            1 => "Edit",
+            2 => "Delete",
+            _ => "Add new"
+        };
+        await ToggleModal();
+        await SetMaxLength();
+        await InitDatePicker2M();
+    }
+
+    private async Task SaveData()
+    {
+        var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
+        if (!isValid) return;
+        IsLoading = true;
+        StateHasChanged();
+        var result = new ResultClient<Guid>();
+        switch (iAction)
+        {
+            case 2:
+                if (data != null)
+                {
+                    result = await _httpService.DeleteAsync<ResultClient<Guid>>($"{ShareEndpoints.Agent}/{data.Id}");
+                    if (result.Succeeded)
+                    {
+                        _items?.Remove(data);
+                    }
+                }
+
+                break;
+            default:
+                result = await _httpService.PostAsync<ResultClient<Guid>>(ShareEndpoints.Agent, new AddEditDataRequest<AgentDto>()
+                {
+                    Data = data!,
+                    Action = iAction == 0 ? ActionCommandType.Add : ActionCommandType.Edit,
+                });
+                if (result.Succeeded)
+                {
+                    if (iAction == 0)
+                    {
+                        data!.Id = result.Data;
+                        _items?.Add(data);
+                    }
+                    else
+                    {
+                        var oFind = _items!.FirstOrDefault(w => w.Id == data!.Id);
+                        if (oFind != null)
+                        {
+                            data.Adapt(oFind);
+                        }
+                    }
+                }
+
+                break;
+        }
+
+        await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+        await ToggleModal();
+    }
+
+}

@@ -1,0 +1,83 @@
+﻿@if (SearchIndicator)
+{
+    <Loading Content="Search..."/>
+}
+else
+{
+    if (Source is { Count: > 0 })
+    {
+        var oGroup = Source.GroupBy(g => new { g.City, g.CountryCode }).ToList();
+        foreach (var item in oGroup)
+        {
+            var ocities = Source.Where(w => w.City == item.Key.City && w.CountryCode == item.Key.CountryCode).ToList();
+            if (ocities is { Count: > 1 })
+            {
+                <div
+                    class="d-flex align-items-center p-3 rounded-3 bg-gray-300 cursor-pointer mb-1">
+                    <div class="symbol symbol-35px symbol-circle me-5">
+                                                                        <span
+                                                                            class="symbol-label bg-light-success fw-semibold">
+                                                                            <i class="ki-duotone ki-geolocation text-primary fs-2x">
+                                                                                <span class="path1"></span>
+                                                                                <span class="path2"></span>
+                                                                            </i>
+                                                                        </span>
+                    </div>
+                    <div class="fw-semibold">
+                                                                        <span
+                                                                            class="fs-6 text-gray-800 me-2">@item.Key.City,</span>
+                        <span
+                            class="text-muted">@item.Key.CountryCode</span>
+                    </div>
+                </div>
+                @foreach (var iCity in Source)
+                {
+                    <div
+                        class="d-flex align-items-center p-3 rounded-3 border-hover border border-dashed border-gray-300 cursor-pointer mb-1"
+                        @onclick="async () => { await SetData(iCity); }">
+                        <div
+                            class="symbol symbol-35px symbol-circle me-5">
+                            <span class="symbol-label bg-light-success fw-semibold">
+                                @if (iCity.Type == "airport")
+                                {
+                                    <i class="fas fa-plane-departure text-info"></i>
+                                }
+                                else if (iCity.MainStation)
+                                {
+                                    <i class="fas fa-home text-primary"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-subway text-success"></i>
+                                }
+                            </span>
+                        </div>
+                        <div class="fw-semibold">
+                            <span
+                                class="fs-6 text-gray-800 me-2">@iCity.Translations?.En,</span>
+                            <span
+                                class="text-muted">@iCity.CountryCode</span>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+    else
+    {
+        <h3>@Loc["Not found. Please try again"]</h3>
+    }
+}
+
+@code {
+    [Parameter] public bool SearchIndicator { get; set; } = false;
+    [Parameter] public List<RailStation> Source { get; set; } = [];
+    [Parameter] public EventCallback<RailStation> SetDataCallBack { get; set; }
+    [Parameter] public bool IsDep { get; set; } = true;
+
+    private async Task SetData(RailStation iCity)
+    {
+        await SetDataCallBack.InvokeAsync(iCity);
+    }
+
+}

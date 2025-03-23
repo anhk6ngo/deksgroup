@@ -1,0 +1,444 @@
+﻿@inherits SharedComponent.BasePage
+@inject IHttpServiceClient _httpService
+<div class="form position-relative bg-white px-3 px-sm-4 pt-4 mb-4 mb-sm-10">
+    <div class="row g-4 position-relative">
+        <div class="col-lg-3">
+            <div class="btn-group w-100" data-kt-buttons="true">
+                <label
+                    class="btn btn-outline btn-active-success btn-color-muted @(iApp == 0 ? "active" : "")"
+                    data-kt-button="true">
+                    <input class="btn-check" type="radio" checked="@(iApp == 0)" @onchange="() => iApp =0"/>
+                    @Loc["Air"]
+                </label>
+                <label
+                    class="btn btn-outline btn-active-success btn-color-muted @(iApp == 1 ? "active" : "")"
+                    data-kt-button="true">
+                    <input class="btn-check" type="radio" checked="@(iApp == 1)" @onchange="() => iApp =1"/>
+                    @Loc["Train"]
+                </label>
+                <label
+                    class="btn btn-outline btn-active-success btn-color-muted @(iApp == 2 ? "active" : "")"
+                    data-kt-button="true">
+                    <input class="btn-check" type="radio" checked="@(iApp == 2)" @onchange="() => iApp =2"/>
+                    @Loc["Tour"]
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3 ms-auto">
+            <div class="btn-group w-100" data-kt-buttons="true">
+                <label
+                    class="btn btn-outline btn-active-primary btn-color-muted @(iTripType == 0 ? "active" : "")"
+                    data-kt-button="true">
+                    <input class="btn-check" type="radio" checked="@(iTripType == 0)"
+                           @onchange="async () => { await ChangeTripType(0); }"/>
+                    @Loc["One Way"]
+                </label>
+                <label
+                    class="btn btn-outline btn-active-primary btn-color-muted @(iTripType == 1 ? "active" : "")"
+                    data-kt-button="true">
+                    <input class="btn-check" type="radio" checked="@(iTripType == 1)"
+                           @onchange="async () => { await ChangeTripType(1); }"/>
+                    @Loc["Round Trip"]
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3 ms-auto">
+            <input @bind="_dRange" class="form-control bg-white" data-control="date-picker"
+                   id="_dateInput"/>
+
+        </div>
+        <div class="col-lg-3">
+            <div class="form-control-border form-control-transparent form-fs-md d-flex w-100">
+                <div class="dropdown me-2">
+                    <input type="text" class="form-control"
+                           value="@(_adt + _chd) Passenger@(_adt + _chd > 1 ? "s" : "")" data-bs-auto-close="outside"
+                           data-bs-toggle="dropdown">
+                    <ul class="dropdown-menu p-3 w-100">
+                        <li class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="mb-0">@Loc["Adults"]</h4>
+                                <small>26+</small>
+                            </div>
+                            <div class="d-flex flex-stack gap-1">
+                                <button type="button" class="btn btn-link p-0 mb-0"
+                                        @onclick="() => { UpdatePax(-1, 0); }">
+                                    <i
+                                        class="fas fa-minus-circle fs-3 fa-fw"></i></button>
+                                <h4 class="guest-selector-count mb-0 adults">@_adt</h4>
+                                <button type="button" class="btn btn-link p-0 mb-0"
+                                        @onclick="() => { UpdatePax(1, 0); }">
+                                    <i
+                                        class="fas fa-plus-circle fs-3 fa-fw"></i></button>
+                            </div>
+                        </li>
+                        <li class="separator border-2 my-3"></li>
+                        <li class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="mb-0">@Loc["Children/Youths"]</h4>
+                                <small>0—25</small>
+                            </div>
+                            <div class="d-flex flex-stack gap-1">
+                                <button type="button" class="btn btn-link p-0 mb-0"
+                                        @onclick="() => { UpdatePax(-1, 1); }">
+                                    <i class="fas fa-minus-circle fs-3 fa-fw"></i>
+                                </button>
+                                <h4 class="guest-selector-count mb-0 adults">@_chd</h4>
+                                <button type="button" class="btn btn-link p-0 mb-0"
+                                        @onclick="() => { UpdatePax(1, 1); }">
+                                    <i class="fas fa-plus-circle fs-3 fa-fw"></i>
+                                </button>
+                            </div>
+                        </li>
+                        @if (_chd > 0)
+                        {
+                            for (var i = 0; i < _chd; i++)
+                            {
+                                <li class="d-flex justify-content-between mb-2">
+                                    <div class="fw-semibold text-center align-self-center">@Loc["Child"]" @(i + 1) (@Loc["Age"])</div>
+                                    @{
+                                        var i1 = i;
+                                    }
+                                    <select class="form-select form-select-sm w-100px"
+                                            @onchange="(e) => { aChild[i1] = e.Value!.ToString()!; }">
+                                        @for (var j = 0; j < 26; j++)
+                                        {
+                                            <option value="@j">@j</option>
+                                        }
+                                    </select>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mb-6">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-5 position-relative">
+                    <div
+                        class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-6">
+                        <label class="form-label mb-3">
+                            <i class="ki-duotone ki-geolocation text-info fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>@Loc["From"]</label>
+                        <div class="w-100 position-relative mb-5">
+                            <input type="text" class="form-control form-control-lg bg-light-primary px-10"
+                                   placeholder="@Loc["From: City, Airport, Station"]"
+                                   @bind:event="oninput" @bind="_Dep" @onkeyup="DepKeyHandler"
+                                   data-kt-menu-trigger="click"
+                                   data-kt-menu-placement="bottom-start" autocomplete="off"
+                                   aria-autocomplete="none"/>
+                            <div
+                                class="dropdown-menu w-auto fw-bold py-3"
+                                data-kt-menu="true" id="dep_menu">
+                                <div class="scroll scroll-y h-350px p-2 mw-400px">
+                                    @if (_Dep.IsNullOrEmpty())
+                                    {
+                                        @foreach (var iCity in DefaultCities)
+                                        {
+                                            <div
+                                                class="d-flex align-items-center p-3 rounded-3 border-hover border border-dashed border-gray-300 cursor-pointer mb-1"
+                                                @onclick="async () => { await SetData((iCity.Slug, iCity.Translations?.En, iCity.CountryCode,true)); }">
+                                                <div class="symbol symbol-35px symbol-circle me-5">
+                                                            <span class="symbol-label bg-light-success fw-semibold">
+                                                                <i class="ki-duotone ki-geolocation text-primary fs-2x">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </span>
+                                                </div>
+                                                <div class="fw-semibold">
+                                                            <span
+                                                                class="fs-6 text-gray-800 me-2">@iCity.Translations?.En,</span>
+                                                    <span class="text-muted">@iCity.CountryCode</span>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (_Dep?.Length > 1)
+                                        {
+                                            if (_blnSearch)
+                                            {
+                                                <Loading Content="Search..."/>
+                                            }
+                                            else
+                                            {
+                                                if (_filterDepcities is { Count: > 0 })
+                                                {
+                                                    foreach (var item in _filterDepcities)
+                                                    {
+                                                        <RailShowLocation Item="item" CallBack="SetData"/>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h3>@Loc["Not found. Please try again"]</h3>
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            @if (_Dep.NotIsNullOrEmpty())
+                            {
+                                <span
+                                    class="btn btn-flush btn-active-color-danger position-absolute top-50 end-0 translate-middle-y lh-0 me-5"
+                                    @onclick="() => { _Dep = string.Empty; }">
+                                            <i class="ki-duotone ki-cross fs-2 fs-lg-1 me-0">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                        </span>
+                            }
+                        </div>
+                    </div>
+                    <div class="btn-flip-icon mt-3 mt-md-0">
+                        <button class="btn btn-icon btn-light-warning btn-circle shadow mb-0"
+                                @onclick="ChangeRoute">
+                            <i
+                                class="fa-solid fa-right-left"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-5">
+                    <div
+                        class="form-fs-lg bg-light rounded-3 h-100 p-6">
+                        <label class="form-label mb-3">
+                            <i class="ki-duotone ki-send text-success fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>@Loc["To"]</label>
+                        <div class="w-100 position-relative mb-5">
+                            <input type="text" class="form-control form-control-lg bg-light-primary px-10"
+                                   placeholder="@Loc["To: City, Airport, Station"]"
+                                   @bind:event="oninput" @bind="_Arr" @onkeyup="ArrKeyHandler"
+                                   autocomplete="off" aria-autocomplete="none" data-bs-auto-close="outside"
+                                   data-bs-toggle="dropdown" id="_arrInput"/>
+                            <div
+                                class="dropdown-menu w-auto fw-bold py-3">
+                                <div class="scroll scroll-y h-350px p-2 mw-400px">
+                                    @if ($"{_Arr}".IsNullOrEmpty() || _filterArrcities is { Count: 0 })
+                                    {
+                                        foreach (var iCity in DefaultCities)
+                                        {
+                                            <div
+                                                class="d-flex align-items-center p-3 rounded-3 border-hover border border-dashed border-gray-300 cursor-pointer mb-1"
+                                                @onclick="async () => { await SetData((iCity.Slug, iCity.Translations?.En, iCity.CountryCode, false)); }">
+                                                <div class="symbol symbol-35px symbol-circle me-5">
+                                                    <span class="symbol-label bg-light-success fw-semibold">
+                                                        <i class="ki-duotone ki-geolocation text-primary fs-2x">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i>
+                                                    </span>
+                                                </div>
+                                                <div class="fw-semibold">
+                                                    <span
+                                                        class="fs-6 text-gray-800 me-2">@iCity.Translations?.En,</span>
+                                                    <span class="text-muted">@iCity.CountryCode</span>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if ($"{_Arr}".Length > 1)
+                                        {
+                                            if (_blnSearch)
+                                            {
+                                                <Loading Content="Search..."/>
+                                            }
+                                            else
+                                            {
+                                                if (_filterArrcities is { Count: > 0 })
+                                                {
+                                                    foreach (var item in _filterArrcities)
+                                                    {
+                                                        <RailShowLocation Item="item" CallBack="SetData" IsDep="false"/>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h3>@Loc["Not found. Please try again"]</h3>
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            @if ($"{_Arr}".NotIsNullOrEmpty())
+                            {
+                                <span
+                                    class="btn btn-flush btn-active-color-danger position-absolute top-50 end-0 translate-middle-y lh-0 me-5"
+                                    @onclick="() => { _Arr = string.Empty; }">
+                                    <i class="ki-duotone ki-cross fs-2 fs-lg-1 me-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 d-flex align-items-center">
+                    <button class="btn btn-lg btn-custom w-100" @onclick="SearchTicket">@Loc["Find tickets"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    private string? _dRange = $"{DateTime.Today.AddDays(3).ToDmy(format: "yyyy-MM-dd")}";
+    private string? _Dep = "";
+    private string? _Arr = "";
+    private string? slugDep = "";
+    private string? slugArr = "";
+    private int iTripType = 0;
+    private int iApp = 1;
+    private bool _blnSearch;
+    private int _adt = 1;
+    private int _chd = 0;
+    private List<string> aChild = [];
+    
+    private List<RailStation> _cities = [];
+    private List<RailLocationOnline> _filterDepcities = [];
+    private List<RailLocationOnline> _filterArrcities = [];
+    public List<RailStation> DefaultCities { get; set; } = [];
+    public RailResult<List<RailStationList>> _stationsResult = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _stationsResult = await _httpService.GetAsync<RailResult<List<RailStationList>>>($"{RailEndpoints.Rail}{RailEndpoints.GetDefaultLocation}");
+        if (_stationsResult.Data is { Count: > 0 })
+        {
+            _cities = _stationsResult.Data.SelectMany(s => s.StationList).ToList();
+            DefaultCities = _cities.ToList();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CallInitMenu();
+            await InitDatePicker2M();
+        }
+    }
+
+    private async Task ChangeTripType(int p0)
+    {
+        iTripType = p0;
+        await InitDatePicker2M(p0 == 0 ? "single" : "range");
+    }
+
+    private void UpdatePax(int value, int kind)
+    {
+        if (_chd + _adt + value > 9)
+        {
+            return;
+        }
+
+        switch (kind)
+        {
+            case 0:
+                _adt += value;
+                if (_adt < 0) _adt = 0;
+                break;
+            default:
+                _chd += value;
+                if (_chd < 0) _chd = 0;
+                if (aChild.Count < _chd)
+                {
+                    aChild.Add("0");
+                }
+                else
+                {
+                    aChild = aChild.Take(_chd).ToList();
+                }
+
+                break;
+        }
+
+        StateHasChanged();
+    }
+
+    private void ChangeRoute()
+    {
+        if (_Dep.IsNullOrEmpty() || _Arr.IsNullOrEmpty()) return;
+        (_Dep, _Arr) = (_Arr, _Dep);
+        StateHasChanged();
+    }
+
+    private async Task DepKeyHandler(KeyboardEventArgs e)
+    {
+        if (_Dep.NotIsNullOrEmpty() && $"{_Dep}".Length > 1)
+        {
+            _blnSearch = true;
+            StateHasChanged();
+            var sSearch = $"{_Dep}".ToLower();
+            var tmp = await _httpService.GetAsync<RailResult<List<RailLocationOnline>>>($"{RailEndpoints.Rail}?search={sSearch}");
+            if (tmp.Status == 200)
+            {
+                _filterDepcities = tmp.Data!;
+            }
+
+            _blnSearch = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task ArrKeyHandler(KeyboardEventArgs e)
+    {
+        if (_Arr.NotIsNullOrEmpty() && $"{_Arr}".Length > 1)
+        {
+            _blnSearch = true;
+            StateHasChanged();
+            var sSearch = $"{_Arr}".ToLower();
+            var tmp = await _httpService.GetAsync<RailResult<List<RailLocationOnline>>>($"{RailEndpoints.Rail}?search={sSearch}");
+            if (tmp.Status == 200)
+            {
+                _filterArrcities = tmp.Data!;
+            }
+
+            _blnSearch = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task SetData((string? slug, string? cityName, string? countryCode, bool isDep) data)
+    {
+        await CallJs("clickItem", "_arrInput");
+        if (data.isDep)
+        {
+            _Dep = $"{data.cityName} - {data.countryCode}".ToUpper();
+            slugDep = data.slug;
+        }
+        else
+        {
+            _Arr = $"{data.cityName} - {data.countryCode}".ToUpper();
+            slugArr = data.slug;
+        }
+    }
+
+    private void SearchTicket()
+    {
+        if (iApp == 1)
+        {
+            var sUrl = $"/train?from={slugDep}&to={slugArr}&dRange={_dRange}&adt={_adt}";
+            if (_chd > 0)
+            {
+                sUrl += $"&chd={aChild.Aggregate((a, b) => $"{a}-{b}")}";
+            }
+
+            NavigationManager?.NavigateTo(sUrl);
+        }
+    }
+
+}

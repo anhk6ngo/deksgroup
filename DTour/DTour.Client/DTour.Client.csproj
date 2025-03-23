@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+    <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libraries\SharedComponent\SharedComponent.csproj" />
+    <ProjectReference Include="..\..\..\..\Libraries\SharedExtension\SharedExtension.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Layout\MainLayout.razor" />
+    <_ContentIncludedByDefault Remove="Layout\MenuFunction.razor" />
+    <_ContentIncludedByDefault Remove="Layout\NavMenu.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Layout\MainLayout.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Layout\MenuFunction.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Layout\NavMenu.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Data\ApproveTopUp.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Data\TopUp.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Identity\Role.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Agent\Pages\Data\ApproveTopUp.razor" />
+    <AdditionalFiles Include="Agent\Pages\Data\TopUp.razor" />
+    <AdditionalFiles Include="Agent\Pages\Identity\Role.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Language\app.vi.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>app.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\SharedResource.vi.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SharedResource.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Language\app.vi.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>app.vi.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\SharedResource.vi.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SharedResource.vi.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

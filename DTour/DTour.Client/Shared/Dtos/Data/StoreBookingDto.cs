@@ -1,0 +1,51 @@
+﻿namespace DTour.Client.Shared.Dtos.Data;
+
+public class StoreBookingDto : AggregateRoot<Guid>, IStoreBooking
+{
+    public string? BookingCode { get; set; }
+    public double Amount { get; set; } = 0;
+    public DateTime DepartDate { get; set; } = DateTime.Today.ToUniversalTime();
+    public DateTime? ReturnDate { get; set; }
+    public double CommitAmount { get; set; } = 0;
+    public string? UserId { get; set; }
+    public int Status { get; set; } = 0;
+    public string? DisplayName { get; set; }
+    public int TicketType { get; set; } = 0;
+    public string? From { get; set; }
+    public string? BookingSessionId { get; set; }
+    public string? To { get; set; }
+    public int Adt { get; set; } = 0;
+    public int Chd { get; set; } = 0;
+    public int Inf { get; set; } = 0;
+    public int PaymentType { get; set; } = 0;
+    public string? TransactionId { get; set; }
+    public string? ApiProviderId { get; set; }
+    public string? SaveObject { get; set; }
+    public string? TicketPdf { get; set; }
+    public string? Pnr { get; set; }
+}
+
+public interface IStoreBooking
+{
+    public double Amount { get; set; } 
+    public DateTime DepartDate { get; set; }
+    public DateTime? ReturnDate { get; set; }
+    public double CommitAmount { get; set; }
+    public string? UserId { get; set; }
+    public string? BookingCode { get; set; }
+    public string? BookingSessionId { get; set; }
+    public int Status { get; set; }
+    public string? DisplayName { get; set; }
+    public int TicketType { get; set; }
+    public string? From { get; set; }
+    public string? To { get; set; }
+    public int Adt { get; set; }
+    public int Chd { get; set; }
+    public int Inf { get; set; }
+    public int PaymentType { get; set; }
+    public string? TransactionId { get; set; }
+    public string? ApiProviderId { get; set; }
+    public string? SaveObject { get; set; }
+    public string? TicketPdf { get; set; }
+    public string? Pnr { get; set; }
+}
