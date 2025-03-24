@@ -96,11 +96,38 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hành động.
+        /// </summary>
+        internal static string Action {
+            get {
+                return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thêm mới.
+        /// </summary>
+        internal static string Add_new {
+            get {
+                return ResourceManager.GetString("Add new", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quán trị.
         /// </summary>
         internal static string Administrator {
             get {
                 return ResourceManager.GetString("Administrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Người lớn.
+        /// </summary>
+        internal static string Adult {
+            get {
+                return ResourceManager.GetString("Adult", resourceCulture);
             }
         }
         
@@ -141,6 +168,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Số tiền.
+        /// </summary>
+        internal static string Amount {
+            get {
+                return ResourceManager.GetString("Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dịch vụ sân bay.
         /// </summary>
         internal static string Ancillary {
@@ -150,11 +186,29 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tiền được chấp nhận.
+        /// </summary>
+        internal static string Approve_Amount {
+            get {
+                return ResourceManager.GetString("Approve Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phê duyệt nạp tiền.
         /// </summary>
         internal static string Approve_Top_up {
             get {
                 return ResourceManager.GetString("Approve Top-up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chấp thuận.
+        /// </summary>
+        internal static string Approved {
+            get {
+                return ResourceManager.GetString("Approved", resourceCulture);
             }
         }
         
@@ -177,6 +231,33 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Số dư.
+        /// </summary>
+        internal static string Balance {
+            get {
+                return ResourceManager.GetString("Balance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên ngân hàng.
+        /// </summary>
+        internal static string Bank_Name {
+            get {
+                return ResourceManager.GetString("Bank Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tài khoản ngân hàng.
+        /// </summary>
+        internal static string Bank_No {
+            get {
+                return ResourceManager.GetString("Bank No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ngày sinh.
         /// </summary>
         internal static string Birthdate {
@@ -186,11 +267,29 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã đặt chỗ.
+        /// </summary>
+        internal static string Booking_code {
+            get {
+                return ResourceManager.GetString("Booking code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Đặt chỗ hoàn thành.
         /// </summary>
         internal static string Booking_Is_Successfully {
             get {
                 return ResourceManager.GetString("Booking Is Successfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kiêu đặt chỗ.
+        /// </summary>
+        internal static string Booking_Type {
+            get {
+                return ResourceManager.GetString("Booking Type", resourceCulture);
             }
         }
         
@@ -213,11 +312,38 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hủy bỏ.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thẻ.
+        /// </summary>
+        internal static string Card {
+            get {
+                return ResourceManager.GetString("Card", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tuyển dụng.
         /// </summary>
         internal static string Careers {
             get {
                 return ResourceManager.GetString("Careers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tiền mặt.
+        /// </summary>
+        internal static string Cash {
+            get {
+                return ResourceManager.GetString("Cash", resourceCulture);
             }
         }
         
@@ -285,11 +411,29 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xóa hết người dùng.
+        /// </summary>
+        internal static string Clear_Users {
+            get {
+                return ResourceManager.GetString("Clear Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toa.
         /// </summary>
         internal static string Coach {
             get {
                 return ResourceManager.GetString("Coach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã.
+        /// </summary>
+        internal static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
             }
         }
         
@@ -321,6 +465,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Người liên hệ.
+        /// </summary>
+        internal static string Contact_Personal {
+            get {
+                return ResourceManager.GetString("Contact Personal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Liên hệ chúng tôi.
         /// </summary>
         internal static string Contact_Us {
@@ -335,6 +488,15 @@ namespace DTour.Client.Localization {
         internal static string Copyright {
             get {
                 return ResourceManager.GetString("Copyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tạo mới tài khoản.
+        /// </summary>
+        internal static string Create_a_new_account {
+            get {
+                return ResourceManager.GetString("Create a new account", resourceCulture);
             }
         }
         
@@ -375,11 +537,47 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xóa.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xóa vai trò.
+        /// </summary>
+        internal static string Delete_Role {
+            get {
+                return ResourceManager.GetString("Delete Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thời gian khởi hành.
         /// </summary>
         internal static string Departure_time {
             get {
                 return ResourceManager.GetString("Departure time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đặt cọc.
+        /// </summary>
+        internal static string Deposit {
+            get {
+                return ResourceManager.GetString("Deposit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diễn giải.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
@@ -402,11 +600,29 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thực hiện.
+        /// </summary>
+        internal static string Do_it {
+            get {
+                return ResourceManager.GetString("Do it", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tải về.
         /// </summary>
         internal static string Download {
             get {
                 return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lấy vé thông qua mã đặt chỗ.
+        /// </summary>
+        internal static string Download_Tickets_by_Booking_code {
+            get {
+                return ResourceManager.GetString("Download Tickets by Booking code", resourceCulture);
             }
         }
         
@@ -434,6 +650,24 @@ namespace DTour.Client.Localization {
         internal static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa vai trò.
+        /// </summary>
+        internal static string Edit_Role {
+            get {
+                return ResourceManager.GetString("Edit Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chỉnh sửa vé.
+        /// </summary>
+        internal static string Edit_Ticket {
+            get {
+                return ResourceManager.GetString("Edit Ticket", resourceCulture);
             }
         }
         
@@ -537,11 +771,29 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Họ và tên.
+        /// </summary>
+        internal static string Full_Name {
+            get {
+                return ResourceManager.GetString("Full Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thư viện ảnh.
         /// </summary>
         internal static string Gallery {
             get {
                 return ResourceManager.GetString("Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lấy dữ liệu.
+        /// </summary>
+        internal static string Get_Data {
+            get {
+                return ResourceManager.GetString("Get Data", resourceCulture);
             }
         }
         
@@ -618,6 +870,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Khứ hồi.
+        /// </summary>
+        internal static string Inbound {
+            get {
+                return ResourceManager.GetString("Inbound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ấn độ - Nepal.
         /// </summary>
         internal static string India_Nepal {
@@ -632,6 +893,15 @@ namespace DTour.Client.Localization {
         internal static string International_format__like {
             get {
                 return ResourceManager.GetString("International format, like", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đặt cọc không?.
+        /// </summary>
+        internal static string Is_Deposit {
+            get {
+                return ResourceManager.GetString("Is Deposit", resourceCulture);
             }
         }
         
@@ -663,11 +933,83 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Danh sách đại lý.
+        /// </summary>
+        internal static string List_of_Agent {
+            get {
+                return ResourceManager.GetString("List of Agent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách hoa hồng.
+        /// </summary>
+        internal static string List_of_Commission {
+            get {
+                return ResourceManager.GetString("List of Commission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách tiền tệ.
+        /// </summary>
+        internal static string List_of_Currency {
+            get {
+                return ResourceManager.GetString("List of Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách tỉ giá.
+        /// </summary>
+        internal static string List_of_Exchange_Rate {
+            get {
+                return ResourceManager.GetString("List of Exchange Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách yêu cầu phê duyệt.
+        /// </summary>
+        internal static string List_of_Request_Top_up {
+            get {
+                return ResourceManager.GetString("List of Request Top-up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách quyền.
+        /// </summary>
+        internal static string List_of_Roles {
+            get {
+                return ResourceManager.GetString("List of Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danh sách nạp tiền.
+        /// </summary>
+        internal static string List_of_Top_up {
+            get {
+                return ResourceManager.GetString("List of Top-up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Đăng nhập.
         /// </summary>
         internal static string Log_in {
             get {
                 return ResourceManager.GetString("Log in", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -686,6 +1028,15 @@ namespace DTour.Client.Localization {
         internal static string News {
             get {
                 return ResourceManager.GetString("News", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -713,6 +1064,15 @@ namespace DTour.Client.Localization {
         internal static string Not_found__Please_try_again {
             get {
                 return ResourceManager.GetString("Not found. Please try again", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ghi chú.
+        /// </summary>
+        internal static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
             }
         }
         
@@ -789,6 +1149,24 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Một chiều.
+        /// </summary>
+        internal static string Outbound {
+            get {
+                return ResourceManager.GetString("Outbound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Khách.
+        /// </summary>
+        internal static string Passenger {
+            get {
+                return ResourceManager.GetString("Passenger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thông tin hành khách.
         /// </summary>
         internal static string Passenger_Details {
@@ -803,6 +1181,15 @@ namespace DTour.Client.Localization {
         internal static string Passenger_Information {
             get {
                 return ResourceManager.GetString("Passenger Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Khách.
+        /// </summary>
+        internal static string Passengers {
+            get {
+                return ResourceManager.GetString("Passengers", resourceCulture);
             }
         }
         
@@ -843,6 +1230,24 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kiểu thanh toaán.
+        /// </summary>
+        internal static string Payment_Type {
+            get {
+                return ResourceManager.GetString("Payment Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phần trăm.
+        /// </summary>
+        internal static string Percent {
+            get {
+                return ResourceManager.GetString("Percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phân quyền.
         /// </summary>
         internal static string Permissions {
@@ -854,9 +1259,27 @@ namespace DTour.Client.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Điện thoại.
         /// </summary>
+        internal static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Điện thoại.
+        /// </summary>
         internal static string Phone_number {
             get {
                 return ResourceManager.GetString("Phone number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhập mật khẩu mới.
+        /// </summary>
+        internal static string Please_enter_your_password {
+            get {
+                return ResourceManager.GetString("Please enter your password", resourceCulture);
             }
         }
         
@@ -879,11 +1302,29 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chuẩn bị.
+        /// </summary>
+        internal static string Preparing {
+            get {
+                return ResourceManager.GetString("Preparing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Liên kết nhanh.
         /// </summary>
         internal static string Quick_Links {
             get {
                 return ResourceManager.GetString("Quick Links", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tỉ giá.
+        /// </summary>
+        internal static string Rate {
+            get {
+                return ResourceManager.GetString("Rate", resourceCulture);
             }
         }
         
@@ -897,11 +1338,38 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bị từ chối.
+        /// </summary>
+        internal static string Rejected {
+            get {
+                return ResourceManager.GetString("Rejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ghỉ nhớ tôi.
         /// </summary>
         internal static string Remember_me {
             get {
                 return ResourceManager.GetString("Remember me", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bỏ vai trò.
+        /// </summary>
+        internal static string Remove_Role_on_User {
+            get {
+                return ResourceManager.GetString("Remove Role on User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yêu cầu phê duyệt.
+        /// </summary>
+        internal static string Request_Approved {
+            get {
+                return ResourceManager.GetString("Request Approved", resourceCulture);
             }
         }
         
@@ -924,6 +1392,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhóm vai trò.
+        /// </summary>
+        internal static string Roles {
+            get {
+                return ResourceManager.GetString("Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Khứ hồi.
         /// </summary>
         internal static string Round_Trip {
@@ -938,6 +1415,15 @@ namespace DTour.Client.Localization {
         internal static string Route {
             get {
                 return ResourceManager.GetString("Route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lưu thay đổi.
+        /// </summary>
+        internal static string Save_Change {
+            get {
+                return ResourceManager.GetString("Save Change", resourceCulture);
             }
         }
         
@@ -1032,11 +1518,74 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gán vai trò.
+        /// </summary>
+        internal static string Set_Rights {
+            get {
+                return ResourceManager.GetString("Set Rights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gán vai trò.
+        /// </summary>
+        internal static string Set_Role_for_User {
+            get {
+                return ResourceManager.GetString("Set Role for User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày ký kết.
+        /// </summary>
+        internal static string Sign_Date {
+            get {
+                return ResourceManager.GetString("Sign Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Đăng xuất.
         /// </summary>
         internal static string Sign_out {
             get {
                 return ResourceManager.GetString("Sign out", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chi nhánh.
+        /// </summary>
+        internal static string Station {
+            get {
+                return ResourceManager.GetString("Station", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thống kê đặt chỗ.
+        /// </summary>
+        internal static string Statistics_Booking {
+            get {
+                return ResourceManager.GetString("Statistics Booking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thống kê dịch vụ.
+        /// </summary>
+        internal static string Statistics_Service {
+            get {
+                return ResourceManager.GetString("Statistics Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng thái.
+        /// </summary>
+        internal static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
@@ -1122,6 +1671,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Điều kiện vé, hạng vé.
+        /// </summary>
+        internal static string Ticket__Fare_Conditions {
+            get {
+                return ResourceManager.GetString("Ticket, Fare Conditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Điều kiện vé.
         /// </summary>
         internal static string Ticket_Conditions {
@@ -1136,6 +1694,15 @@ namespace DTour.Client.Localization {
         internal static string Ticket_Options {
             get {
                 return ResourceManager.GetString("Ticket Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kiểu vé.
+        /// </summary>
+        internal static string Ticket_Type {
+            get {
+                return ResourceManager.GetString("Ticket Type", resourceCulture);
             }
         }
         
@@ -1176,6 +1743,33 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tổng tiền.
+        /// </summary>
+        internal static string Total_Amount {
+            get {
+                return ResourceManager.GetString("Total Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tổng đặt chỗ.
+        /// </summary>
+        internal static string Total_Booking {
+            get {
+                return ResourceManager.GetString("Total Booking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tổng hủy chỗ.
+        /// </summary>
+        internal static string Total_Cancel {
+            get {
+                return ResourceManager.GetString("Total Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Du lịch.
         /// </summary>
         internal static string Tour {
@@ -1212,6 +1806,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Báo cáo giao dịch.
+        /// </summary>
+        internal static string Transaction_Reports {
+            get {
+                return ResourceManager.GetString("Transaction Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trạng thái giao dịch.
         /// </summary>
         internal static string Transaction_Status {
@@ -1235,6 +1838,15 @@ namespace DTour.Client.Localization {
         internal static string Travel_Guide {
             get {
                 return ResourceManager.GetString("Travel Guide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cập nhật chi nhánh.
+        /// </summary>
+        internal static string Update_Station {
+            get {
+                return ResourceManager.GetString("Update Station", resourceCulture);
             }
         }
         
@@ -1266,6 +1878,24 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Người sử dụng.
+        /// </summary>
+        internal static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Người SD có vai trò.
+        /// </summary>
+        internal static string User_have_role {
+            get {
+                return ResourceManager.GetString("User have role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quán lý người dùng.
         /// </summary>
         internal static string User_Management {
@@ -1293,11 +1923,47 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xem báo cáo.
+        /// </summary>
+        internal static string View_Report {
+            get {
+                return ResourceManager.GetString("View Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xem NSD có vai trò.
+        /// </summary>
+        internal static string View_Roles_on_User {
+            get {
+                return ResourceManager.GetString("View Roles on User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xem người dùng.
+        /// </summary>
+        internal static string View_Users {
+            get {
+                return ResourceManager.GetString("View Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chúng tôi chấp thuận.
         /// </summary>
         internal static string We_Accept {
             get {
                 return ResourceManager.GetString("We Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Có.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         

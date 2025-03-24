@@ -1,22 +1,22 @@
 ﻿@page "/agent/top-up"
 
-<PageTitle>Top Up</PageTitle>
+<PageTitle>@Loc["Top-up"]</PageTitle>
 <SectionContent SectionName="@NavConstants.TbLeft">
     <Breadcrumb Slash="true"></Breadcrumb>
-    <Breadcrumb>Top-up</Breadcrumb>
+    <Breadcrumb>@Loc["Top-up"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
     <input @bind="DateRange" class="form-control form-control-sm w-200px" placeholder="Pick date range" id="RangeDate"/>
-    <button class="btn btn-sm btn-primary" @onclick="GetData">Get Data</button>
+    <button class="btn btn-sm btn-primary" @onclick="GetData">@Loc["Get Data"]</button>
 </SectionContent>
 @if (IsLoading)
 {
     <LoadingRotate/>
 }
-<Card Title="List of Top-up">
+<Card Title="@Loc["List of Top-up"]">
     <ToolbarRight>
         <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new TopUpDto(), 0)">
-            <i class="fa fa-plus-square"></i>Add new
+            <i class="fa fa-plus-square"></i>@Loc["Add new"]
         </button>
     </ToolbarRight>
     <ChildContent>
@@ -30,12 +30,12 @@
                 <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
                     <thead>
                     <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                        <th>Action</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Approve Amount</th>
-                        <th>Status</th>
-                        <th>Note</th>
+                        <th>@Loc["Action"]</th>
+                        <th>@Loc["Date"]</th>
+                        <th>@Loc["Amount"]</th>
+                        <th>@Loc["Approve Amount"]</th>
+                        <th>@Loc["Status"]</th>
+                        <th>@Loc["Note"]</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,7 +62,7 @@
                             <td>@item.RequestDate.ToLocalTime().ToDmy()</td>
                             <td>@item.RequestAmount.ToString("N2")</td>
                             <td>@item.ApproveAmount.ToString("N2")</td>
-                            <td>@item.Status.ToTopUpStatus()</td>
+                            <td>@Loc[item.Status.ToTopUpStatus()]</td>
                             <td class="w-50">
                                 @item.Note
                                 @if (item.ApproveNote.NotIsNullOrEmpty())
@@ -78,23 +78,24 @@
         }
     </ChildContent>
 </Card>
-<CustomModal Title="@($"{Title} Top-up")" OnClickCallback="SaveData">
+<CustomModal Title="@($"{Title} Top-up")" OnClickCallback="SaveData" SaveTitle="@Loc["Save Change"]"
+             CancelTitle="@Loc["Cancel"]">
     <EditForm Model="data" class="form">
         <FluentValidationValidator @ref="_fluentValidationValidator"/>
         <div class="row mb-7">
             <div class="col-md-6">
-                <label class="required">Date (mm/dd/yyyy)</label>
+                <label class="required">@Loc["Date"] (mm/dd/yyyy)</label>
                 <InputDate @bind-Value="@data!.RequestDate" class="form-control" data-control="date-picker"/>
                 <ValidationMessage For="@(() => data.RequestDate)"/>
             </div>
             <div class="col-md-6">
-                <label class="required">Amount</label>
+                <label class="required">@Loc["Amount"]</label>
                 <input type="text" @bind="@data.RequestAmount" class="form-control numberinputmask"/>
                 <ValidationMessage For="@(() => data.RequestAmount)"/>
             </div>
         </div>
         <div class="row mb-7">
-            <label class="required">Note</label>
+            <label class="required">@Loc["Note"]</label>
             <InputTextArea type="text" @bind-Value="@data!.Note" class="form-control maxlength" maxlength="500"/>
             <ValidationMessage For="@(() => data.Note)"/>
         </div>
@@ -103,7 +104,7 @@
                 <input class="form-check-input" type="checkbox"
                        @bind="@data.IsDeposit" id="flexSwitchShareRoom"/>
                 <label class="form-check-label" for="flexSwitchShareRoom">
-                    Is Deposit
+                    @Loc["Is Deposit"]
                 </label>
             </div>
         </div>

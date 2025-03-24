@@ -63,6 +63,9 @@
     <data name="Users" xml:space="preserve">
         <value>Người sử dụng</value>
     </data>
+    <data name="User" xml:space="preserve">
+        <value>Người sử dụng</value>
+    </data>
     <data name="User Management" xml:space="preserve">
         <value>Quán lý người dùng</value>
     </data>
@@ -112,6 +115,9 @@
         <value>Tìm vé</value>
     </data>
     <data name="Adults" xml:space="preserve">
+        <value>Người lớn</value>
+    </data>
+    <data name="Adult" xml:space="preserve">
         <value>Người lớn</value>
     </data>
     <data name="Log in" xml:space="preserve">
@@ -324,8 +330,14 @@
     <data name="Select Outbound" xml:space="preserve">
         <value>Chọn vé một chiều</value>
     </data>
+    <data name="Outbound" xml:space="preserve">
+        <value>Một chiều</value>
+    </data>
     <data name="Select Inbound" xml:space="preserve">
         <value>Chọn vé khứ hồi</value>
+    </data>
+    <data name="Inbound" xml:space="preserve">
+        <value>Khứ hồi</value>
     </data>
     <data name="Cheapest" xml:space="preserve">
         <value>Rẻ nhất</value>
@@ -399,11 +411,71 @@
     <data name="Please select a ticket from the list" xml:space="preserve">
         <value>Xin vui lòng chọn vé từ danh sách</value>
     </data>
+    <data name="Add new" xml:space="preserve">
+        <value>Thêm mới</value>
+    </data>
     <data name="Edit" xml:space="preserve">
         <value>Chỉnh sửa</value>
     </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Xóa</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>Tên</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Diễn giải</value>
+    </data>
+    <data name="Roles" xml:space="preserve">
+        <value>Nhóm vai trò</value>
+    </data>
+    <data name="View Roles on User" xml:space="preserve">
+        <value>Xem NSD có vai trò</value>
+    </data>
+    <data name="Set Role for User" xml:space="preserve">
+        <value>Gán vai trò</value>
+    </data>
+    <data name="Update Station" xml:space="preserve">
+        <value>Cập nhật chi nhánh</value>
+    </data>
+    <data name="Station" xml:space="preserve">
+        <value>Chi nhánh</value>
+    </data>
+    <data name="Remove Role on User" xml:space="preserve">
+        <value>Bỏ vai trò</value>
+    </data>
+    <data name="Do it" xml:space="preserve">
+        <value>Thực hiện</value>
+    </data>
+    <data name="User have role" xml:space="preserve">
+        <value>Người SD có vai trò</value>
+    </data>
+    <data name="List of Roles" xml:space="preserve">
+        <value>Danh sách quyền</value>
+    </data>
+    <data name="View Users" xml:space="preserve">
+        <value>Xem người dùng</value>
+    </data>
+    <data name="Clear Users" xml:space="preserve">
+        <value>Xóa hết người dùng</value>
+    </data>
+    <data name="Edit Role" xml:space="preserve">
+        <value>Sửa vai trò</value>
+    </data>
+    <data name="Delete Role" xml:space="preserve">
+        <value>Xóa vai trò</value>
+    </data>
+    <data name="Set Rights" xml:space="preserve">
+        <value>Gán vai trò</value>
+    </data>
+    <data name="Edit Ticket" xml:space="preserve">
+        <value>Chỉnh sửa vé</value>
+    </data>
     <data name="Ticket Conditions" xml:space="preserve">
         <value>Điều kiện vé</value>
+    </data>
+    <data name="Ticket, Fare Conditions" xml:space="preserve">
+        <value>Điều kiện vé, hạng vé</value>
     </data>
     <data name="Tickets" xml:space ="preserve">
         <value>Vé</value>
@@ -429,6 +501,18 @@
     <data name="Optional" xml:space="preserve">
         <value>Tùy chọn</value>
     </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Hủy bỏ</value>
+    </data>
+    <data name="Code" xml:space="preserve">
+        <value>Mã</value>
+    </data>
+    <data name="Sign Date" xml:space="preserve">
+        <value>Ngày ký kết</value>
+    </data>
+    <data name="Contact Personal" xml:space="preserve">
+        <value>Người liên hệ</value>
+    </data>
     <data name="OUT" xml:space="preserve">
         <value>Một chiều</value>
     </data>
@@ -438,10 +522,145 @@
     <data name="Password" xml:space="preserve">
         <value>Mật khẩu</value>
     </data>
+    <data name="Passenger" xml:space="preserve">
+        <value>Khách</value>
+    </data>
+    <data name="Passengers" xml:space="preserve">
+        <value>Khách</value>
+    </data>
+    <data name="Create a new account" xml:space="preserve">
+        <value>Tạo mới tài khoản</value>
+    </data>
+    <data name="Full Name" xml:space="preserve">
+        <value>Họ và tên</value>
+    </data>
     <data name="Use a local account to log in" xml:space="preserve">
         <value>Sử dụng tài khoản cá nhân để đăng nhập</value>
     </data>
     <data name="Here are your booking details. We thank you for your purchase." xml:space="preserve">
         <value>Đây là thông tin đặt chỗ chi tiết. Chúng tôi xin cảm ơn bạn đã mua dịch vụ của chúng tôi.</value>
+    </data>
+    <data name="Bank No" xml:space="preserve">
+        <value>Tài khoản ngân hàng</value>
+    </data>
+    <data name="Bank Name" xml:space="preserve">
+        <value>Tên ngân hàng</value>
+    </data>
+    <data name="Save Change" xml:space="preserve">
+        <value>Lưu thay đổi</value>
+    </data>
+    <data name="Action" xml:space="preserve">
+        <value>Hành động</value>
+    </data>
+    <data name="Phone" xml:space="preserve">
+        <value>Điện thoại</value>
+    </data>
+    <data name="List of Agent" xml:space="preserve">
+        <value>Danh sách đại lý</value>
+    </data>
+    <data name="List of Currency" xml:space="preserve">
+        <value>Danh sách tiền tệ</value>
+    </data>
+    <data name="List of Exchange Rate" xml:space="preserve">
+        <value>Danh sách tỉ giá</value>
+    </data>
+    <data name="List of Commission" xml:space="preserve">
+        <value>Danh sách hoa hồng</value>
+    </data>
+    <data name="List of Request Top-up" xml:space="preserve">
+        <value>Danh sách yêu cầu phê duyệt</value>
+    </data>
+    <data name="List of Top-up" xml:space="preserve">
+        <value>Danh sách nạp tiền</value>
+    </data>
+    <data name="Rate" xml:space="preserve">
+        <value>Tỉ giá</value>
+    </data>
+    <data name="Percent" xml:space="preserve">
+        <value>Phần trăm</value>
+    </data>
+    <data name="Is Deposit" xml:space="preserve">
+        <value>Đặt cọc không?</value>
+    </data>
+    <data name="Deposit" xml:space="preserve">
+        <value>Đặt cọc</value>
+    </data>
+    <data name="Note" xml:space="preserve">
+        <value>Ghi chú</value>
+    </data>
+    <data name="Balance" xml:space="preserve">
+        <value>Số dư</value>
+    </data>
+    <data name="Amount" xml:space="preserve">
+        <value>Số tiền</value>
+    </data>
+    <data name="Yes" xml:space="preserve">
+        <value>Có</value>
+    </data>
+    <data name="No" xml:space="preserve">
+        <value>Không</value>
+    </data>
+    <data name="View Report" xml:space="preserve">
+        <value>Xem báo cáo</value>
+    </data>
+    <data name="Total Amount" xml:space="preserve">
+        <value>Tổng tiền</value>
+    </data>
+    <data name="Total Booking" xml:space="preserve">
+        <value>Tổng đặt chỗ</value>
+    </data>
+    <data name="Total Cancel" xml:space="preserve">
+        <value>Tổng hủy chỗ</value>
+    </data>
+    <data name="Statistics Booking" xml:space="preserve">
+        <value>Thống kê đặt chỗ</value>
+    </data>
+    <data name="Statistics Service" xml:space="preserve">
+        <value>Thống kê dịch vụ</value>
+    </data>
+    <data name="Booking Type" xml:space="preserve">
+        <value>Kiêu đặt chỗ</value>
+    </data>
+    <data name="Approve Amount" xml:space="preserve">
+        <value>Tiền được chấp nhận</value>
+    </data>
+    <data name="Get Data" xml:space="preserve">
+        <value>Lấy dữ liệu</value>
+    </data>
+    <data name="Status" xml:space="preserve">
+        <value>Trạng thái</value>
+    </data>
+    <data name="Request Approved" xml:space="preserve">
+        <value>Yêu cầu phê duyệt</value>
+    </data>
+    <data name="Approved" xml:space="preserve">
+        <value>Chấp thuận</value>
+    </data>
+    <data name="Rejected" xml:space="preserve">
+        <value>Bị từ chối</value>
+    </data>
+    <data name="Preparing" xml:space="preserve">
+        <value>Chuẩn bị</value>
+    </data>
+    <data name="Booking code" xml:space="preserve">
+        <value>Mã đặt chỗ</value>
+    </data>
+    <data name="Download Tickets by Booking code" xml:space="preserve">
+        <value>Lấy vé thông qua mã đặt chỗ</value>
+    </data>
+    <data name="Transaction Reports" xml:space="preserve">
+        <value>Báo cáo giao dịch</value>
+    </data>
+    <data name="Payment Type" xml:space="preserve">
+        <value>Kiểu thanh toaán</value>
+    </data>
+    <data name="Ticket Type" xml:space="preserve">
+        <value>Kiểu vé</value>
+    </data>
+    <data name="Card" xml:space="preserve">
+        <value>Thẻ</value>
+    </data>
+    <data name="Cash" xml:space="preserve">
+        <value>Tiền mặt</value>
     </data>
 </root>

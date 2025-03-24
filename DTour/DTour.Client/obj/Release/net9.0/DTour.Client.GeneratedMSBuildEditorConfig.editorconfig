@@ -50,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QWdlbnRcUGFnZXNcQ2F0YWxvZ1xDdXJyZW5jeS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Agent/Pages/Data/CancelBooking.razor]
+build_metadata.AdditionalFiles.TargetPath = QWdlbnRcUGFnZXNcRGF0YVxDYW5jZWxCb29raW5nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Agent/Pages/Data/Commission.razor]
 build_metadata.AdditionalFiles.TargetPath = QWdlbnRcUGFnZXNcRGF0YVxDb21taXNzaW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Agent/Pages/Data/Ticket.razor]
 build_metadata.AdditionalFiles.TargetPath = QWdlbnRcUGFnZXNcRGF0YVxUaWNrZXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Agent/Pages/Data/TransactionReport.razor]
+build_metadata.AdditionalFiles.TargetPath = QWdlbnRcUGFnZXNcRGF0YVxUcmFuc2FjdGlvblJlcG9ydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Agent/Pages/Index.razor]
@@ -92,6 +100,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Pages/CheckOutVnp.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hlY2tPdXRWbnAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Pages/GetTicket.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2V0VGlja2V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Projects/V9/2025/DeksGroup/DTour/DTour.Client/Pages/Home.razor]

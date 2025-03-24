@@ -1,0 +1,100 @@
+﻿@page "/agent/transaction-report"
+
+<PageTitle>@Loc["Transaction Reports"]</PageTitle>
+<SectionContent SectionName="@NavConstants.TbLeft">
+    <Breadcrumb Slash="true"></Breadcrumb>
+    <Breadcrumb>@Loc["Transaction Reports"]</Breadcrumb>
+</SectionContent>
+<SectionContent SectionName="@NavConstants.TbRight">
+    <input @bind="DateRange" class="form-control form-control-sm w-200px" placeholder="Pick date range" id="RangeDate"/>
+    <button class="btn btn-sm btn-primary" @onclick="GetData">@Loc["Get Data"]</button>
+</SectionContent>
+
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<Card Title="@Loc["Transaction Reports"]">
+    <ChildContent>
+        @if (_items == null || IsLoading)
+        {
+            <Loading/>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
+                    <thead>
+                    <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                        <th>@Loc["Action"]</th>
+                        <th>@Loc["Pnr"]</th>
+                        <th>@Loc["Date"]</th>
+                        <th>@Loc["Route"]</th>
+                        <th>@Loc["Amount"]</th>
+                        <th>@Loc["Commission"]</th>
+                        <th>@Loc["Payment Type"]</th>
+                        <th>@Loc["Ticket Type"]</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in _items)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.BookingSessionId.NotIsNullOrEmpty())
+                                {
+                                    <a class="btn btn-primary" href="/agent/cancel-booking/@item.BookingSessionId">@Loc["Cancel"]</a>
+                                }
+                            </td>
+                            <td>@item.Pnr</td>
+                            <td>@item.DepartDate.ToLocalTime().ToDmy()</td>
+                            <td>@item.Amount.ToString("N2")</td>
+                            <td>@item.From - @item.To</td>
+                            <td>@item.CommitAmount.ToString("N2")</td>
+                            <th>@Loc[(item.PaymentType == 0 ? "Card" : "Cash")]</th>
+                            <th>@Loc[(item.TicketType == 0 ? "Air" : "Train")]</th>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </ChildContent>
+</Card>
+
+@code {
+    private List<StoreBookingDto>? _items = [];
+    private GetReportRequest _request = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        DateRange = "".InitDateRange();
+        await GetData();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CallInitRangeDate();
+        }
+
+        if (InitDataTable)
+        {
+            InitDataTable = false;
+            await CallInitialDataTable();
+        }
+    }
+
+    private async Task GetData()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        _request.DateRange = DateRange;
+        _items = await _httpService.PostAsync<List<StoreBookingDto>>($"{ShareEndpoints.Report}", _request);
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+    }
+
+}

@@ -14,4 +14,17 @@ public class ReportController : BaseApiController
         });
         return Ok(result);
     }
+    public async Task<IActionResult> GetStoreBooking(GetReportRequest input)
+    {
+        input.UserId = User.GetUserId();
+        if (User.IsInRole(RoleConstants.OperationRole))
+        {
+            input.UserId = string.Empty;
+        }
+        var result = await _mediator!.Send(new GetStoreBookingByUserQuery()
+        {
+            Input = input
+        });
+        return Ok(result);
+    }
 }

@@ -107,12 +107,12 @@
                                         <label @onclick="() => { ShowFareClass(0);}"
                                                class="btn btn-outline btn-outline-dashed btn-@(_onewayStep == 0 ? "light-primary" : "active-light-primary") p-2 d-flex align-items-center">
                                             <p class="text-muted fs-2">1. @Loc["Outbound"]</p>
-                                            <p class="text-@(_onewayStep == 0 ? "primary" : "muted")">@_request.Dep - @_request.Arr</p>
+                                            <p class="ms-2 fs-2 text-@(_onewayStep == 0 ? "primary" : "muted")">@_request.Dep - @_request.Arr</p>
                                         </label>
                                         <label @onclick="() => { ShowFareClass(1);}"
                                                class="btn btn-outline btn-outline-dashed btn-@(_onewayStep == 1 ? "light-primary" : "active-light-primary") p-2 d-flex align-items-center">
                                             <p class="text-muted fs-2">2. @Loc["Inbound"]</p>
-                                            <p class="text-@(_onewayStep == 1 ? "primary" : "muted")">@_request.Arr - @_request.Dep</p>
+                                            <p class="ms-2 fs-2 text-@(_onewayStep == 1 ? "primary" : "muted")">@_request.Arr - @_request.Dep</p>
                                         </label>
                                     </div>
                                 }
@@ -134,7 +134,7 @@
                                             @Loc["Duration"] @_selectTrain?.Summary?.TravelDuration</h6>
                                         <h6>@Loc["Train number"]: @sTrain</h6>
                                         <div
-                                            class="text-muted">@(_request.Adult > 0 ? $"{_request.Adult} Adult" : "") @(_request.Child > 0 ? $"{_request.Child} Child" : "") @_selectTrain?.Amount.AutoFormat()
+                                            class="text-muted">@($"{(_request.Adult > 0 ? $"{_request.Adult} {Loc["Adult"]}" : "")}") @($"{(_request.Child > 0 ? $"{_request.Child} {Loc["Child"]}" : "")}") @_selectTrain?.Amount.AutoFormat()
                                         </div>
                                     </div>
                                 </div>
@@ -540,7 +540,7 @@
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <h4>@Loc["Tickets"]</h4>
                                                 <div
-                                                    class="fs-2">@(_request.Adult > 0 ? $"{_request.Adult} Adult" : "") @(_request.Child > 0 ? $"{_request.Child} Child" : "")
+                                                    class="fs-2">@($"{(_request.Adult > 0 ? $"{_request.Adult} {Loc["Adult"]}" : "")}") @($"{(_request.Child > 0 ? $"{_request.Child} {Loc["Child"]}" : "")}")
                                                     <span
                                                         class="fw-bold fs-2">@sumTrain.Sum(s => s.Amount).AutoFormat()</span>
                                                 </div>
@@ -619,18 +619,18 @@
         }
     }
 </section>
-<CustomModal Title="Edit Ticket" SaveTitle="Edit"
+<CustomModal Title="@Loc["Edit Ticket"]" SaveTitle="@Loc["Edit"]" CancelTitle="@Loc["Cancel"]"
              OnClickCallback="async () => { _iStep = 1; await ToggleModal(); }"
              Backdrop="true" AddClass="modal-dialog-centered">
     <h5>@Loc["Are you sure you want to update the outbound ticket?"]</h5>
     <div class="rounded border border-gray-400 p-6">
         <h5 class="mb-3">@_selectTrain?.Summary?.DepartureDate @_selectTrain?.Summary?.DepartureTime.DisplayLeft() - @_selectTrain?.Summary?.ArrivalTime.DisplayLeft() </h5>
         <h5 class="mb-3">@_selectTrain?.Summary?.Origin?.Label - @_selectTrain?.Summary?.Destination?.Label</h5>
-        <h6 class="text-muted mb-3">Duration @_selectTrain?.Summary?.TravelDuration</h6>
+        <h6 class="text-muted mb-3">@Loc["Duration"] @_selectTrain?.Summary?.TravelDuration</h6>
     </div>
 </CustomModal>
 
-<CustomModal Title="Ticket & Fare Condition" HideSaveButton="true" AddClass="modal-dialog-centered" ModalId="TicketCondition">
+<CustomModal Title="@Loc["Ticket, Fare Condition"]" HideSaveButton="true" AddClass="modal-dialog-centered" ModalId="TicketCondition">
     <div class="d-flex flex-column">
         @if (dicCondition.Keys.Contains(iSelectCon))
         {

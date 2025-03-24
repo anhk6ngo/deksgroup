@@ -301,6 +301,8 @@ namespace DTour.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Status", "TicketType", "Pnr");
+
                     b.HasIndex("IsActive", "CreatedOn", "Status", "TicketType", "UserId");
 
                     b.ToTable("storebookings");

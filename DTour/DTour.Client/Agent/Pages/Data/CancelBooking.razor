@@ -1,0 +1,129 @@
+﻿@page "/agent/cancel-booking/{id}"
+
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<div class="card shadow-sm">
+    <div class="card-body">
+        @if (booking != null)
+        {
+            if (booking.Errors is { Count: > 0 })
+            {
+                var sError = "The processing is error";
+                if (booking.Errors is { Count: > 0 })
+                {
+                    sError = booking.Errors.Select(s => s.Message).Aggregate((a, b) => $"{a} {b}");
+                }
+
+                <div class="rounded m-10 p-10">
+                    <div class="alert alert-danger">
+                        @sError
+                    </div>
+                </div>
+            }
+            else
+            {
+                var blnCancel = false;
+                if (booking.Data is { Count: > 0 })
+                {
+                    foreach (var data in booking.Data)
+                    {
+                        <p>Booking Expire: @data.BookingExpirationTime</p>
+                        <p>Reservation Expire: @data.ReservationExpirationTime</p>
+                        if (data.Tickets is { Count: 0 })
+                        {
+                            continue;
+                        }
+
+                        foreach (var ticket in data.Tickets!)
+                        {
+                            if (ticket.IsCancelable)
+                            {
+                                blnCancel = true;
+                            }
+
+                            <p>Is Cancelable: @ticket.IsCancelable</p>
+                        }
+                    }
+                }
+
+                if (blnCancel)
+                {
+                    <button class="btn btn-primary" @onclick="Cancel">Cancel Booking</button>
+                }
+                @if (rsCancel != null)
+                {
+                    if (rsCancel.Errors is { Count: > 0 })
+                    {
+                        var sError = "The processing is error";
+                        if (rsCancel.Errors is { Count: > 0 })
+                        {
+                            sError = rsCancel.Errors.Select(s => s.Message).Aggregate((a, b) => $"{a} {b}");
+                        }
+
+                        <div class="rounded m-10 p-10">
+                            <div class="alert alert-danger">
+                                <p>
+                                    @sError
+                                </p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rounded m-10 p-10">
+                            <div class="alert alert-success">
+                                <h1>The processing is done</h1>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    if (iStep == 1)
+                    {
+                        <div class="rounded m-10 p-10">
+                            <div class="alert alert-danger">
+                                <p>
+                                    The processing is error. Please contact to administrator for details.
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? Id { get; set; }
+    private RailResult<List<RailCancelBookingResponse>>? booking = default;
+    private RailResult<List<RailCancelBookingSessionResponse>>? rsCancel = default;
+    private int iStep = 0;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (Id.NotIsNullOrEmpty())
+            {
+                IsLoading = true;
+                StateHasChanged();
+                booking = await _httpService.GetAsync<RailResult<List<RailCancelBookingResponse>>?>($"{RailEndpoints.Rail}/cancellation-detail/{Id}");
+                IsLoading = false;
+                StateHasChanged();
+            }
+        }
+    }
+
+    private async Task Cancel()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        iStep = 1;
+        rsCancel = await _httpService.GetAsync<RailResult<List<RailCancelBookingSessionResponse>>?>($"{RailEndpoints.Rail}/cancel/{Id}");
+        IsLoading = false;
+        StateHasChanged();
+    }
+}

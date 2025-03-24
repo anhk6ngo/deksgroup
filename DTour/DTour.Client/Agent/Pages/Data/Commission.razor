@@ -1,21 +1,21 @@
 ﻿@page "/agent/commission"
 
 @attribute [Authorize(Roles = $"{RoleConstants.AccountingRole}")]
-<PageTitle>Commission</PageTitle>
+<PageTitle>@Loc["Commission"]</PageTitle>
 <SectionContent SectionName="@NavConstants.TbLeft">
     <Breadcrumb Slash="true"></Breadcrumb>
-    <Breadcrumb TextMuted="true">Commission</Breadcrumb>
+    <Breadcrumb TextMuted="true">@Loc["Commission"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
     <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new CommissionDto(), 0)">
-        <i class="fa fa-plus-square"></i>Add new
+        <i class="fa fa-plus-square"></i>@Loc["Add new"]
     </button>
 </SectionContent>
 @if (IsLoading)
 {
     <LoadingRotate/>
 }
-<Card Title="List of Commission">
+<Card Title="@Loc["List of Commission"]">
     @if (_items == null || IsLoading)
     {
         <Loading/>
@@ -26,11 +26,11 @@
             <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
                 <thead>
                 <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                    <th>Action</th>
-                    <th>Agent Name</th>
-                    <th>Percent</th>
-                    <th>From</th>
-                    <th>To</th>
+                    <th>@Loc["Action"]</th>
+                    <th>@Loc["Agent"]</th>
+                    <th>@Loc["Percent"]</th>
+                    <th>@Loc["From"]</th>
+                    <th>@Loc["To"]</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,12 +58,12 @@
         </div>
     }
 </Card>
-<CustomModal Title="@($"{Title} Commission")" OnClickCallback="SaveData">
+<CustomModal Title="@($"{Title} Commission")" OnClickCallback="SaveData" SaveTitle="@Loc["Save Change"]"
+             CancelTitle="@Loc["Cancel"]">
     <EditForm Model="data" class="form">
         <FluentValidationValidator @ref="_fluentValidationValidator"/>
         <div class="row mb-7">
-           
-            <label class="required">Agent</label>
+            <label class="required">@Loc["Agent"]</label>
             <select class="form-select bg-light-warning" data-control="select2" data-id="cus"
                     data-dropdown-parent="#@UiConstants.GetModalNameDefault">
                 <option value="">Select Item</option>
@@ -76,19 +76,19 @@
             <ValidationMessage For="@(() => data!.AgentId)"/>
         </div>
         <div class="row mb-7">
-            <label class="required">Percent</label>
+            <label class="required">@Loc["Percent"]</label>
             <input class="form-control form-control-sm numberinputmask"
                    @bind="@data!.Percent"/>
             <ValidationMessage For="@(() => data.Percent)"/>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label class="required">From (mm/dd/yyyy)</label>
+                <label class="required">@Loc["From"] (mm/dd/yyyy)</label>
                 <InputDate @bind-Value="@data!.From" class="form-control" data-control="date-picker"/>
                 <ValidationMessage For="@(() => data.From)"/>
             </div>
             <div class="col-md-6">
-                <label class="required">To (mm/dd/yyyy)</label>
+                <label class="required">@Loc["To"] (mm/dd/yyyy)</label>
                 <InputDate @bind-Value="@data!.To" class="form-control" data-control="date-picker"/>
                 <ValidationMessage For="@(() => data.To)"/>
             </div>

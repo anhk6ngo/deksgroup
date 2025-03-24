@@ -2,12 +2,12 @@
 
 <SectionContent SectionName="@NavConstants.TbLeft">
     <Breadcrumb Slash="true"></Breadcrumb>
-    <Breadcrumb TextMuted="true">Dashboard</Breadcrumb>
+    <Breadcrumb TextMuted="true">@Loc["Dash board"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
     <input @bind="DateRange" class="form-control form-control-sm w-200px mx-2" placeholder="Pick date range"
            id="RangeDate"/>
-    <button class="btn btn-sm btn-primary" @onclick="GetData">View Report</button>
+    <button class="btn btn-sm btn-primary" @onclick="GetData">@Loc["View Report"]</button>
 </SectionContent>
 @if (IsLoading)
 {
@@ -22,7 +22,7 @@
                     <span
                         class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_balanceDto?.Amount.ToString("N2")</span>
                 </div>
-                <span class="text-gray-500 pt-1 fw-semibold fs-6">Balance</span>
+                <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Balance"]</span>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
                     <span
                         class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_balanceDto?.DepositAmount.ToString("N2")</span>
                 </div>
-                <span class="text-gray-500 pt-1 fw-semibold fs-6">Deposit</span>
+                <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Deposit"]</span>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
                     <span
                         class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_items?.Sum(s => s.Amount).ToString("N2")</span>
                 </div>
-                <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Amount</span>
+                <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Total Amount"]</span>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                     <span
                         class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_items?.Sum(s => s.ActiveNo + s.DeActiveNo)</span>
                 </div>
-                <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Booking</span>
+                <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Total Booking"]</span>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
                     </i>
                     <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_items?.Sum(s => s.DeActiveNo)</span>
                 </div>
-                <span class="text-gray-500 pt-1 fw-semibold fs-6">Total Cancel</span>
+                <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Total Cancel"]</span>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
             <div class="card card-flush overflow-hidden h-md-100">
                 <div class="card-header py-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold text-gray-900">Statistics Booking</span>
+                        <span class="card-label fw-bold text-gray-900">@Loc["Statistics Booking"]</span>
                     </h3>
                 </div>
                 <div class="card-body d-flex justify-content-between flex-column pb-1 px-0">
@@ -100,7 +100,7 @@
             <div class="card card-flush overflow-hidden h-md-100">
                 <div class="card-header py-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold text-gray-900">Statistics Service</span>
+                        <span class="card-label fw-bold text-gray-900">@Loc["Statistics Service"]</span>
                     </h3>
                 </div>
                 <div class="card-body d-flex justify-content-between flex-column pb-1 px-0">
@@ -118,11 +118,11 @@
             <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
                 <thead>
                 <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                    <th>Date</th>
-                    <th>Booking Type</th>
-                    <th>Total Amount</th>
-                    <th>Total Booking</th>
-                    <th>Total Cancel</th>
+                    <th>@Loc["Date"]</th>
+                    <th>@Loc["Booking Type"]</th>
+                    <th>@Loc["Total Amount"]</th>
+                    <th>@Loc["Total Booking"]</th>
+                    <th>@Loc["Total Cancel"]</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -132,7 +132,7 @@
                     {
                         <tr>
                             <td>@item.TransDate.ToDmy()</td>
-                            <td>@(item.TicketType == 0 ? "Air": "Train")</td>
+                            <td>@Loc[(item.TicketType == 0 ? "Air": "Train")]</td>
                             <td>@item.Amount.ToString("N2")</td>
                             <td>@(item.ActiveNo + item.DeActiveNo)</td>
                             <td>@item.DeActiveNo</td>

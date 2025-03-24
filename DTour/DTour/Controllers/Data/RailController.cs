@@ -311,7 +311,15 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
     [HttpGet("retrieve-booking/{id}")]
     public async Task<IActionResult> RetrieveBooking(string id)
     {
-        var result = await bookingService.RetrieveBooking(id);
+        var tmpId = id;
+        if (tmpId.Length == 6)
+        {
+            tmpId = await _mediator!.Send(new GetBookingSessionIdQuery()
+            {
+                Pnr = id
+            });
+        }
+        var result = await bookingService.RetrieveBooking(tmpId);
         return Ok(result);
     }
     

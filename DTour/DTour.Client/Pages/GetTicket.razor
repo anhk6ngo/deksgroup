@@ -1,0 +1,70 @@
+﻿@page "/get-ticket-by-pnr"
+@inject IHttpServiceClient _http
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<div class="container mb-20">
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <div class="card-title">@Loc["Download Tickets by Booking code"]</div>
+                    <div class="card-toolbar">
+                        <div class="d-flex justify-content-between">
+                            <input class="form-control w-150px me-5" @bind="Pnr" placeholder="@Loc["Booking code"]"/>
+                            <button class="btn btn-primary" @onclick="GetTickets">@Loc["Get Data"]</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (result != null)
+                    {
+                        if (result.Status == 200)
+                        {
+                            <h1>@Loc["Ticket"]</h1>
+                            <div class="d-flex flex-column">
+                                @foreach (var s1 in result.Data?.SelectMany(s => s.PdfTickets!)!)
+                                {
+                                    <li class="d-flex align-items-center py-2">
+                                        <span class="bullet bullet-dot me-5"></span>
+                                        <a target="_blank"
+                                           href="@s1">@Loc["Download"]</a>
+                                    </li>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            var sError = "The processing is error";
+                            if (result.Errors is { Count: > 0 })
+                            {
+                                sError = result.Errors.Select(s => s.Message).Aggregate((a, b) => $"{a} {b}");
+                            }
+
+                            <div class="rounded m-10 p-10">
+                                <div class="alert alert-danger">
+                                    @sError
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    private string? Pnr { get; set; }
+    private RailResult<List<RailConfirmBookingResponse>>? result = default;
+
+    private async Task GetTickets()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        result = await _http.GetAsync<RailResult<List<RailConfirmBookingResponse>>?>($"{RailEndpoints.Rail}/retrieve-booking/{Pnr}");
+        IsLoading = false;
+        StateHasChanged();
+    }
+
+}

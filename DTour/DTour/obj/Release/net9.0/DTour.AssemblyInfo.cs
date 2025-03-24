@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DTour")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a614f51544f8bc8155f18d1343e39e9752f28ffb")]
 [assembly: System.Reflection.AssemblyProductAttribute("DTour")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DTour")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

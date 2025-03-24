@@ -51,7 +51,7 @@
             <div class="form-control-border form-control-transparent form-fs-md d-flex w-100">
                 <div class="dropdown me-2">
                     <input type="text" class="form-control"
-                           value="@(_adt + _chd) Passenger@(_adt + _chd > 1 ? "s" : "")" data-bs-auto-close="outside"
+                           value="@(_adt + _chd) @Loc[$"Passenger{(_adt + _chd > 1 ? "s" : "")}"]" data-bs-auto-close="outside"
                            data-bs-toggle="dropdown">
                     <ul class="dropdown-menu p-3 w-100">
                         <li class="d-flex justify-content-between">
@@ -94,11 +94,11 @@
                             for (var i = 0; i < _chd; i++)
                             {
                                 <li class="d-flex justify-content-between mb-2">
-                                    <div class="fw-semibold text-center align-self-center">@Loc["Child"]" @(i + 1) (@Loc["Age"])</div>
+                                    <div class="fw-semibold text-center align-self-center">@Loc["Child"] @(i + 1) (@Loc["Age"])</div>
                                     @{
                                         var i1 = i;
                                     }
-                                    <select class="form-select form-select-sm w-100px"
+                                    <select class="form-select form-select-sm w-75px"
                                             @onchange="(e) => { aChild[i1] = e.Value!.ToString()!; }">
                                         @for (var j = 0; j < 26; j++)
                                         {
@@ -141,16 +141,16 @@
                                                 class="d-flex align-items-center p-3 rounded-3 border-hover border border-dashed border-gray-300 cursor-pointer mb-1"
                                                 @onclick="async () => { await SetData((iCity.Slug, iCity.Translations?.En, iCity.CountryCode,true)); }">
                                                 <div class="symbol symbol-35px symbol-circle me-5">
-                                                            <span class="symbol-label bg-light-success fw-semibold">
-                                                                <i class="ki-duotone ki-geolocation text-primary fs-2x">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                </i>
-                                                            </span>
+                                                    <span class="symbol-label bg-light-success fw-semibold">
+                                                        <i class="ki-duotone ki-geolocation text-primary fs-2x">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i>
+                                                    </span>
                                                 </div>
                                                 <div class="fw-semibold">
-                                                            <span
-                                                                class="fs-6 text-gray-800 me-2">@iCity.Translations?.En,</span>
+                                                    <span
+                                                        class="fs-6 text-gray-800 me-2">@iCity.Translations?.En,</span>
                                                     <span class="text-muted">@iCity.CountryCode</span>
                                                 </div>
                                             </div>
@@ -188,11 +188,11 @@
                                 <span
                                     class="btn btn-flush btn-active-color-danger position-absolute top-50 end-0 translate-middle-y lh-0 me-5"
                                     @onclick="() => { _Dep = string.Empty; }">
-                                            <i class="ki-duotone ki-cross fs-2 fs-lg-1 me-0">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </span>
+                                    <i class="ki-duotone ki-cross fs-2 fs-lg-1 me-0">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </span>
                             }
                         </div>
                     </div>
@@ -291,7 +291,7 @@
             </div>
         </div>
     </div>
-
+    <a href="/get-ticket-by-pnr" class="fs-1">@Loc["Download Tickets by Booking code"]</a>
 </div>
 
 @code {
@@ -431,7 +431,9 @@
     {
         if (iApp == 1)
         {
-            var sUrl = $"/train?from={slugDep}&to={slugArr}&dRange={_dRange}&adt={_adt}";
+            var sDep = $"{_Dep}".SplitExt("-").FirstOrDefault();
+            var sArr = $"{_Arr}".SplitExt("-").FirstOrDefault();
+            var sUrl = $"/train?from={slugDep}&to={slugArr}&dep={sDep}&arr={sArr}&dRange={_dRange}&adt={_adt}";
             if (_chd > 0)
             {
                 sUrl += $"&chd={aChild.Aggregate((a, b) => $"{a}-{b}")}";

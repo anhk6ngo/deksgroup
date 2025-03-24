@@ -6,6 +6,8 @@ namespace DTour.Client.Pages;
 public partial class Train
 {
     [SupplyParameterFromQuery] public string? From { get; set; }
+    [SupplyParameterFromQuery] public string? Dep { get; set; }
+    [SupplyParameterFromQuery] public string? Arr { get; set; }
     [SupplyParameterFromQuery] public string? To { get; set; }
     [SupplyParameterFromQuery] public string? Adt { get; set; }
     [SupplyParameterFromQuery] public string? Chd { get; set; }
@@ -55,6 +57,8 @@ public partial class Train
         _request.DateRange = dRange;
         _request.SlugDep = From;
         _request.SlugArr = To;
+        _request.Dep = Dep;
+        _request.Arr = Arr;
         _request.IsRoundTrip = $"{dRange}".Contains("to");
         var iAdt = $"{Adt}".ConvertToInt();
         if (iAdt > 0)

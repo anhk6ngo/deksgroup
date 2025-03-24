@@ -5,7 +5,7 @@ public class GetSumBookingByUserQuery : IRequest<List<SumBookingResponse>>
     public GetReportRequest Input { get; set; } = null!;
 }
 
-internal class GetSumShipmentByUserQueryHandler(IUnitOfWork<Guid, PortalContext> unitOfWork)
+internal class GetSumBookingByUserQueryHandler(IUnitOfWork<Guid, PortalContext> unitOfWork)
     : IRequestHandler<GetSumBookingByUserQuery, List<SumBookingResponse>>
 {
     public async Task<List<SumBookingResponse>> Handle(GetSumBookingByUserQuery request,

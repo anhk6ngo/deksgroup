@@ -1,18 +1,18 @@
 ﻿@page "/agent/approve-top-up"
-<PageTitle>Approve Top-up</PageTitle>
+<PageTitle>@Loc["Approve Top-up"]</PageTitle>
 <SectionContent SectionName="@NavConstants.TbLeft">
     <Breadcrumb Slash="true"></Breadcrumb>
-    <Breadcrumb>Approve Top-up</Breadcrumb>
+    <Breadcrumb>@Loc["Approve Top-up"]</Breadcrumb>
 </SectionContent>
 @if (IsLoading)
 {
     <LoadingRotate/>
 }
 
-<Card Title="List of Request Top-up">
+<Card Title="@Loc["List of Request Top-up"]">
     <ToolbarRight>
         <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new TopUpDto(), 0)">
-            <i class="fa fa-plus-square"></i>Add new
+            <i class="fa fa-plus-square"></i>@Loc["Add new"]
         </button>
     </ToolbarRight>
     <ChildContent>
@@ -26,11 +26,11 @@
                 <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
                     <thead>
                     <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                        <th>Action</th>
-                        <th>Date</th>
-                        <th>Display Name</th>
-                        <th>Amount</th>
-                        <th>Note</th>
+                        <th>@Loc["Action"]</th>
+                        <th>@Loc["Date"]</th>
+                        <th>@Loc["Name"]</th>
+                        <th>@Loc["Amount"]</th>
+                        <th>@Loc["Note"]</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,14 +59,15 @@
         }
     </ChildContent>
 </Card>
-<CustomModal Title="@($"{Title} Top up")" OnClickCallback="SaveData">
+<CustomModal Title="@($"{Title} Top up")" OnClickCallback="SaveData" SaveTitle="@Loc["Save Change"]"
+             CancelTitle="@Loc["Cancel"]">
     <EditForm Model="data" class="form">
         <FluentValidationValidator @ref="_fluentValidationValidator"/>
         <h4>@data?.Note</h4>
-        <h5>Amount: @data?.RequestAmount.ToString("N2")</h5>
-        <h5>Is Deposit: @(data?.IsDeposit == true ? "Yes" : "No")</h5>
+        <h5>@Loc["Amount"]: @data?.RequestAmount.ToString("N2")</h5>
+        <h5>@Loc["Is Deposit"]: @Loc[(data?.IsDeposit == true ? "Yes" : "No")]</h5>
         <div class="row mb-7">
-            <label class="form-label required">Note</label>
+            <label class="form-label required">@Loc["Note"]</label>
             <InputTextArea type="text" @bind-Value="@data!.AccNote" class="form-control maxlength" rows="3"
                            maxlength="500"/>
             <ValidationMessage For="@(() => data.AccNote)"/>
@@ -74,7 +75,7 @@
         @if (iAction == 0)
         {
             <div class="row mb-7">
-                <label class="form-label">User</label>
+                <label class="form-label">@Loc["User"]</label>
                 <select class="form-select bg-light-warning" data-control="select2" data-id="config"
                         data-dropdown-parent="#@UiConstants.GetModalNameDefault">
                     <option value="">Select Item</option>
@@ -89,13 +90,13 @@
                     <input class="form-check-input" type="checkbox"
                            @bind="@data.IsDeposit" id="flexSwitchShareRoom"/>
                     <label class="form-check-label" for="flexSwitchShareRoom">
-                        Is Deposit
+                        @Loc["Is Deposit"]
                     </label>
                 </div>
             </div>
         }
         <div class="row mb-7">
-            <label class="fs-6 fw-semibold form-label">Amount</label>
+            <label class="fs-6 fw-semibold form-label">@Loc["Amount"]</label>
             <input class="form-control numberinputmask" @bind="@data!.ApproveAmount"/>
             <ValidationMessage For="@(() => data.ApproveAmount)"/>
         </div>

@@ -1,21 +1,21 @@
 ﻿@page "/agent/exchange-rate"
 
 @attribute [Authorize(Roles = $"{RoleConstants.AccountingRole}")]
-<PageTitle>ExchangeRate</PageTitle>
+<PageTitle>@Loc["Exchange Rate"]</PageTitle>
 <SectionContent SectionName="@NavConstants.TbLeft">
     <Breadcrumb Slash="true"></Breadcrumb>
-    <Breadcrumb TextMuted="true">ExchangeRate</Breadcrumb>
+    <Breadcrumb TextMuted="true">@Loc["Exchange Rate"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
     <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new ExchangeRateDto(), 0)">
-        <i class="fa fa-plus-square"></i>Add new
+        <i class="fa fa-plus-square"></i>@Loc["Add new"]
     </button>
 </SectionContent>
 @if (IsLoading)
 {
     <LoadingRotate/>
 }
-<Card Title="List of Exchange Rate">
+<Card Title="@Loc["List of Exchange Rate"]">
     @if (_items == null || IsLoading)
     {
         <Loading/>
@@ -26,11 +26,11 @@
             <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
                 <thead>
                 <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                    <th>Action</th>
-                    <th>Currency</th>
-                    <th>Rate</th>
-                    <th>From</th>
-                    <th>To</th>
+                    <th>@Loc["Action"]</th>
+                    <th>@Loc["Currency"]</th>
+                    <th>@Loc["Rate"]</th>
+                    <th>@Loc["From"]</th>
+                    <th>@Loc["To"]</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,12 +58,13 @@
         </div>
     }
 </Card>
-<CustomModal Title="@($"{Title} ExchangeRate")" OnClickCallback="SaveData">
+<CustomModal Title="@($"{Title} ExchangeRate")" OnClickCallback="SaveData" SaveTitle="@Loc["Save Change"]"
+             CancelTitle="@Loc["Cancel"]">
     <EditForm Model="data" class="form">
         <FluentValidationValidator @ref="_fluentValidationValidator"/>
         <div class="row mb-7">
             <div class="col-md-6">
-                <label class="required">Currency</label>
+                <label class="required">@Loc["Currency"]</label>
                 <select class="form-select bg-light-warning" data-control="select2" data-id="cus"
                         data-dropdown-parent="#@UiConstants.GetModalNameDefault">
                     <option value="">Select Item</option>
@@ -76,7 +77,7 @@
                 <ValidationMessage For="@(() => data!.Currency)"/>
             </div>
             <div class="col-md-6">
-                <label class="required">Rate</label>
+                <label class="required">@Loc["Rate"]</label>
                 <input class="form-control form-control-sm numberinputmask"
                        @bind="@data!.Rate"/>
                 <ValidationMessage For="@(() => data.Rate)"/>
@@ -84,12 +85,12 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label class="required">From (mm/dd/yyyy)</label>
+                <label class="required">@Loc["From"] (mm/dd/yyyy)</label>
                 <InputDate @bind-Value="@data!.From" class="form-control" data-control="date-picker"/>
                 <ValidationMessage For="@(() => data.From)"/>
             </div>
             <div class="col-md-6">
-                <label class="required">To (mm/dd/yyyy)</label>
+                <label class="required">@Loc["To"] (mm/dd/yyyy)</label>
                 <InputDate @bind-Value="@data!.To" class="form-control" data-control="date-picker"/>
                 <ValidationMessage For="@(() => data.To)"/>
             </div>

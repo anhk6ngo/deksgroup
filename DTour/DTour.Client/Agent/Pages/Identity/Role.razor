@@ -4,10 +4,10 @@
 @inject IHttpServiceClient _httpService
 <PageTitle>Roles And Set Rights</PageTitle>
 <SectionContent SectionName="@NavConstants.TbLeft">
-    <Breadcrumb>Roles</Breadcrumb>
+    <Breadcrumb>@Loc["Roles"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
-    <button class="btn btn-custom" @onclick="ShowRightForm">@(SetRight ? "Roles" : "Set Rights")</button>
+    <button class="btn btn-custom" @onclick="ShowRightForm">@Loc[$"{(SetRight ? "Roles" : "Set Rights")}"]</button>
 </SectionContent>
 @if (SetRight)
 {
@@ -22,7 +22,7 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-12 mb-5">
-                            <label class="form-label">User</label>
+                            <label class="form-label">@Loc["User"]</label>
                             <select class="form-select" id="endUser">
                                 @foreach (var iUser in SelectUsers)
                                 {
@@ -31,7 +31,7 @@
                             </select>
                         </div>
                         <div class="col-md-12 mb-5">
-                            <label class="form-label">Roles</label>
+                            <label class="form-label">@Loc["Roles"]</label>
                             <select class="form-select" id="role" multiple>
                                 @foreach (var iRole in Data!)
                                 {
@@ -45,44 +45,44 @@
                             <div class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input" type="radio" checked="@(ActionRight == 0)" @onchange="@(() => ActionRight = 0)" id="gMethod"/>
                                 <label class="form-check-label" for="gMethod">
-                                    View Roles on User
+                                    @Loc["View Roles on User"]
                                 </label>
                             </div>
                             <div class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input" type="radio" checked="@(ActionRight == 1)" @onchange="@(() => ActionRight = 1)" id="gMethod1"/>
                                 <label class="form-check-label" for="gMethod1">
-                                    Set Role for User
+                                    @Loc["Set Role for User"]
                                 </label>
                             </div>
                             <div class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input" type="radio" checked="@(ActionRight == 2)" @onchange="@(() => ActionRight = 2)" id="gMethod2"/>
                                 <label class="form-check-label" for="gMethod2">
-                                    Remove Role on User
+                                    @Loc["Remove Role on User"]
                                 </label>
                             </div>
                             <div class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input" type="radio" checked="@(ActionRight == 3)" @onchange="@(() => ActionRight = 3)" id="gMethod2"/>
                                 <label class="form-check-label" for="gMethod2">
-                                    Update Station
+                                    @Loc["Update Station"]
                                 </label>
                             </div>
                             <button class="btn btn-success" @onclick="RoleAction">
                                 <i class="ki-duotone ki-security-user">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                </i> Do it
+                                </i> @Loc["Do it"]
                             </button>
                         </div>
                     </div>
                     <div class="row">
-                        <label class="form-label">Station</label>
+                        <label class="form-label">@Loc["Station"]</label>
                         <input @bind="data.Description" class="form-control"/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     @if (UserInRoles is { Count: > 0 })
                     {
-                        <h4>User have role</h4>
+                        <h4>@Loc["User have role"]</h4>
                         foreach (var iRole in UserInRoles)
                         {
                             <p>@iRole.text</p>
@@ -101,7 +101,7 @@ else
     }
     else
     {
-        <h1>List of Roles</h1>
+        <h1>@Loc["List of Roles"]</h1>
         @if (Data is { Count: > 0 })
         {
             <div class="row g-5 g-xl-9">
@@ -115,25 +115,25 @@ else
                                 </div>
                             </div>
                             <div class="card-body pt-1">
-                                <div class="fw-bold text-gray-600 mb-5">Total users with this role: @item.Users</div>
+                                <div class="fw-bold text-gray-600 mb-5">@Loc["Total users with this role"]: @item.Users</div>
                                 <p>@item.Description</p>
                             </div>
                             <div class="card-footer flex-wrap pt-0">
                                 <button type="button" class="btn btn-light btn-active-primary my-1 me-2" data-bs-toggle="modal"
                                         data-bs-target="#app_modal_1" @onclick="() => ActionData(item.id, 4)">
-                                    View Users
+                                    @Loc["View Users"]
                                 </button>
                                 <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal"
                                         data-bs-target="#app_modal_1" @onclick="() => ActionData(item.id, 1)">
-                                    Edit Role
+                                    @Loc["Edit Role"]
                                 </button>
                                 <button type="button" class="btn btn-light-danger my-1" data-bs-toggle="modal"
                                         data-bs-target="#app_modal_1" @onclick="() => ActionData(item.id, 2)">
-                                    Delete Role
+                                    @Loc["Delete Role"]
                                 </button>
                                 <button type="button" class="btn btn-light-warning my-1" data-bs-toggle="modal"
                                         data-bs-target="#app_modal_1" @onclick="() => ActionData(item.id, 3)">
-                                    Clear Users
+                                    @Loc["Clear Users"]
                                 </button>
                             </div>
                         </div>
@@ -145,7 +145,7 @@ else
                             <button class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#app_modal_1"
                                     @onclick="() => ActionData(string.Empty, 0)">
                                 <img src="img/addRole.png" alt="" class="mw-100 mh-150px mb-7"/>
-                                <div class="fw-bold fs-3 text-gray-600 text-hover-primary">Add New Role</div>
+                                <div class="fw-bold fs-3 text-gray-600 text-hover-primary">@Loc["Add New Role"]</div>
                             </button>
                         </div>
                     </div>
@@ -160,7 +160,7 @@ else
     {
         @if (ViewUsers is { Count: > 0 })
         {
-            <h4>Role: @data.Name</h4>
+            <h4>@Loc["Role"]: @data.Name</h4>
             <div class="d-flex flex-column text-gray-600 scroll mh-500px">
                 @foreach (var iUser in ViewUsers)
                 {
@@ -176,12 +176,12 @@ else
         <EditForm Model="data" class="form">
             <FluentValidationValidator @ref="_fluentValidationValidator"/>
             <div class="row mb-7">
-                <label class="required">Role Name</label>
+                <label class="required">@Loc["Name"]</label>
                 <InputText type="text" @bind-Value="@data!.Name" class="form-control maxlength" maxlength="255"/>
                 <ValidationMessage For="@(() => data.Name)"/>
             </div>
             <div class="row mb-7">
-                <label class="required">Description</label>
+                <label class="required">@Loc["Description"]</label>
                 <InputText type="text" @bind-Value="@data.Description" class="form-control maxlength" maxlength="255"/>
                 <ValidationMessage For="@(() => data.Description)"/>
             </div>
