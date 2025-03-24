@@ -16,7 +16,7 @@ internal class GetStoreBookingIdQueryHandler(IUnitOfWork<Guid, PortalContext> un
         for (var i = 0; i < 3; i++)
         {
             result =await unitOfWork.RepositoryNew<StoreBooking>().Entities
-                .Where(w=>w.Id == request.Id && w.UserId == request.UserId)
+                .Where(w=>w.Id == request.Id)
                 .ProjectToType<StoreBookingDto>()
                 .FirstOrDefaultAsync(cancellationToken);
             if (result != null && result.TransactionId.NotIsNullOrEmpty())

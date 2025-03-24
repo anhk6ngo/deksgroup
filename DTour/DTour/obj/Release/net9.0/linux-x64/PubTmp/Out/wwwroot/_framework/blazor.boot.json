@@ -1,11 +1,11 @@
 {
   "mainAssemblyName": "DTour.Client",
   "resources": {
-    "hash": "sha256-i4pBCqyI9Or2JUXtWIg/mH72HjTjwMmq4jfmcAvcBAQ=",
+    "hash": "sha256-6MaWFY4mpYnETON7VF1P6ZcKcqjURZ/U5mUuuZdrAEY=",
     "fingerprinting": {
       "Blazored.FluentValidation.x0xsecpmtx.wasm": "Blazored.FluentValidation.wasm",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
-      "DTour.Client.kl4mjxbcur.wasm": "DTour.Client.wasm",
+      "DTour.Client.aydot3rw35.wasm": "DTour.Client.wasm",
       "FluentValidation.a26tmul8eq.wasm": "FluentValidation.wasm",
       "Mapster.Core.i31rf2yj42.wasm": "Mapster.Core.wasm",
       "Mapster.0l4ktdlc6p.wasm": "Mapster.wasm",
@@ -36,7 +36,7 @@
       "Microsoft.JSInterop.WebAssembly.8eb000j8w7.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
       "Newtonsoft.Json.qkbufwhni2.wasm": "Newtonsoft.Json.wasm",
       "QrCodeGenerator.gyim9s0wsc.wasm": "QrCodeGenerator.wasm",
-      "SharedComponent.yf5apfkf82.wasm": "SharedComponent.wasm",
+      "SharedComponent.ctuga3f3wl.wasm": "SharedComponent.wasm",
       "SharedExtension.sr8cydy7y3.wasm": "SharedExtension.wasm",
       "Stripe.net.1o0wv29jg2.wasm": "Stripe.net.wasm",
       "System.Collections.Concurrent.dfsicj0zsx.wasm": "System.Collections.Concurrent.wasm",
@@ -98,7 +98,7 @@
       "System.Xml.ReaderWriter.lw3sr8mh68.wasm": "System.Xml.ReaderWriter.wasm",
       "System.Xml.XDocument.q32h0u5hry.wasm": "System.Xml.XDocument.wasm",
       "System.Xml.XmlSerializer.s103ebtqit.wasm": "System.Xml.XmlSerializer.wasm",
-      "DTour.Client.resources.kv0a1ww3mn.wasm": "DTour.Client.resources.wasm",
+      "DTour.Client.resources.cxufekus5t.wasm": "DTour.Client.resources.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.hmanx9razn.js": "dotnet.native.js",
       "dotnet.native.p4lwlf2bu1.wasm": "dotnet.native.wasm",
@@ -124,7 +124,7 @@
     "assembly": {
       "Blazored.FluentValidation.x0xsecpmtx.wasm": "sha256-MSQuUWmw/uBMui2/n4kdEKi0h5j0G+EuO1sM6KK6ltM=",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
-      "DTour.Client.kl4mjxbcur.wasm": "sha256-OHhvwJgEnCfbJo7nl9kJCgvyilk1F+HGNT4A6w6ZZbU=",
+      "DTour.Client.aydot3rw35.wasm": "sha256-XsqhIpG3IoStBa+zGI1Ic54Qn55AWIa9Nbc0ZHbDw+Y=",
       "FluentValidation.a26tmul8eq.wasm": "sha256-Dt7DBDag97mASqcSTSWerTCmGMiE8QnbGYMRbfGmqvQ=",
       "Mapster.Core.i31rf2yj42.wasm": "sha256-TtVD3ZLBnfkyp2wZGh0Zdq76kODF5kS8P6l91a7SVDA=",
       "Mapster.0l4ktdlc6p.wasm": "sha256-zMqum/r3XCq0wm80zzfaEQ4LR5DJZnx7FXCghCHunAA=",
@@ -155,7 +155,7 @@
       "Microsoft.JSInterop.WebAssembly.8eb000j8w7.wasm": "sha256-sGms9Oai1ztzgfMsqBvmeKwa5ZyGWr/AEXr6thw0lso=",
       "Newtonsoft.Json.qkbufwhni2.wasm": "sha256-GlXMWKvDs45M2pACoR3Y4Qh8mcrOZGljqmvJY+6JZ5s=",
       "QrCodeGenerator.gyim9s0wsc.wasm": "sha256-iF0r/Mcv+s6dNMXVL9St6saK/dWlKyx2KbyiDbuk3sY=",
-      "SharedComponent.yf5apfkf82.wasm": "sha256-8nAlY5MtA6itPcyR3D4E/xnEsMPIjfC8/F1PCm7xvh8=",
+      "SharedComponent.ctuga3f3wl.wasm": "sha256-ABpDLpWusLzbfLZFOYHdtWNoPs8XVzjDOpXeMV1Ub7M=",
       "SharedExtension.sr8cydy7y3.wasm": "sha256-mLJDqcSPqy7ktL1oLv4WKoMQ/Q3g0BTVzZV2cl0CbVs=",
       "Stripe.net.1o0wv29jg2.wasm": "sha256-nx3r8ndqBxiQvtvVrDNOEzdX6KRJmpgTAg+Yy9Ka8uI=",
       "System.Collections.Concurrent.dfsicj0zsx.wasm": "sha256-lycCZrq2nyOPGfK050kXSdvWvNJAa/T6jFjZL5RlpX4=",
@@ -218,7 +218,7 @@
     },
     "satelliteResources": {
       "vi": {
-        "DTour.Client.resources.kv0a1ww3mn.wasm": "sha256-EPz7p5U18QuhqEgVq7ijuw3St2avqT94D5sNvJFOb3E="
+        "DTour.Client.resources.cxufekus5t.wasm": "sha256-UMiisCBIkO9lfo8w9Qg9c6gfinb2u2yHQPlfr0JALG8="
       }
     }
   },

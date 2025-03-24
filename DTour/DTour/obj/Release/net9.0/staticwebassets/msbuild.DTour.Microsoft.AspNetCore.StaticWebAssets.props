@@ -2280,8 +2280,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qrwvhsjgcp</Fingerprint>
-      <Integrity>pojm91Gd9CF/n6zGyWefqHDtuizrJMAIBjE854CibRs=</Integrity>
+      <Fingerprint>nt223nfhau</Fingerprint>
+      <Integrity>NbaGf1Sjx3ymjI70lAmW+P49ewW2s+KM7PwztogCdBU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\plugins\datatables\datatables.bundle.css'))</OriginalItemSpec>
@@ -2298,8 +2298,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>39g6vd4j17</Fingerprint>
-      <Integrity>x2qB3kmQS4lqRunJC1Lc+E5Isf7Jl1Xj0yWRbe2euzc=</Integrity>
+      <Fingerprint>6yeqklf5o1</Fingerprint>
+      <Integrity>0vm3CRO1TZrUubt+2dfqN2SUa/7Vkv1TOvakcvezmLg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\plugins\datatables\datatables.bundle.js'))</OriginalItemSpec>

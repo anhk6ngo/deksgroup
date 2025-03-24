@@ -20,7 +20,7 @@
                 <div class="d-flex align-items-center">
                     <span class="fs-4 fw-semibold text-gray-500 me-1 align-self-start">$</span>
                     <span
-                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_balanceDto?.Amount.ToString("N2")</span>
+                        class="fs-1 fw-bold text-gray-900 me-2 lh-1 ls-n2">@_balanceDto?.Amount.ToString("N2")</span>
                 </div>
                 <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Balance"]</span>
             </div>
@@ -32,7 +32,7 @@
                 <div class="d-flex align-items-center">
                     <span class="fs-4 fw-semibold text-gray-500 me-1 align-self-start">$</span>
                     <span
-                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_balanceDto?.DepositAmount.ToString("N2")</span>
+                        class="fs-1 fw-bold text-gray-900 me-2 lh-1 ls-n2">@_balanceDto?.DepositAmount.ToString("N2")</span>
                 </div>
                 <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Deposit"]</span>
             </div>
@@ -44,7 +44,7 @@
                 <div class="d-flex align-items-center">
                     <span class="fs-4 fw-semibold text-gray-500 me-1 align-self-start">$</span>
                     <span
-                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">@_items?.Sum(s => s.Amount).ToString("N2")</span>
+                        class="fs-1 fw-bold text-gray-900 me-2 lh-1 ls-n2">@_items?.Sum(s => s.Amount).ToString("N2")</span>
                 </div>
                 <span class="text-gray-500 pt-1 fw-semibold fs-6">@Loc["Total Amount"]</span>
             </div>
@@ -132,7 +132,7 @@
                     {
                         <tr>
                             <td>@item.TransDate.ToDmy()</td>
-                            <td>@Loc[(item.TicketType == 0 ? "Air": "Train")]</td>
+                            <td>@Loc[(item.TicketType == 0 ? "Air" : "Train")]</td>
                             <td>@item.Amount.ToString("N2")</td>
                             <td>@(item.ActiveNo + item.DeActiveNo)</td>
                             <td>@item.DeActiveNo</td>
@@ -141,6 +141,48 @@
                 }
                 </tbody>
             </table>
+            if (_data is { Count: > 0 })
+            {
+                <div class="separator my-10"></div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.StaticId">
+                        <thead>
+                        <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                            <th class="min-w-200px">@Loc["Name"]</th>
+                            <th>@Loc["Pnr"]</th>
+                            <th class="min-w-125px">@Loc["Date"]</th>
+                            <th class="min-w-125px">@Loc["Departure Date"]</th>
+                            <th class="min-w-250px">@Loc["Route"]</th>
+                            <th class="min-w-150px">@Loc["Amount"]</th>
+                            <th class="min-w-150px">@Loc["Commission"]</th>
+                            <th class="min-w-150px">@Loc["Payment Type"]</th>
+                            <th class="min-w-150px">@Loc["Ticket Type"]</th>
+                            <th class="min-w-150px">@Loc["Code"]</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (_items is { Count: > 0 })
+                        {
+                            foreach (var item in _data)
+                            {
+                                <tr>
+                                    <td>@item.DisplayName</td>
+                                    <td>@item.Pnr</td>
+                                    <td>@item.TranDate?.ToLocalTime().ToDmy()</td>
+                                    <td>@item.DepartDate.ToLocalTime().ToDmy()</td>
+                                    <td>@item.From - @item.To</td>
+                                    <td>@item.Amount.ToString("N2")</td>
+                                    <td>@item.CommitAmount.ToString("N2")</td>
+                                    <th>@Loc[(item.PaymentType == 0 ? "Card" : "Cash")]</th>
+                                    <th>@Loc[(item.TicketType == 0 ? "Air" : "Train")]</th>
+                                    <td>@item.TransactionId</td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
         }
     </div>
 </div>
@@ -154,14 +196,14 @@
     };
 
     private List<SumBookingResponse>? _items = [];
+    private List<StoreBookingDto>? _data = [];
     private bool _initChart = false;
-
-    protected override async Task OnInitializedAsync()
+    
+    protected override void OnInitialized()
     {
         DateRange = "".InitDateRange();
         _request.UserId = $"{ShareUserInfo?.UserId}";
-        _balanceDto = await _httpService.GetAsync<UserBalanceDto>($"{ShareEndpoints.TopUp}");
-        await GetData();
+        base.OnInitialized();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -169,6 +211,8 @@
         if (firstRender)
         {
             await CallInitRangeDate();
+            _balanceDto = await _httpService.GetAsync<UserBalanceDto>($"{ShareEndpoints.TopUp}");
+            await GetData();
         }
 
         if (_initChart)
@@ -184,7 +228,7 @@
                 }).ToList();
                 var tmpGroup1 = _items.GroupBy(g => g.TicketType).Select(s => new
                 {
-                    Service = s.Key == 0 ? "Air": "Train",
+                    Service = s.Key == 0 ? "Air" : "Train",
                     Count = s.Sum(sm => sm.ActiveNo)
                 }).ToList();
                 var aData = tmpGroup.Select(s => s.Amount.ToRound(2)).ToList();
@@ -209,6 +253,7 @@
         {
             InitDataTable = false;
             await CallInitialDataTable();
+            await CallJs("initFixTable", UiConstants.StaticId, 3, 1);
         }
     }
 
@@ -218,6 +263,11 @@
         IsLoading = true;
         StateHasChanged();
         _items = await _httpService.PostAsync<List<SumBookingResponse>>($"{ShareEndpoints.Report}/sum-by", _request);
+        if(ShareUserInfo?.Role != null && ShareUserInfo.Role.Contains(RoleConstants.OperationRole))
+        {
+            _data =await _httpService.PostAsync<List<StoreBookingDto>>($"{ShareEndpoints.Report}", _request);
+            _data = _data.OrderBy(o => o.TranDate).ToList();
+        }
         IsLoading = false;
         InitDataTable = true;
         _initChart = true;

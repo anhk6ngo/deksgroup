@@ -8,6 +8,10 @@ public class ReportController : BaseApiController
     public async Task<IActionResult> SumByUser(GetReportRequest input)
     {
         input.UserId = User.GetUserId();
+        if (User.IsInRole(RoleConstants.OperationRole))
+        {
+            input.UserId = string.Empty;
+        }
         var result = await _mediator!.Send(new GetSumBookingByUserQuery()
         {
             Input = input

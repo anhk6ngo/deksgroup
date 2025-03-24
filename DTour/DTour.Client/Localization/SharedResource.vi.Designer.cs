@@ -555,6 +555,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ngày khởi hành.
+        /// </summary>
+        internal static string Departure_Date {
+            get {
+                return ResourceManager.GetString("Departure Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thời gian khởi hành.
         /// </summary>
         internal static string Departure_time {

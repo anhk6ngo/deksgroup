@@ -11,5 +11,7 @@ public class MapsterInstaller : IInstaller
             .Map(des => des.text, src => src.text);
         TypeAdapterConfig<CustomRole, RoleUserDto>.NewConfig()
             .Map(des => des.id, src => src.Id);
+        TypeAdapterConfig<StoreBooking, StoreBookingDto>.NewConfig()
+            .Map(des => des.TranDate, src => src.CreatedOn);
     }
 }

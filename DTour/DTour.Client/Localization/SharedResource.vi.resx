@@ -663,4 +663,7 @@
     <data name="Cash" xml:space="preserve">
         <value>Tiền mặt</value>
     </data>
+    <data name="Departure Date" xml:space="preserve">
+        <value>Ngày khởi hành</value>
+    </data>
 </root>

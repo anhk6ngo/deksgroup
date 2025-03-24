@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DTour.Client",
   "resources": {
-    "hash": "sha256-25RBGPMNn6nsuS9oIMN4mlIXnVqI3ObgiBPbee8M738=",
+    "hash": "sha256-0bM1H3IPWN6acHDKPRhsMHKxQGjX23xUiRQ/ljHZ/XA=",
     "fingerprinting": {
       "Blazored.FluentValidation.x0xsecpmtx.wasm": "Blazored.FluentValidation.wasm",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
@@ -218,13 +218,13 @@
       "dotnet.native.p4lwlf2bu1.wasm": "dotnet.native.wasm",
       "dotnet.runtime.o8gq1i8bk6.js": "dotnet.runtime.js",
       "icudt.oh1zvcfom8.dat": "icudt.dat",
-      "SharedComponent.yf5apfkf82.wasm": "SharedComponent.wasm",
+      "SharedComponent.ctuga3f3wl.wasm": "SharedComponent.wasm",
       "SharedExtension.sr8cydy7y3.wasm": "SharedExtension.wasm",
-      "SharedComponent.cnmkktqr8e.pdb": "SharedComponent.pdb",
+      "SharedComponent.7pff0eysfl.pdb": "SharedComponent.pdb",
       "SharedExtension.y7bts6axyz.pdb": "SharedExtension.pdb",
-      "DTour.Client.kl4mjxbcur.wasm": "DTour.Client.wasm",
-      "DTour.Client.qbnyc18xll.pdb": "DTour.Client.pdb",
-      "DTour.Client.resources.kv0a1ww3mn.wasm": "DTour.Client.resources.wasm"
+      "DTour.Client.aydot3rw35.wasm": "DTour.Client.wasm",
+      "DTour.Client.bhgl5dw5oc.pdb": "DTour.Client.pdb",
+      "DTour.Client.resources.cxufekus5t.wasm": "DTour.Client.resources.wasm"
     },
     "jsModuleNative": {
       "dotnet.native.hmanx9razn.js": "sha256-d7UNSArplVrX3arY2Kmhxp1wN79ng8hLqIBrkiQ9Gbo="
@@ -451,18 +451,18 @@
       "WindowsBase.377bly7twj.wasm": "sha256-0VmBdMjdc0nZGHDSfaGirT6y3mJTM0qx8eqCUC/rpiE=",
       "mscorlib.o0184ey5ia.wasm": "sha256-2GxNKZQJVJvYMUxSTuXa5V2qxawSMMHZtwG33SKVCZU=",
       "netstandard.hb3h2rr8mk.wasm": "sha256-DWn9+RH/ElZQ6imlYqVwZvir1KTzNwY18AzGmnyiymU=",
-      "SharedComponent.yf5apfkf82.wasm": "sha256-8nAlY5MtA6itPcyR3D4E/xnEsMPIjfC8/F1PCm7xvh8=",
+      "SharedComponent.ctuga3f3wl.wasm": "sha256-ABpDLpWusLzbfLZFOYHdtWNoPs8XVzjDOpXeMV1Ub7M=",
       "SharedExtension.sr8cydy7y3.wasm": "sha256-mLJDqcSPqy7ktL1oLv4WKoMQ/Q3g0BTVzZV2cl0CbVs=",
-      "DTour.Client.kl4mjxbcur.wasm": "sha256-OHhvwJgEnCfbJo7nl9kJCgvyilk1F+HGNT4A6w6ZZbU="
+      "DTour.Client.aydot3rw35.wasm": "sha256-XsqhIpG3IoStBa+zGI1Ic54Qn55AWIa9Nbc0ZHbDw+Y="
     },
     "pdb": {
-      "SharedComponent.cnmkktqr8e.pdb": "sha256-WMjDkRhNpBP3RY3hsRHRLYFEieX7CJXCkNGLDnxzfKs=",
+      "SharedComponent.7pff0eysfl.pdb": "sha256-OxVCLfHeqgMvj2FZ+KlYjgFu8cSpxhxj7GGKwIzEYPI=",
       "SharedExtension.y7bts6axyz.pdb": "sha256-DjKNPca4aLoslE/Lzslgw6lqTxl4kuDowv8vjrch2PQ=",
-      "DTour.Client.qbnyc18xll.pdb": "sha256-lpreOyygL4Vr6K5VJcHLiVT7fdwoQRX3S0RFwNx19U8="
+      "DTour.Client.bhgl5dw5oc.pdb": "sha256-UQB1/YXbleriJX1yDsSqyCQGWpjHkHsS0IGVxG/lsNc="
     },
     "satelliteResources": {
       "vi": {
-        "DTour.Client.resources.kv0a1ww3mn.wasm": "sha256-EPz7p5U18QuhqEgVq7ijuw3St2avqT94D5sNvJFOb3E="
+        "DTour.Client.resources.cxufekus5t.wasm": "sha256-UMiisCBIkO9lfo8w9Qg9c6gfinb2u2yHQPlfr0JALG8="
       }
     }
   },

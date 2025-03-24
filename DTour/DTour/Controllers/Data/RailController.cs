@@ -303,7 +303,7 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
     {
         var oFind = await _mediator!.Send(new GetStoreBookingIdQuery()
         {
-            Id = id
+            Id = id,
         });
         return Ok(oFind);
     }

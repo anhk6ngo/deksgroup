@@ -48,8 +48,8 @@
                             </td>
                             <td>@item.Pnr</td>
                             <td>@item.DepartDate.ToLocalTime().ToDmy()</td>
-                            <td>@item.Amount.ToString("N2")</td>
                             <td>@item.From - @item.To</td>
+                            <td>@item.Amount.ToString("N2")</td>
                             <td>@item.CommitAmount.ToString("N2")</td>
                             <th>@Loc[(item.PaymentType == 0 ? "Card" : "Cash")]</th>
                             <th>@Loc[(item.TicketType == 0 ? "Air" : "Train")]</th>
