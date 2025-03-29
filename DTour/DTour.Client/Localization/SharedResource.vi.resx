@@ -666,4 +666,19 @@
     <data name="Departure Date" xml:space="preserve">
         <value>Ngày khởi hành</value>
     </data>
+    <data name="Bank, transaction fee" xml:space="preserve">
+        <value>Phí ngân hàng, phí thanh toán</value>
+    </data>
+    <data name="System fee" xml:space="preserve">
+        <value>Phí hệ thống</value>
+    </data>
+    <data name="Management fee" xml:space="preserve">
+        <value>Phí quản lý</value>
+    </data>
+    <data name="Service fee" xml:space="preserve">
+        <value>Phí dịch vụ</value>
+    </data>
+    <data name="Fare" xml:space="preserve">
+        <value>Giá vé</value>
+    </data>
 </root>

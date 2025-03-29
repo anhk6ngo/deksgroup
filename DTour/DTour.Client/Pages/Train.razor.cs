@@ -39,6 +39,7 @@ public partial class Train
     private Dictionary<string, List<string>> _dicAmen = new();
     private List<RailAmenity> _storeAmenities = [];
     private StoreBookingDto _data = new();
+    private FeeConfig? _feeConfig = new();
     private int _onewayStep = 0;
     private StoreData _storeData = new();
 
@@ -124,10 +125,12 @@ public partial class Train
         var result =
             await _http!.PostAsync<RailResult<List<RailSearchResponse>>>($"{RailEndpoints.Rail}{RailEndpoints.Search}",
                 rq);
+        _data.SystemFee = 0;
         if (result.Status == 200)
         {
             _searchResult = result.Data?.FirstOrDefault();
             _storeData.BookingSessionId = _searchResult?.BookingSessionId;
+            _feeConfig = result.FeeConfig;
             if (_onewayStep == 0)
             {
                 _data.BookingSessionId = _storeData.BookingSessionId;
@@ -140,7 +143,8 @@ public partial class Train
             {
                 _data.ReturnDate = aDate[1].ConvertToDate() ?? DateTime.Today;
             }
-
+            _data.ExcRate = result.ExchangeRate;
+            _data.SystemFee = result.FeeConfig?.SystemFee * _request.PaxAge.Count * (_request.IsRoundTrip ? 2 : 1) ?? 0;
             var searchAmen = new List<string>();
             if (_searchResult?.TrainList is { Count: > 0 })
             {
@@ -413,6 +417,7 @@ public partial class Train
         if (!isValid) return;
         _data.PaymentType = iMethod;
         _rqCreate.Data = _data;
+        _rqCreate.Amount = _data.Amount;
         IsLoading = true;
         StateHasChanged();
         var result =
@@ -431,9 +436,10 @@ public partial class Train
         {
             if (iMethod == 0)
             {
-                _navigationManager.NavigateTo($"{result.Id}", replace:true);
+                _navigationManager.NavigateTo($"{result.Id}", replace: true);
                 return;
             }
+
             _iStep = 4;
             _createBookingResult = result.Data;
             _urls = result.Urls;

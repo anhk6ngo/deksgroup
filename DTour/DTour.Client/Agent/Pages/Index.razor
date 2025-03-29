@@ -109,12 +109,8 @@
             </div>
         </div>
     </div>
-}
-
-<div class="card shadow-sm">
-    <div class="card-body">
-        @if (!IsLoading)
-        {
+    <div class="card shadow-sm">
+        <div class="card-body">
             <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
                 <thead>
                 <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
@@ -141,11 +137,12 @@
                 }
                 </tbody>
             </table>
-            if (_data is { Count: > 0 })
+            @if (_data is { Count: > 0 })
             {
                 <div class="separator my-10"></div>
                 <div class="table-responsive">
-                    <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.StaticId">
+                    <table class="table table-hover table-rounded table-striped border gy-7 gs-7"
+                           id="@UiConstants.StaticId">
                         <thead>
                         <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
                             <th class="min-w-200px">@Loc["Name"]</th>
@@ -183,9 +180,10 @@
                     </table>
                 </div>
             }
-        }
+        </div>
     </div>
-</div>
+}
+
 
 @code {
     [CascadingParameter] private UserInfo? ShareUserInfo { get; set; }
@@ -198,7 +196,7 @@
     private List<SumBookingResponse>? _items = [];
     private List<StoreBookingDto>? _data = [];
     private bool _initChart = false;
-    
+
     protected override void OnInitialized()
     {
         DateRange = "".InitDateRange();
@@ -259,15 +257,17 @@
 
     private async Task GetData()
     {
+        _data = [];
         _request.DateRange = DateRange;
         IsLoading = true;
         StateHasChanged();
         _items = await _httpService.PostAsync<List<SumBookingResponse>>($"{ShareEndpoints.Report}/sum-by", _request);
-        if(ShareUserInfo?.Role != null && ShareUserInfo.Role.Contains(RoleConstants.OperationRole))
+        if (ShareUserInfo?.Role != null && ShareUserInfo.Role.Contains(RoleConstants.OperationRole))
         {
-            _data =await _httpService.PostAsync<List<StoreBookingDto>>($"{ShareEndpoints.Report}", _request);
+            _data = await _httpService.PostAsync<List<StoreBookingDto>>($"{ShareEndpoints.Report}", _request);
             _data = _data.OrderBy(o => o.TranDate).ToList();
         }
+
         IsLoading = false;
         InitDataTable = true;
         _initChart = true;

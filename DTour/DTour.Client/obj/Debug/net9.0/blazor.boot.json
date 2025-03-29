@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "DTour.Client",
   "resources": {
-    "hash": "sha256-FdKFnOqDpDTUUDdeMUJT0ZXzZlvS7M0MpWp4k3397Q4=",
+    "hash": "sha256-M8aErXtg0c/SSXrgHaJV0LCsyXGmXCiTYMWs0Whp69w=",
     "fingerprinting": {
       "Blazored.FluentValidation.x0xsecpmtx.wasm": "Blazored.FluentValidation.wasm",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
@@ -222,9 +222,9 @@
       "SharedExtension.rf0ihg1c04.wasm": "SharedExtension.wasm",
       "SharedComponent.amrzab5kpy.pdb": "SharedComponent.pdb",
       "SharedExtension.7ha0udy5fu.pdb": "SharedExtension.pdb",
-      "DTour.Client.8vd2ioy759.wasm": "DTour.Client.wasm",
-      "DTour.Client.evnwfkq68l.pdb": "DTour.Client.pdb",
-      "DTour.Client.resources.6x0xcn31ko.wasm": "DTour.Client.resources.wasm"
+      "DTour.Client.o6qt6vlqnm.wasm": "DTour.Client.wasm",
+      "DTour.Client.rshrjq0z3t.pdb": "DTour.Client.pdb",
+      "DTour.Client.resources.hp2rig0reh.wasm": "DTour.Client.resources.wasm"
     },
     "jsModuleNative": {
       "dotnet.native.hmanx9razn.js": "sha256-d7UNSArplVrX3arY2Kmhxp1wN79ng8hLqIBrkiQ9Gbo="
@@ -453,16 +453,16 @@
       "netstandard.hb3h2rr8mk.wasm": "sha256-DWn9+RH/ElZQ6imlYqVwZvir1KTzNwY18AzGmnyiymU=",
       "SharedComponent.6dcgm1pgrn.wasm": "sha256-mqz9bF7bPh5RqG/Bnl3eyI2Rd4a3klahDC/nfFXErpU=",
       "SharedExtension.rf0ihg1c04.wasm": "sha256-SSx7suPcrvX9ra5VpEv5Md7LOmdBH14GpAS/T0pWeBE=",
-      "DTour.Client.8vd2ioy759.wasm": "sha256-TLv0wXZygQi7HGYlPCrO7UhgfHhO4DMUbNqwKHY1/Oo="
+      "DTour.Client.o6qt6vlqnm.wasm": "sha256-MGRZYD39z0ajGItH0mKxpkSJb185kWfGRlVvzGTdD48="
     },
     "pdb": {
       "SharedComponent.amrzab5kpy.pdb": "sha256-buOnp8MnAw3bitXO3NpB0Myu0btQ6x3YTdNN9yR3xqI=",
       "SharedExtension.7ha0udy5fu.pdb": "sha256-C8cZghgecVoquy1SulDtR6Fqs6Iq+isxdZVNd1bEkzg=",
-      "DTour.Client.evnwfkq68l.pdb": "sha256-2p9lxM9RTH8Hn3JPp78R+4WtUenbeP27pJHjbKCbuaM="
+      "DTour.Client.rshrjq0z3t.pdb": "sha256-2+2oE+mj5WN26FNNBGvqnPltnNwkGpaq4hYSkx9rOtM="
     },
     "satelliteResources": {
       "vi": {
-        "DTour.Client.resources.6x0xcn31ko.wasm": "sha256-6jo/IJinxZx7AV0pnxgCkxUjd0gcPEGPVxZNlatSVLM="
+        "DTour.Client.resources.hp2rig0reh.wasm": "sha256-dZjdEcjjyGocITxWOibT0BNGQKGPv05BuRwCV3gC608="
       }
     }
   },

@@ -240,6 +240,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phí ngân hàng, phí thanh toán.
+        /// </summary>
+        internal static string Bank__transaction_fee {
+            get {
+                return ResourceManager.GetString("Bank, transaction fee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên ngân hàng.
         /// </summary>
         internal static string Bank_Name {
@@ -708,6 +717,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Giá vé.
+        /// </summary>
+        internal static string Fare {
+            get {
+                return ResourceManager.GetString("Fare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chọn giá vé, hạng dịch vụ.
         /// </summary>
         internal static string Fare__Class_Selection {
@@ -1010,6 +1028,15 @@ namespace DTour.Client.Localization {
         internal static string Log_in {
             get {
                 return ResourceManager.GetString("Log in", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phí quản lý.
+        /// </summary>
+        internal static string Management_fee {
+            get {
+                return ResourceManager.GetString("Management fee", resourceCulture);
             }
         }
         
@@ -1518,6 +1545,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phí dịch vụ.
+        /// </summary>
+        internal static string Service_fee {
+            get {
+                return ResourceManager.GetString("Service fee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dịch vụ.
         /// </summary>
         internal static string Services {
@@ -1631,6 +1667,15 @@ namespace DTour.Client.Localization {
         internal static string Switch {
             get {
                 return ResourceManager.GetString("Switch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phí hệ thống.
+        /// </summary>
+        internal static string System_fee {
+            get {
+                return ResourceManager.GetString("System fee", resourceCulture);
             }
         }
         

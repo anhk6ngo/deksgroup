@@ -152,7 +152,7 @@
                                             <div class="ticket-class-container">
                                                 <div class="ticket-class-content swiper th-slider overflow-hidden"
                                                      id="ticketClass"
-                                                     data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"}}}'>
+                                                     data-slider-options='{"autoplay":false,"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"}}}'>
                                                     <div class="swiper-wrapper">
                                                         @foreach (var item in _selectGroupClass!)
                                                         {
@@ -185,8 +185,10 @@
                                                                             {
                                                                                 dicCondition.Add(_onewayStep, []);
                                                                             }
+
                                                                             dicCondition[_onewayStep] = aDataFull.Select(s => $"{s?.En}").ToList();
                                                                         }
+
                                                                         <ul class="position-relative">
                                                                             @foreach (var amen in aDataFull)
                                                                             {
@@ -233,7 +235,8 @@
                                     </div>
                                     <div class="card shadow-sm mb-6">
                                         <div class="card-body">
-                                            <h5>@Loc["Step 2 of 2"] : <span class="fw-semibold">@Loc["Select your Fare"]</span>
+                                            <h5>@Loc["Step 2 of 2"] : <span
+                                                    class="fw-semibold">@Loc["Select your Fare"]</span>
                                             </h5>
                                             <div class="row">
                                                 @foreach (var item in _selectOfferByClass!)
@@ -261,8 +264,10 @@
                                                                         {
                                                                             dicFareCondition.Add(_onewayStep, []);
                                                                         }
+
                                                                         dicFareCondition[_onewayStep] = lstFareCon.Select(s => $"{s?.En}").ToList();
                                                                     }
+
                                                                     foreach (var amen in lstFareCon)
                                                                     {
                                                                         <p>@amen?.En</p>
@@ -300,7 +305,8 @@
                                         </div>
                                         <div class="row g-8 mb-5">
                                             <div class="col-md-6">
-                                                <label class="required fw-semibold form-label">@Loc["First Name"]</label>
+                                                <label
+                                                    class="required fw-semibold form-label">@Loc["First Name"]</label>
                                                 <input class="form-control" type="text"
                                                        @bind="_rqCreate.Buyer!.FirstName" id="FirstNameContact">
                                                 <ValidationMessage For="@(() => _rqCreate.Buyer!.FirstName)"/>
@@ -314,13 +320,15 @@
                                         </div>
                                         <div class="row g-9 mb-5">
                                             <div class="col-md-6">
-                                                <label class="required fw-semibold form-label">@Loc["Email Address"]</label>
+                                                <label
+                                                    class="required fw-semibold form-label">@Loc["Email Address"]</label>
                                                 <input class="form-control" type="text"
                                                        @bind="_rqCreate.Buyer!.Email">
                                                 <ValidationMessage For="@(() => _rqCreate.Buyer!.Email)"/>
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="required fw-semibold form-label">@Loc["Phone number"]</label>
+                                                <label
+                                                    class="required fw-semibold form-label">@Loc["Phone number"]</label>
                                                 <input class="form-control" type="text"
                                                        placeholder="+000 000 000 000"
                                                        @bind="_rqCreate.Buyer!.Phone">
@@ -349,14 +357,16 @@
 
                                             <div class="row g-9 mb-5">
                                                 <div class="col-md-6 fv-row">
-                                                    <label class="required fw-semibold form-label">@Loc["First Name"]</label>
+                                                    <label
+                                                        class="required fw-semibold form-label">@Loc["First Name"]</label>
                                                     <input class="form-control"
                                                            type="text"
                                                            @bind="@pax.FirstName">
                                                     <ValidationMessage For="@(() => pax!.FirstName)"/>
                                                 </div>
                                                 <div class="col-md-6 fv-row">
-                                                    <label class="required fw-semibold form-label">@Loc["Last Name"]</label>
+                                                    <label
+                                                        class="required fw-semibold form-label">@Loc["Last Name"]</label>
                                                     <input class="form-control"
                                                            type="text"
                                                            @bind="@pax.LastName">
@@ -536,27 +546,66 @@
                                                     </button>
                                                 </div>
                                             }
+
                                             <div class="separator separator-dotted my-3"></div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h4>@Loc["Tickets"]</h4>
-                                                <div
-                                                    class="fs-2">@($"{(_request.Adult > 0 ? $"{_request.Adult} {Loc["Adult"]}" : "")}") @($"{(_request.Child > 0 ? $"{_request.Child} {Loc["Child"]}" : "")}")
-                                                    <span
-                                                        class="fw-bold fs-2">@sumTrain.Sum(s => s.Amount).AutoFormat()</span>
-                                                </div>
-                                            </div>
                                             if (_iStep == 3)
                                             {
                                                 var dAmount = sumTrain.Sum(s => s.Amount) ?? 0;
-                                                _rqCreate.Amount = dAmount * 1.1;
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h4>@Loc["Tax and fees"]</h4>
-                                                    <div class="fs-2x">@((dAmount * 0.1).AutoFormat())</div>
+                                                var dMan = dAmount * (_feeConfig?.ManagementFee ?? 0) / 100;
+                                                var dSer = dAmount * (_feeConfig?.ServiceFee ?? 0) / 100;
+                                                var dSys = _data.SystemFee ?? 0;
+                                                var dTran = (dAmount + dMan + dSer + dSys) * (_feeConfig?.BankFee ?? 0) / 100;
+                                                var dTotal = dAmount + dMan + dSer + dSys + dTran;
+                                                _data.Amount = dTotal;
+                                                _data.ManagementFee = dMan;
+                                                _data.TranFee = dTran;
+                                                _data.ServiceFee = dSer;
+                                                _data.Price = dAmount;
+                                                
+                                                <div class="accordion accordion-icon-collapse" id="price_accordion">
+                                                    <div class="mb-5">
+                                                        <div class="accordion-header py-3 d-flex align-items-center justify-content-between collapse" data-bs-toggle="collapse" data-bs-target="#price_accordion_1" aria-expanded="false">
+                                                            <h4>@Loc["Total Amount"]</h4>
+                                                            <div class="fs-2x">@dTotal.AutoFormat()</div>
+                                                        </div>
+                                                        <div id="price_accordion_1" class="fs-6 collapse" data-bs-parent="#price_accordion">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <h4>@Loc["Fare"]</h4>
+                                                                <div
+                                                                    class="fs-4">@($"{(_request.Adult > 0 ? $"{_request.Adult} {Loc["Adult"]}" : "")}") @($"{(_request.Child > 0 ? $"{_request.Child} {Loc["Child"]}" : "")}")
+                                                                    <span
+                                                                        class="fs-3">@sumTrain.Sum(s => s.Amount).AutoFormat()</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <h4>@Loc["Bank, transaction fee"]</h4>
+                                                                <div class="fs-3">@dTran.AutoFormat()</div>
+                                                            </div>
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <h4>@Loc["System fee"]</h4>
+                                                                <div class="fs-3">@dSys.AutoFormat()</div>
+                                                            </div>
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <h4>@Loc["Management fee"]</h4>
+                                                                <div class="fs-3">@dMan.AutoFormat()</div>
+                                                            </div>
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <h4>@Loc["Service fee"]</h4>
+                                                                <div class="fs-3">@dSer.AutoFormat()</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div
-                                                    class="d-flex align-items-center justify-content-between fw-semibold">
-                                                    <h4>Total</h4>
-                                                    <div class="fs-2x">@((dAmount * 1.1).AutoFormat())</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <h4>@Loc["Fare"]</h4>
+                                                    <div
+                                                        class="fs-4">@($"{(_request.Adult > 0 ? $"{_request.Adult} {Loc["Adult"]}" : "")}") @($"{(_request.Child > 0 ? $"{_request.Child} {Loc["Child"]}" : "")}")
+                                                        <span
+                                                            class="fw-bold fs-2">@sumTrain.Sum(s => s.Amount).AutoFormat()</span>
+                                                    </div>
                                                 </div>
                                             }
                                         }
@@ -572,19 +621,23 @@
                         @if (_iStep == 3)
                         {
                             <div class="d-flex justify-content-between px-5 mb-10">
-                                <button class="btn btn-primary w-100 me-5" @onclick="()=>GotoPay()">@Loc["Pay with Card"]
+                                <button class="btn btn-primary w-100 me-5"
+                                        @onclick="()=>GotoPay()">@Loc["Pay with Card"]
                                 </button>
                                 <AuthorizeView>
                                     <Authorized>
-                                        <button class="btn btn-success w-100" @onclick="()=>GotoPay(1)">@Loc["Pay with Cash"]</button>
+                                        <button class="btn btn-success w-100"
+                                                @onclick="()=>GotoPay(1)">@Loc["Pay with Cash"]</button>
                                     </Authorized>
                                 </AuthorizeView>
                             </div>
                             @if (CultureInfo.CurrentCulture.Name == "vi-VN")
                             {
                                 <div class="text-center">
-                                    Bằng cách nhấp vào nút thanh toán có nghĩa là bạn đã đồng ý với các điều khoản và điều kiện. Chính sách bảo mật. Điều kiện của nhà khai thác. Điều kiện vé (MỘT CHIỀU VÀ KHỨ HỒI).
-                                </div> 
+                                    Bằng cách nhấp vào nút thanh toán có nghĩa là bạn đã đồng ý với các
+                                    điều khoản và điều kiện. Chính sách bảo mật. Điều kiện của nhà khai
+                                    thác. Điều kiện vé (MỘT CHIỀU VÀ KHỨ HỒI).
+                                </div>
                             }
                             else
                             {
@@ -598,7 +651,6 @@
                                         Conditions</a> and <a href="#" class="fw-bold">Ticket conditions</a>
                                 </div>
                             }
-                            
                         }
                     </div>
                 </div>
@@ -630,7 +682,8 @@
     </div>
 </CustomModal>
 
-<CustomModal Title="@Loc["Ticket, Fare Condition"]" HideSaveButton="true" AddClass="modal-dialog-centered" ModalId="TicketCondition">
+<CustomModal Title="@Loc["Ticket, Fare Condition"]" HideSaveButton="true" AddClass="modal-dialog-centered"
+             ModalId="TicketCondition">
     <div class="d-flex flex-column">
         @if (dicCondition.Keys.Contains(iSelectCon))
         {

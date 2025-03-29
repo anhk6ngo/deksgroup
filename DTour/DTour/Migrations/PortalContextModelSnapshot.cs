@@ -249,6 +249,9 @@ namespace DTour.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
+                    b.Property<double?>("ExcRate")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("From")
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
@@ -265,6 +268,9 @@ namespace DTour.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<double?>("ManagementFee")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("PaymentType")
                         .HasColumnType("integer");
 
@@ -272,14 +278,23 @@ namespace DTour.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
+                    b.Property<double?>("Price")
+                        .HasColumnType("double precision");
+
                     b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("timestamp(6)");
 
                     b.Property<string>("SaveObject")
                         .HasColumnType("text");
 
+                    b.Property<double?>("ServiceFee")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("Status")
                         .HasColumnType("integer");
+
+                    b.Property<double?>("SystemFee")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("TicketPdf")
                         .HasColumnType("text");
@@ -290,6 +305,9 @@ namespace DTour.Migrations
                     b.Property<string>("To")
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
+
+                    b.Property<double?>("TranFee")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("TransactionId")
                         .HasMaxLength(50)

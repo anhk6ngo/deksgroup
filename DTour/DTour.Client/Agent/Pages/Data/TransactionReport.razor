@@ -26,14 +26,18 @@
                 <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
                     <thead>
                     <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                        <th>@Loc["Action"]</th>
-                        <th>@Loc["Pnr"]</th>
-                        <th>@Loc["Date"]</th>
-                        <th>@Loc["Route"]</th>
-                        <th>@Loc["Amount"]</th>
-                        <th>@Loc["Commission"]</th>
-                        <th>@Loc["Payment Type"]</th>
-                        <th>@Loc["Ticket Type"]</th>
+                        <th class="min-w-150px">@Loc["Action"]</th>
+                        <th class="min-w-100px">@Loc["Pnr"]</th>
+                        <th class="min-w-150px">@Loc["Date"]</th>
+                        <th class="min-w-250px">@Loc["Route"]</th>
+                        <th class="min-w-150px">@Loc["Amount"]</th>
+                        <th class="min-w-150px">@Loc["Fare"]</th>
+                        <th class="min-w-150px">@Loc["Bank, transaction fee"]</th>
+                        <th class="min-w-150px">@Loc["System fee"]</th>
+                        <th class="min-w-150px">@Loc["Management fee"]</th>
+                        <th class="min-w-150px">@Loc["Service fee"]</th>
+                        <th class="min-w-150px">@Loc["Payment Type"]</th>
+                        <th class="min-w-150px">@Loc["Ticket Type"]</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,7 +54,11 @@
                             <td>@item.DepartDate.ToLocalTime().ToDmy()</td>
                             <td>@item.From - @item.To</td>
                             <td>@item.Amount.ToString("N2")</td>
-                            <td>@item.CommitAmount.ToString("N2")</td>
+                            <td>@item.Price?.ToString("N2")</td>
+                            <td>@item.TranFee?.ToString("N2")</td>
+                            <td>@item.SystemFee?.ToString("N2")</td>
+                            <td>@item.ManagementFee?.ToString("N2")</td>
+                            <td>@item.ServiceFee?.ToString("N2")</td>
                             <th>@Loc[(item.PaymentType == 0 ? "Card" : "Cash")]</th>
                             <th>@Loc[(item.TicketType == 0 ? "Air" : "Train")]</th>
                         </tr>

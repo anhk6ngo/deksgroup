@@ -23,6 +23,12 @@ public class StoreBookingDto : AggregateRoot<Guid>, IStoreBooking
     public string? SaveObject { get; set; }
     public string? TicketPdf { get; set; }
     public string? Pnr { get; set; }
+    public double? TranFee { get; set; } = 0;
+    public double? SystemFee { get; set; } = 0;
+    public double? ServiceFee { get; set; } = 0;
+    public double? ManagementFee { get; set; } = 0;
+    public double? ExcRate { get; set; } = 0;
+    public double? Price { get; set; } = 0;
     public DateTime? TranDate { get; set; }
 }
 
@@ -49,4 +55,9 @@ public interface IStoreBooking
     public string? SaveObject { get; set; }
     public string? TicketPdf { get; set; }
     public string? Pnr { get; set; }
+    public double? TranFee { get; set; }
+    public double? SystemFee { get; set; }
+    public double? ServiceFee { get; set; }
+    public double? ManagementFee { get; set; }
+    public double? ExcRate { get; set; }
 }

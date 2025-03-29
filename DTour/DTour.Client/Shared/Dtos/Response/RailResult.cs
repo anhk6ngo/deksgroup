@@ -7,4 +7,6 @@ public class RailResult<T> where T : class
     public List<RailError>? Errors { get; set; }
     public string? Id { get; set; }
     public List<string>? Urls { get; set; }
+    public FeeConfig? FeeConfig { get; set; }
+    public double ExchangeRate { get; set; }
 }

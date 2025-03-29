@@ -7,7 +7,8 @@ public class RailBookingService(
     IHttpClientFactory clientFactory,
     IHttpServiceClient httpServiceClient,
     ILoadFile loadFile,
-    IMediator mediator)
+    IMediator mediator,
+    IAppCache cache)
     : IRailBookingService
 {
     public async Task<RailResult<List<RailSearchResponse>>> Search(RailSearch request)
@@ -74,15 +75,16 @@ public class RailBookingService(
         }
 
         var dPer = 1.0;
-        var config = loadFile.LoadFileAsync<ConfigTicket>("config");
+        var fees = cache.GetOrAdd<FeeConfig?>("store-fee", () => loadFile.LoadFileAsync<FeeConfig?>("fees"),
+            TimeSpan.FromMinutes(15));
         var exchangeRates = await mediator.Send(new GetActiveExchangeRateQuery());
-        dPer = (100 + config.MakeUp) / 100;
         if (request.ConvertVnd)
         {
             var oFind = exchangeRates.FirstOrDefault(w =>
                 $"{w.Currency}".Contains("eur", StringComparison.CurrentCultureIgnoreCase));
             if (oFind != null)
             {
+                searchResult.ExchangeRate = oFind.Rate;
                 dPer *= oFind.Rate;
             }
         }
@@ -119,6 +121,12 @@ public class RailBookingService(
 
         #endregion
 
+        searchResult.FeeConfig = new FeeConfig();
+        fees.Adapt(searchResult.FeeConfig);
+        if (fees != null)
+        {
+            searchResult.FeeConfig!.SystemFee *= searchResult.ExchangeRate;
+        }
         return searchResult;
     }
 

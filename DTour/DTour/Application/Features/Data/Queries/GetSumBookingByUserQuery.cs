@@ -14,7 +14,11 @@ internal class GetSumBookingByUserQueryHandler(IUnitOfWork<Guid, PortalContext> 
         var oDateRange = $"{request.Input.DateRange}".ConvertRangeDate(lastday: true, isUtc: true);
         var oFilter = PredicateBuilder.True<StoreBooking>();
         oFilter = oFilter.And(w => w.CreatedOn >= oDateRange.dFrom
-                                   && w.CreatedOn <= oDateRange.dTo && w.CreatedBy == request.Input.UserId);
+                                   && w.CreatedOn <= oDateRange.dTo);
+        if (request.Input.UserId.NotIsNullOrEmpty())
+        {
+            oFilter = oFilter.And(w => w.UserId == request.Input.UserId);
+        }
         var result = await unitOfWork.RepositoryNew<StoreBooking>().Entities
             .Where(oFilter)
             .AsNoTracking()
