@@ -297,7 +297,7 @@ public partial class Train
                 TariffGuid = s.Key.TariffGuid,
                 OfferId = s.Key.OfferId,
                 TariffName = s.Key.TariffName,
-                Price = s.Sum(sm => sm.Price),
+                Price = s.Min(sm => sm.Price),
             }).ToList();
         _selectGroupClass = _selectOfferClass?.GroupBy(g => new
         {
@@ -307,7 +307,7 @@ public partial class Train
         {
             Name = s.Key.Name,
             Guid = s.Key.Guid,
-            Price = s.Sum(sm => sm.Price)
+            Price = s.Min(sm => sm.Price)
         }).OrderBy(o => o.Price).ToList();
         if (_selectOfferByClass is { Count: > 0 })
         {

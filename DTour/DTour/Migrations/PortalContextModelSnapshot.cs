@@ -285,7 +285,8 @@ namespace DTour.Migrations
                         .HasColumnType("timestamp(6)");
 
                     b.Property<string>("SaveObject")
-                        .HasColumnType("text");
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
 
                     b.Property<double?>("ServiceFee")
                         .HasColumnType("double precision");
@@ -297,12 +298,17 @@ namespace DTour.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("TicketPdf")
-                        .HasColumnType("text");
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
 
                     b.Property<int>("TicketType")
                         .HasColumnType("integer");
 
                     b.Property<string>("To")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("ToEmail")
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 

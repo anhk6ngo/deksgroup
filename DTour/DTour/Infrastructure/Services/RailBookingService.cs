@@ -1,5 +1,7 @@
 ﻿using System.Net;
+using System.Text;
 using DTour.Application.Features.Data.Queries;
+using SharedKernel.Models;
 
 namespace DTour.Infrastructure.Services;
 
@@ -8,6 +10,7 @@ public class RailBookingService(
     IHttpServiceClient httpServiceClient,
     ILoadFile loadFile,
     IMediator mediator,
+    IMailService mailService,
     IAppCache cache)
     : IRailBookingService
 {
@@ -127,6 +130,7 @@ public class RailBookingService(
         {
             searchResult.FeeConfig!.SystemFee *= searchResult.ExchangeRate;
         }
+
         return searchResult;
     }
 
@@ -184,5 +188,41 @@ public class RailBookingService(
         if (response.StatusCode != HttpStatusCode.OK) return new RailResult<List<RailLocationOnline>>();
         var content = await response.Content.ReadAsStringAsync();
         return content.ToObject<RailResult<List<RailLocationOnline>>>();
+    }
+
+    public async Task SendEmail(SendEmailRequest request)
+    {
+        var lstAttatchs = new List<AttachmentFileInfo>();
+        if (request.Urls is { Count: > 0 })
+        {
+            var client = clientFactory.CreateClient();
+            var i = 0;
+            foreach (var url in request.Urls)
+            {
+                i++;
+                var response = await client.GetAsync(url);
+                if(response.StatusCode != HttpStatusCode.OK) continue;
+                var content = await response.Content.ReadAsByteArrayAsync();
+                lstAttatchs.Add( new AttachmentFileInfo
+                {
+                    Content = content,
+                    FileName = $"{request.BookingCode}_{i}.pdf",
+                });
+            }
+        }
+
+        var sBody = new StringBuilder();
+        sBody.AppendLine("<h1>Thank for your purchase!</h1>");
+        sBody.AppendLine($"This is a booking code: {request.BookingCode}<br/>");
+        sBody.AppendLine("Thanks & best regards.<br/>");
+        sBody.AppendLine("Note: This is a robot email. Please do not reply to this email.");
+        var msg = new MailRequest()
+        {
+            To = request.Email,
+            Subject = $"{request.BookingCode}",
+            Attachments = lstAttatchs,
+            Body = sBody.ToString()
+        };
+        await mailService.SendAsync(msg);
     }
 }

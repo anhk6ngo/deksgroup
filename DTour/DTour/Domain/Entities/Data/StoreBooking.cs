@@ -28,5 +28,6 @@ public class StoreBooking: AuditableEntityNew<Guid>, IStoreBooking
     public double? ServiceFee { get; set; }
     public double? ManagementFee { get; set; }
     public double? ExcRate { get; set; }
+    public string? ToEmail { get; set; }
     public double? Price { get; set; }
 }

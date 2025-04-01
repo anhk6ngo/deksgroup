@@ -1,5 +1,7 @@
 ﻿using DTour.Application.Features.Data.Commands;
 using DTour.Application.Features.Data.Queries;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SharedKernel.Models;
 
 namespace DTour.Controllers.Data;
 

@@ -13,4 +13,5 @@ public interface IRailBookingService: IManager
     public Task<RailResult<List<RailCancelBookingResponse>>> CancellationBookingDetails(string? bookingSessionId);
     public Task<RailResult<List<RailCancelBookingSessionResponse>>> CancelBooking(string? bookingSessionId);
     public Task<RailResult<List<RailLocationOnline>>> GetStation(string input);
+    public Task SendEmail(SendEmailRequest request);
 }

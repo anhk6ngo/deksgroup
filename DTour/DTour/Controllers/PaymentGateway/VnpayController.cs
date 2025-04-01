@@ -1,3 +1,4 @@
+using Hangfire;
 using SharedExtension.PaymentGateway;
 
 namespace DTour.Controllers.PaymentGateway
@@ -83,6 +84,13 @@ namespace DTour.Controllers.PaymentGateway
                                             oData.Urls = lstLink;
                                             oFind.SaveObject = oData.ConvertObjectToString();
                                         }
+                                        var rqSendEmail = new SendEmailRequest()
+                                        {
+                                            Email = $"{oFind.ToEmail}",
+                                            BookingCode = oFind.Pnr,
+                                            Urls = lstLink,
+                                        };
+                                        BackgroundJob.Enqueue<IRailBookingService>(x => x.SendEmail(rqSendEmail));
                                     }
                                     await context.RepositoryNew<StoreBooking>().UpdateAsync(oFind);
                                     await context.Commit(CancellationToken.None);

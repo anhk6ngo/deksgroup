@@ -493,12 +493,12 @@
       "PackagePath": "staticwebassets\\js\\swiper-bundle.min.js"
     },
     {
-      "Id": "C:\\Projects\\V9\\2025\\DeksGroup\\DTour\\DTour\\wwwroot\\json\\config.json",
-      "PackagePath": "staticwebassets\\json\\config.json"
-    },
-    {
       "Id": "C:\\Projects\\V9\\2025\\DeksGroup\\DTour\\DTour\\wwwroot\\json\\country.json",
       "PackagePath": "staticwebassets\\json\\country.json"
+    },
+    {
+      "Id": "C:\\Projects\\V9\\2025\\DeksGroup\\DTour\\DTour\\wwwroot\\json\\fees.json",
+      "PackagePath": "staticwebassets\\json\\fees.json"
     },
     {
       "Id": "C:\\Projects\\V9\\2025\\DeksGroup\\DTour\\DTour\\wwwroot\\json\\station.json",

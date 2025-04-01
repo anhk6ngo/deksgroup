@@ -275,7 +275,7 @@
                                                                 }
                                                             </div>
                                                             <div
-                                                                class="d-flex flex-center @(blnActive ? "bg-success text-white" : "bg-light-success") text-uppercase h-40px w-100">
+                                                                class="d-flex flex-center @(blnActive ? "bg-success text-white" : "bg-light-success") text-uppercase h-40px w-100 mt-auto">
                                                                 @if (blnActive)
                                                                 {
                                                                     <i class="fas fa-check me-2"></i>
@@ -372,40 +372,48 @@
                                                            @bind="@pax.LastName">
                                                     <ValidationMessage For="@(() => pax!.LastName)"/>
                                                 </div>
-                                            </div>
-                                            @if (pax.Type != "adult")
-                                            {
                                                 <div class="col-md-6 fv-row">
                                                     <label
-                                                        class="required fs-6 fw-semibold mb-2">@Loc["Birthdate"]</label>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <select class="form-select bg-light-warning"
-                                                                    id="@Guid.NewGuid()"
-                                                                    @onchange="(e) => { UpdateDob(e, 0, pax); }">
-                                                                <OptionDateTime OptType="EnumOpt.Month"
-                                                                                Value="@(pax.Dob.ToString("MMM"))"/>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <select class="form-select bg-light-warning"
-                                                                    id="@Guid.NewGuid()"
-                                                                    @onchange="(e) => { UpdateDob(e, 1, pax); }">
-                                                                <OptionDateTime OptType="EnumOpt.Day"
-                                                                                Value="@($"{pax.Dob.Day}")"/>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <select class="form-select bg-light-warning"
-                                                                    id="@Guid.NewGuid()"
-                                                                    @onchange="(e) => { UpdateDob(e, 2, pax); }">
-                                                                <OptionDateTime OptType="EnumOpt.Year"
-                                                                                Value="@($"{pax.Dob.Year}")"/>
-                                                            </select>
+                                                        class="required fw-semibold form-label">@Loc["Identity, Passport No"]</label>
+                                                    <input class="form-control"
+                                                           type="text"
+                                                           @bind="@pax.DocumentNumber">
+                                                    <ValidationMessage For="@(() => pax!.DocumentNumber)"/>
+                                                </div>
+                                                @if (pax.Type != "adult")
+                                                {
+                                                    <div class="col-md-6 fv-row">
+                                                        <label
+                                                            class="required fs-6 fw-semibold mb-2">@Loc["Birthdate"]</label>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <select class="form-select bg-light-warning"
+                                                                        id="@Guid.NewGuid()"
+                                                                        @onchange="(e) => { UpdateDob(e, 0, pax); }">
+                                                                    <OptionDateTime OptType="EnumOpt.Month"
+                                                                                    Value="@(pax.Dob.ToString("MMM"))"/>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select class="form-select bg-light-warning"
+                                                                        id="@Guid.NewGuid()"
+                                                                        @onchange="(e) => { UpdateDob(e, 1, pax); }">
+                                                                    <OptionDateTime OptType="EnumOpt.Day"
+                                                                                    Value="@($"{pax.Dob.Day}")"/>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select class="form-select bg-light-warning"
+                                                                        id="@Guid.NewGuid()"
+                                                                        @onchange="(e) => { UpdateDob(e, 2, pax); }">
+                                                                    <OptionDateTime OptType="EnumOpt.Year"
+                                                                                    Value="@($"{pax.Dob.Year}")"/>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            }
+                                                }
+                                            </div>
                                         }
                                     </div>
                                 </EditForm>

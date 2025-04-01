@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DTour.Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11d1a4480daf88438ba2ffad01339f46372a788b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+822f388a8c21f54032df852ada13afd47e494182")]
 [assembly: System.Reflection.AssemblyProductAttribute("DTour.Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DTour.Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

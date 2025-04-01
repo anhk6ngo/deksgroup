@@ -888,6 +888,15 @@ namespace DTour.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thẻ căn cước/Hộ chiếú.
+        /// </summary>
+        internal static string Identity__Passport_No {
+            get {
+                return ResourceManager.GetString("Identity, Passport No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trong nước ban, ngô ngữ, múi giờ.
         /// </summary>
         internal static string In_your_country__language__time_zone {
