@@ -28,6 +28,7 @@ public class StoreBookingDto : AggregateRoot<Guid>, IStoreBooking
     public double? ServiceFee { get; set; } = 0;
     public double? ManagementFee { get; set; } = 0;
     public double? ExcRate { get; set; } = 0;
+    public string? ToEmail { get; set; }
     public double? Price { get; set; } = 0;
     public DateTime? TranDate { get; set; }
 }
@@ -60,4 +61,5 @@ public interface IStoreBooking
     public double? ServiceFee { get; set; }
     public double? ManagementFee { get; set; }
     public double? ExcRate { get; set; }
+    public string? ToEmail { get; set; }
 }

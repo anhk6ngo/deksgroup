@@ -1,10 +1,10 @@
 .idea/*
 .vs/*
 .vscode/*
-DTour/DTour/bin/*
-DTour/DTour/obj/*
-DTour/DTour.client/bin/*
-DTour/DTour.client/obj/*
-DTour/DTour.shared/bin/*
-DTour/DTour.shared/obj/*
+./DTour/DTour/bin/*
+./DTour/DTour/obj/*
+./DTour/DTour.client/bin/*
+./DTour/DTour.client/obj/*
+./DTour/DTour.shared/bin/*
+./DTour/DTour.shared/obj/*
 **.txt

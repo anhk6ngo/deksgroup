@@ -681,4 +681,7 @@
     <data name="Fare" xml:space="preserve">
         <value>Giá vé</value>
     </data>
+    <data name="Identity, Passport No" xml:space="preserve">
+        <value>Thẻ căn cước/Hộ chiếú</value>
+    </data>
 </root>

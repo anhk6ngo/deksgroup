@@ -1,5 +1,6 @@
 ﻿using DTour.Application.Features.Data.Commands;
 using DTour.Application.Features.Data.Queries;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DTour.Controllers.Data;
@@ -71,12 +72,14 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
                 }
             }
         }
+
         var sUserId = User.GetUserId();
         saveBooking.UserId = sUserId;
         saveBooking.ApiProviderId = input.ApiProviderId;
         saveBooking.DisplayName = User.GetClaimByName("DisplayName");
         saveBooking.Amount = input.Amount ?? 0;
         saveBooking.SaveObject = result.ConvertObjectToString();
+        saveBooking.ToEmail = $"{input.Buyer?.Email}";
         var resultAdd = await _mediator!.Send(new AddEditBookingCommand()
         {
             Request = new AddEditDataRequest<StoreBookingDto>()
@@ -160,17 +163,24 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
                 }
             }
         }
+
         var resultConfirm = await bookingService.BookingConfirm(new RailConfirm()
         {
             ApiProviderId = input.ApiProviderId,
             BookingSessionId = input.BookingSessionId,
         });
-        if (resultConfirm.Status != 200) return Ok(result);
+        if (resultConfirm.Status != 200)
+        {
+            result.Status = resultConfirm.Status;
+            result.Errors = resultConfirm.Errors;
+            return Ok(result);
+        }
         var lstLink = new List<string>();
-        foreach (var item in resultConfirm.Data!.Where(item => item.PdfTickets is { Count: > 0}))
+        foreach (var item in resultConfirm.Data!.Where(item => item.PdfTickets is { Count: > 0 }))
         {
             lstLink.AddRange(item.PdfTickets!);
         }
+
         result.Urls = lstLink;
         saveBooking.UserId = sUserId;
         saveBooking.ApiProviderId = input.ApiProviderId;
@@ -178,6 +188,7 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
         saveBooking.Status = 2;
         saveBooking.Amount = input.Amount ?? 0;
         saveBooking.SaveObject = result.ConvertObjectToString();
+        saveBooking.ToEmail = $"{input.Buyer?.Email}";
         await _mediator!.Send(new FuncBalanceCommand()
         {
             Input = new BalanceRequest()
@@ -200,9 +211,16 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
                 Data = saveBooking
             }
         });
+        var rqSendEmail = new SendEmailRequest()
+        {
+            Email = $"{input.Buyer?.Email}",
+            BookingCode = saveBooking.Pnr,
+            Urls = lstLink,
+        };
+        BackgroundJob.Enqueue<IRailBookingService>(x => x.SendEmail(rqSendEmail));
         return Ok(result);
     }
-    
+
     [HttpPost("confirm-booking/{id}")]
     [Authorize]
     public async Task<IActionResult> ConfirmBooking(Guid id)
@@ -242,11 +260,12 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
                 ]
             });
         }
+
         var checkBalance = await _mediator!.Send(new GetBalanceByUserQuery
         {
             UserId = sUserId,
         });
-        
+
         if (checkBalance == null || checkBalance.Amount < oFind.Amount)
         {
             return Ok(new RailResult<List<RailConfirmBookingResponse>>
@@ -307,7 +326,7 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
         });
         return Ok(oFind);
     }
-    
+
     [HttpGet("retrieve-booking/{id}")]
     public async Task<IActionResult> RetrieveBooking(string id)
     {
@@ -319,16 +338,18 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
                 Pnr = id
             });
         }
+
         var result = await bookingService.RetrieveBooking(tmpId);
         return Ok(result);
     }
-    
+
     [HttpGet("cancellation-detail/{id}")]
     public async Task<IActionResult> CancellationDetail(string id)
     {
         var result = await bookingService.CancellationBookingDetails(id);
         return Ok(result);
     }
+
     [HttpGet("cancel/{id}")]
     public async Task<IActionResult> Cancel(string id)
     {

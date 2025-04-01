@@ -17,6 +17,9 @@ public class StoreBookingConfiguration : IEntityTypeConfiguration<StoreBooking>
         builder.Property(p => p.TransactionId).HasMaxLength(50);
         builder.Property(p => p.ApiProviderId).HasMaxLength(36);
         builder.Property(p => p.Pnr).HasMaxLength(10);
+        builder.Property(p => p.ToEmail).HasMaxLength(255);
+        builder.Property(p => p.SaveObject).HasMaxLength(4000);
+        builder.Property(p => p.TicketPdf).HasMaxLength(4000);
         builder.HasIndex(u => new {u.IsActive, u.CreatedOn, u.Status, u.TicketType, u.UserId});
         builder.HasIndex(u => new {u.Status, u.TicketType, u.Pnr});
     }
