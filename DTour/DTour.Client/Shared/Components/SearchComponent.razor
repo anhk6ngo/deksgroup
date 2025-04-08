@@ -305,8 +305,8 @@
     private bool _blnSearch;
     private int _adt = 1;
     private int _chd = 0;
+    private string? term = string.Empty;
     private List<string> aChild = [];
-    
     private List<RailStation> _cities = [];
     private List<RailLocationOnline> _filterDepcities = [];
     private List<RailLocationOnline> _filterArrcities = [];
@@ -380,8 +380,8 @@
     {
         if (_Dep.NotIsNullOrEmpty() && $"{_Dep}".Length > 1)
         {
+            if (_blnSearch) return;
             _blnSearch = true;
-            StateHasChanged();
             var sSearch = $"{_Dep}".ToLower();
             var tmp = await _httpService.GetAsync<RailResult<List<RailLocationOnline>>>($"{RailEndpoints.Rail}?search={sSearch}");
             if (tmp.Status == 200)
@@ -398,8 +398,8 @@
     {
         if (_Arr.NotIsNullOrEmpty() && $"{_Arr}".Length > 1)
         {
+            if (_blnSearch) return;
             _blnSearch = true;
-            StateHasChanged();
             var sSearch = $"{_Arr}".ToLower();
             var tmp = await _httpService.GetAsync<RailResult<List<RailLocationOnline>>>($"{RailEndpoints.Rail}?search={sSearch}");
             if (tmp.Status == 200)
@@ -411,7 +411,7 @@
             StateHasChanged();
         }
     }
-
+    
     private async Task SetData((string? slug, string? cityName, string? countryCode, bool isDep) data)
     {
         await CallJs("clickItem", "_arrInput");
