@@ -8,6 +8,7 @@ public static class Caches
     public const string GetAllCityCacheKey = "all-city";
     public const string GetAllBranchCacheKey = "all-branch";
     public const string GetAllCurrencyCacheKey = "all-currency";
+    public const string GetAllPostCacheKey = "all-post";
     public const string GetAllExchangeRateCacheKey = "all-exchange-rate";
     public const string GetActiveExchangeRateCacheKey = "active-exchange-rate";
     public const string GetAllAgentCacheKey = "all-agent";

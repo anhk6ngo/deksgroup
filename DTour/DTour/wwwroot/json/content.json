@@ -1,0 +1,314 @@
+﻿{
+  "heros": [
+    {
+      "imagePath": "hero/hero_2_5.jpg",
+      "title": "Discover the Joy of Seamless Travel",
+      "detail": "Tourm an international travel management company with 25 years of experience, specializing in business and maritime travel."
+    },
+    {
+      "imagePath": "hero/hero_2_2.jpg",
+      "title": "Discover the Joy of Seamless Travel",
+      "detail": "Tourm an international travel management company with 25 years of experience, specializing in business and maritime travel."
+    },
+    {
+      "imagePath": "hero/hero_2_4.jpg",
+      "title": "Discover the Joy of Seamless Travel",
+      "detail": "Tourm an international travel management company with 25 years of experience, specializing in business and maritime travel."
+    }
+  ],
+  "packages": {
+    "title": "Travel to Choose Country",
+    "items": [
+      {
+        "location": "Rome",
+        "imagePath": "category/rome.webp",
+        "desc": "Water Bungalows",
+        "price": 856.00
+      },
+      {
+        "location": "Milan",
+        "imagePath": "category/milan.webp",
+        "desc": "Garibaldi Lake",
+        "price": 856.00
+      },
+      {
+        "location": "Barcelona",
+        "imagePath": "category/barcelona.webp",
+        "desc": "Sok national park",
+        "price": 856.00
+      },
+      {
+        "location": "Paris",
+        "imagePath": "category/paris.webp",
+        "desc": "Water Bungalows",
+        "price": 856.00
+      },
+      {
+        "location": "Sevilla",
+        "imagePath": "category/sevilla.webp",
+        "desc": "Garibaldi Lake",
+        "price": 856.00
+      },
+      {
+        "location": "Venice",
+        "imagePath": "category/venice.webp",
+        "desc": "Sok national park",
+        "price": 856.00
+      }
+    ]
+  },
+  "abouts": {
+    "title": "Let’s Go Together",
+    "subtitle": "Plan Your Trip With us",
+    "detail": "There are many variations of passages of available but the majority have suffered alteration in some form, by injected hum randomised words.",
+    "imagePath": [
+      "about_3_1.jpg",
+      "about_3_2.jpg",
+      "about_3_3.jpg"
+    ],
+    "items": [
+      {
+        "title": "Exclusive Trip",
+        "detail": "There are many variations of passages of available but the majority."
+      },
+      {
+        "title": "Safety First Always",
+        "detail": "There are many variations of passages of available but the majority."
+      },
+      {
+        "title": "Professional Guide",
+        "detail": "There are many variations of passages of available but the majority."
+      }
+    ]
+  },
+  "tours": {
+    "title": "Best Experience",
+    "subtitle": "Popular Tour Package",
+    "items": [
+      {
+        "imagePath": "tour/tour_12_1.jpg",
+        "desc": "Belgium Guggenheim Forest",
+        "price": 856.00,
+        "star": 4.8,
+        "duration": "7 Days"
+      },
+      {
+        "imagePath": "tour/tour_12_2.jpg",
+        "desc": "Italy Forest Tour package",
+        "price": 856.00,
+        "star": 4.8,
+        "duration": "7 Days"
+      },
+      {
+        "imagePath": "tour/tour_12_3.jpg",
+        "desc": "Dubai Zoo Tour Package",
+        "price": 856.00,
+        "star": 4.8,
+        "duration": "7 Days"
+      },
+      {
+        "imagePath": "tour/tour_12_4.jpg",
+        "desc": "Belgium Guggenheim Forest",
+        "price": 856.00,
+        "star": 4.8,
+        "duration": "7 Days"
+      },
+      {
+        "imagePath": "tour/tour_12_1.jpg",
+        "desc": "Belgium Guggenheim Forest",
+        "price": 856.00,
+        "star": 4.8,
+        "duration": "7 Days"
+      }
+    ]
+  },
+  "gallery": {
+    "title": "Make Your Tour More Pleasure",
+    "subtitle": "Recent Gallery",
+    "items": [
+      "gallery/gallery_1_1.jpg",
+      "gallery/gallery_1_2.jpg",
+      "gallery/gallery_1_3.jpg",
+      "gallery/gallery_1_4.jpg",
+      "gallery/gallery_1_5.jpg",
+      "gallery/gallery_1_6.jpg",
+      "gallery/gallery_1_7.jpg"
+    ]
+  },
+  "counters": [
+    {
+      "title": "Years Experience",
+      "counterNumber": 12
+    },
+    {
+      "title": "Retention Rate",
+      "counterNumber": 97,
+      "unit": "%"
+    },
+    {
+      "title": "Tour Completed",
+      "counterNumber": 8,
+      "unit": "k"
+    },
+    {
+      "title": "Happy Travellers",
+      "counterNumber": 19,
+      "unit": "k"
+    }
+  ],
+  "destinations": {
+    "title": "Top Destination",
+    "subtitle": "Popular Destination",
+    "items": [
+      {
+        "imagePath": "destination/destination_9_1.jpg",
+        "title": "Thailand"
+      },
+      {
+        "imagePath": "destination/destination_9_2.jpg",
+        "title": "Belgium"
+      },
+      {
+        "imagePath": "destination/destination_9_3.jpg",
+        "title": "Island"
+      },
+      {
+        "imagePath": "destination/destination_9_4.jpg",
+        "title": "Maldives"
+      }
+    ]
+  },
+  "chooseUs": {
+    "title": "Why Choose Us",
+    "subtitle": "Wander Far, Explore More",
+    "detail": "Enjoy different experiences in every place you visit and discover new and affordable adventures of course.",
+    "items": [
+      {
+        "imagePath": "icon/choose_2_1.svg",
+        "title": "Flight Ticket",
+        "detail": "Vitae donec pellentesque a aliquam et ultricies auctor."
+      },
+      {
+        "imagePath": "icon/choose_2_2.svg",
+        "title": "Accommodation",
+        "detail": "Vitae donec pellentesque a aliquam et ultricies auctor."
+      },
+      {
+        "imagePath": "icon/choose_2_3.svg",
+        "title": "Packaged Tour",
+        "detail": "Vitae donec pellentesque a aliquam et ultricies auctor."
+      }
+    ]
+  },
+  "tourGuide": {
+    "title": "Meet with Guide",
+    "subtitle": "Tour Guide",
+    "items": [
+      {
+        "imagePath": "team/team_1_1.jpg",
+        "title": "Jacob Jones",
+        "detail": "Tourist Guide",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      },
+      {
+        "imagePath": "team/team_1_2.jpg",
+        "title": "Jane Cooper",
+        "detail": "Tourist Guide",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      },
+      {
+        "imagePath": "team/team_1_3.jpg",
+        "title": "Guy Hawkins",
+        "detail": "Tourist Guide",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      },
+      {
+        "imagePath": "team/team_1_4.jpg",
+        "title": "Jenny Wilson",
+        "detail": "Tourist Guide",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      }
+    ]
+  },
+  "askQuestion": {
+    "title": "Frequently Asked Question",
+    "subtitle": "Your Perfect Journey, Crafted with Care",
+    "items": [
+      {
+        "title": "What does a travel agency do?",
+        "detail": "We help plan, book, and coordinate your travel arrangements, including flights, accommodations, tours, and activities, ensuring a hassle-free travel experience."
+      },
+      {
+        "title": "Do travel agencies only handle international trips?",
+        "detail": "We help plan, book, and coordinate your travel arrangements, including flights, accommodations, tours, and activities, ensuring a hassle-free travel experience."
+      },
+      {
+        "title": "Do you offer customized travel packages?",
+        "detail": "We help plan, book, and coordinate your travel arrangements, including flights, accommodations, tours, and activities, ensuring a hassle-free travel experience."
+      },
+      {
+        "title": "How do I book a trip through your agency?",
+        "detail": "We help plan, book, and coordinate your travel arrangements, including flights, accommodations, tours, and activities, ensuring a hassle-free travel experience."
+      }
+    ]
+  },
+  "testimonial": {
+    "title": "Testimonial",
+    "subtitle": "What Client Say About us",
+    "items": [
+      {
+        "message": "Khách sạn và nhà hàng ăn uống rất tốt, thực đơn phong phú. Dịch vụ DTOUR rất chuyên nghiệp.",
+        "title": "Anh Hiền - Chánh văn phòng Nasco",
+        "place": "Đoàn CBNV Hải Châu đi Mỹ.",
+        "star": 4.5
+      },
+      {
+        "message": "Hướng dẫn viên của DTOUR là hướng dẫn viên tốt nhất từ trước tới nay. Rất cảm ơn các bạn.",
+        "title": "Anh Nguyên - Trưởng phòng",
+        "place": "Đoàn CBNV đi Hà Tĩnh.",
+        "star": 5
+      },
+      {
+        "message": "Đội ngũ của DTOUR làm việc rất chuyên nghiệp, nhiệt tình, chu đáo. Thực sự yên tâm khi có các bạn.",
+        "title": "Anh Hùng - Trưởng phòng AITS",
+        "place": "Đoàn CBNV đi Đà Nẵng.",
+        "star": 5
+      },
+      {
+        "message": "Chuyến du lịch được suôn sẻ nhờ sự nhiệt tình làm việc của các thành viên ban điều hành, tài xế, HDV… Thay mặt anh chị em gửi lời cám ơn tới các thành viên công ty DTOUR nhiều nhé.",
+        "title": "Anh Việt - VAECO",
+        "place": "Đoàn CBNV đi Đà Lạt.",
+        "star": 5
+      },
+      {
+        "message": "Chuyến đi lần này thực sự khiến chúng tôi hài lòng về dịch vụ của Dtour, đặc biệt HDV rất am hiểu lịch sử và nhiệt tình giúp đỡ chúng tôi trong suốt kỳ nghỉ.",
+        "title": "Trường PTTH Xuân Đỉnh",
+        "place": "Đoàn giáo viên đi Đà Nẵng.",
+        "star": 5
+      },
+      {
+        "message": "Mình rất hài lòng về kỳ nghỉ của vợ chồng mình vừa rồi. Cảm ơn Dtour đã làm nên kỷ niệm đáng nhớ cho chúng mình.",
+        "title": "Chị Quỳnh - Techcombank Hội sở",
+        "place": "Kỳ nghỉ trăng mật.",
+        "star": 5
+      }
+    ]
+  },
+  "subscribe": {
+    "imagePath": "bg/subscribe_bg_2.jpg",
+    "title": "Subscribe And Get a Special Discount",
+    "detail": "Speedily say has suitable disposal add boy. On forth doubt miles of child. Exercise joy man children rejoiced."
+  }
+}

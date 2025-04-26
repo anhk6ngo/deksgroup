@@ -1,0 +1,317 @@
+﻿@page "/service/{id}"
+<div class="breadcumb-wrapper">
+    <div class="container">
+        <div class="breadcumb-content"><h1 class="breadcumb-title">Service Details</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="/">Home</a></li>
+                <li>@Id</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="space">
+    <div class="container shape-mockup-wrap">
+        @if ($"{Id}".ToLower() == "visa")
+        {
+            <div class="page-content d-block mb-30">
+                <h1 class="box-title text-center mb-20">VISA DU LỊCH ÚC</h1>
+                <p class="box-text mb-30">
+                    Bạn muốn ghé thăm Thành phố cảng Sydney, “nàng thơ” của nước Úc - Melbourne, thư gian tại những bãi
+                    biển
+                    tuyệt đẹp, trải nghiệm văn hóa đặc sắc hoặc đơn giản là đi thăm người thân đang sinh sống tại Úc?
+                    Dịch
+                    vụ làm visa Úc trọn gói của DTour đơn giản hóa mọi quy trình, tăng tỷ lệ đậu cao, tiết kiệm thời
+                    gian và
+                    chi phí cho khách hàng
+                </p>
+                <h2 class="box-title">Hồ sơ xin Visa</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Hộ chiếu gốc còn hạn ít nhất 6 tháng kể từ ngày dự kiến rời khỏi Úc và có ít nhất 2 trang
+                            trống
+                            để dán visa
+                        </li>
+                        <li>2 ảnh 4x6cm, nền trắng, chụp trong vòng 6 tháng gần nhất, không đeo kính màu</li>
+                        <li>Chứng minh nhân dân/CCCD: Bản gốc và bản photo công chứng</li>
+                        <li>Sổ hộ khẩu: Bản gốc và bản photo công chứng tất cả các trang</li>
+                        <li>Giấy khai sinh: Bản gốc và bản photo công chứng</li>
+                        <li>Giấy đăng ký kết hôn: (Nếu đã kết hôn) Bản gốc và bản photo công chứng</li>
+                        <li>Tờ khai xin visa</li>
+                        <li>Chứng minh tài chính: Sổ tiết kiệm số dư tối thiểu 5000 USD, Xác nhận số dư tài khoản ngân
+                            hàng
+                            trong vòng 3 tháng gần nhất
+                        </li>
+                        <li>Chứng minh sở hữu tài sản: Sổ đỏ, giấy đăng ký ô tô, cổ phiếu,... (nếu có)</li>
+                        <li>Chứng minh công việc: Hợp đồng lao động/ Quyết định bổ nhiệm/ Giấy phép kinh doanh, Bảng
+                            lương 3
+                            tháng gần nhất, Xác nhận công tác
+                        </li>
+                        <li>Chứng minh mục đích chuyến đi: Vé máy bay khứ hồi, Xác nhận đặt phòng khách sạn, chương
+                            trình du
+                            lịch
+                        </li>
+                        <li>Thư mời: (Nếu đi thăm người thân hoặc bạn bè tại Úc)</li>
+                        <li>Bảo hiểm du lịch: Giấy tờ chứng minh bạn đã mua bảo hiểm du lịch</li>
+                    </ul>
+                </div>
+                <p class="box-text py-10 fw-semibold">Lưu ý: Tùy theo từng trường hợp mà Quý khách có thể bổ sung thêm 1
+                    số
+                    hồ sơ khác nếu cần.</p>
+                <h4 class="box-title">Ưu điểm:</h4>
+                <div class="checklist">
+                    <ul>
+                        <li>Hỗ trợ chuẩn bị hồ sơ chuẩn xác từ đội ngũ giàu kinh nghiệm</li>
+                        <li>Tiết kiệm thời gian, công sức</li>
+                        <li>Tăng tỷ lệ đậu visa tối đa</li>
+                        <li>Chi phí hợp lý và minh bạch</li>
+                    </ul>
+                </div>
+                <p class="box-text my-10">Liên hệ DTour ngay để được tư vấn theo từng hồ sơ cụ thể – nhận visa Úc dễ
+                    dàng,
+                    an tâm
+                    bay đúng lịch!</p>
+            </div>
+            <div class="page-content d-block mb-30">
+                <h1 class="box-title text-cente mb-20r">VISA DU LỊCH NHẬT BẢN</h1>
+                <p class="box-text mb-30">
+                    Bạn muốn đặt chân đến “Xứ sở mặt trời mọc” - Nhật Bản nhưng lo lắng về thủ tục xin Visa gắt gao và
+                    nhiều
+                    bước? Dịch vụ làm visa Nhật Bản trọn gói của DTour đơn giản hóa mọi quy trình, tăng tỷ lệ đậu cao,
+                    tiết
+                    kiệm thời gian và chi phí cho khách hàng
+                </p>
+                <h2 class="box-title">Hồ sơ xin Visa</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Hộ chiếu gốc còn hạn 6 tháng, có chữ ký ở trang 3
+                        </li>
+                        <li>2 ảnh 4.5 X 3.5, nền trắng</li>
+                        <li>Form khai tiếng anh: khai đầy đủ thông tin và ký tên trang 2 trùng với chữ ký trong hộ
+                            chiếu. In
+                            giấy 1 mặt (không được in 2 mặt)
+                        </li>
+                        <li>Chứng minh tài chính: Xác nhận số dư tài khoản ngân hàng/ sổ tiết kiệm công chứng. Sao kê
+                            tài
+                            khoản 6 tháng (Highlight giao dịch nhận lương nếu có),...
+                        </li>
+                        <li>Chứng minh nghề nghiệp</li>
+                        <li>Chứng minh mối quan hệ: Nếu nộp từ 2 người trở lên. Nếu là bạn bè: Ảnh chụp chung rõ mặt (in
+                            màu, in vào giấy in ảnh và có note tên những người nộp visa), 2-3 kiểu. Nếu là vợ - chồng -
+                            con
+                            hoặc người thân: Sổ hộ khẩu, Giấy khai sinh, Đăng ký kết hôn công chứng
+                        </li>
+                    </ul>
+                </div>
+                <p class="box-text py-10 fw-semibold">Lưu ý: Tùy theo từng trường hợp mà Quý khách có thể bổ sung thêm 1
+                    số
+                    hồ sơ khác nếu cần.</p>
+                <h4 class="box-title">Ưu điểm:</h4>
+                <div class="checklist">
+                    <ul>
+                        <li>Hỗ trợ chuẩn bị hồ sơ chuẩn xác từ đội ngũ giàu kinh nghiệm</li>
+                        <li>Tiết kiệm thời gian, công sức</li>
+                        <li>Tăng tỷ lệ đậu visa tối đa</li>
+                        <li>Chi phí hợp lý và minh bạch</li>
+                    </ul>
+                </div>
+                <p class="box-text my-10">Liên hệ DTour ngay để được tư vấn theo từng hồ sơ cụ thể – nhận visa Nhật Bản
+                    dễ
+                    dàng,
+                    an tâm bay đúng lịch!</p>
+            </div>
+            <div class="page-content d-block mb-30">
+                <h1 class="box-title text-center mb-20">VISA DU LỊCH HÀN QUỐC</h1>
+                <p class="box-text mb-30">
+                    Bạn đang có kế hoạch du lịch, công tác hay thăm thân tại Hàn Quốc nhưng vẫn còn phân vân về thủ tục
+                    xin
+                    Visa. Dịch vụ làm visa Hàn Quốc trọn gói của DTour đơn giản hóa mọi quy trình, tăng tỷ lệ đậu cao,
+                    tiết
+                    kiệm thời gian và chi phí cho khách hàng
+                </p>
+                <h2 class="box-title">Hồ sơ xin Visa</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Hộ chiếu bản gốc (còn hạn trên 6 tháng)</li>
+                        <li>2 ảnh kích cỡ 3.5 x 4.5 nền trắng (Ảnh mới chụp. Ảnh lộ trán, lông mày, tai. Ảnh không đeo
+                            kính)
+                        </li>
+                        <li>Bản photo CMND/CCCD</li>
+                        <li>Bản photo hộ khẩu</li>
+                        <li>Bản photo công chứng giấy đăng ký kết hôn nếu đã kết hôn (bắt buộc), nếu không có đăng ký
+                            kết
+                            hôn vui lòng cung cấp giấy xác nhận tình trạng hôn nhân có dấu đỏ của chính quyền địa phương
+                        </li>
+                        <li>Bản photo công chứng giấy khai sinh nếu đi cùng bố/mẹ</li>
+                        <li>Tờ khai thông tin</li>
+                        <li>Giấy tờ chứng minh công việc</li>
+                        <li>Giấy tờ chứng minh tài chính</li>
+                    </ul>
+                </div>
+                <p class="box-text py-10 fw-semibold">Lưu ý: Tùy theo từng trường hợp mà Quý khách có thể bổ sung thêm 1
+                    số
+                    hồ sơ khác nếu cần.</p>
+                <h4 class="box-title">Ưu điểm:</h4>
+                <div class="checklist">
+                    <ul>
+                        <li>Hỗ trợ chuẩn bị hồ sơ chuẩn xác từ đội ngũ giàu kinh nghiệm</li>
+                        <li>Tiết kiệm thời gian, công sức</li>
+                        <li>Tăng tỷ lệ đậu visa tối đa</li>
+                        <li>Chi phí hợp lý và minh bạch</li>
+                    </ul>
+                </div>
+                <p class="box-text my-10">Liên hệ DTour ngay để được tư vấn theo từng hồ sơ cụ thể – nhận visa Hàn Quốc
+                    dễ
+                    dàng,
+                    an tâm bay đúng lịch!</p>
+            </div>
+            <div class="page-content d-block mb-30">
+                <h1 class="box-title text-center mb-20">VISA DU LỊCH ĐÀI LOAN</h1>
+                <p class="box-text mb-30">
+                    Bạn muốn ghé thăm Đài Loan - một trong bốn “con rồng của châu Á”, nhưng chưa biết bắt đầu từ đâu với
+                    thủ
+                    tục Visa? Đừng lo lắng! Dịch vụ làm visa Đài Loan trọn gói của DTour đơn giản hóa mọi quy trình,
+                    tăng tỷ
+                    lệ đậu cao, tiết kiệm thời gian và chi phí cho khách hàng
+                </p>
+                <h2 class="box-title my-10">VISA ONLINE</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Scan hộ chiếu</li>
+                        <li>Scan visa tiên tiến</li>
+                        <li>Tờ khai thông tin</li>
+                    </ul>
+                </div>
+                <h2 class="box-title my-10">VISA QUAN HỒNG</h2>
+                <p class="box-text my-10">Áp dụng cho khách chưa từng đi các nước tiên tiến như trên và những khách tuy
+                    có
+                    visa tiên tiến nhưng khai visa online không thành công</p>
+                <div class="checklist">
+                    <ul>
+                        <li>Hộ chiếu còn hạn trên 6 tháng tính đến ngày kết thúc tour</li>
+                        <li>Ảnh chân dung 4*6 nền trắng</li>
+                        <li>Chụp 2 mặt căn cước công dân</li>
+                        <li>Chứng minh nghề nghiệp của du khách: hợp đồng lao động, quá trình đóng bảo hiểm xã hội/
+                            quyết định hưu trí/ quyết định bổ nhiệm/ quyết định nâng lương,…
+                        </li>
+                        <li>Chụp giấy khai sinh nếu chưa đủ 18 tuổi</li>
+                        <li>Nếu khách hàng dưới 18 tuổi không đi cùng cha mẹ thì bắt buộc phải cung cấp Giấy ủy quyền có
+                            xác nhận phường xã ngay khi nộp hồ sơ xin visa
+                        </li>
+
+                    </ul>
+                </div>
+                <p class="box-text py-10 fw-semibold">Lưu ý: Tùy theo từng trường hợp mà Quý khách có thể bổ sung thêm 1
+                    số
+                    hồ sơ khác nếu cần.</p>
+                <h4 class="box-title">Ưu điểm:</h4>
+                <div class="checklist">
+                    <ul>
+                        <li>Hỗ trợ chuẩn bị hồ sơ chuẩn xác từ đội ngũ giàu kinh nghiệm</li>
+                        <li>Tiết kiệm thời gian, công sức</li>
+                        <li>Tăng tỷ lệ đậu visa tối đa</li>
+                        <li>Chi phí hợp lý và minh bạch</li>
+                    </ul>
+                </div>
+                <p class="box-text my-10">Liên hệ DTour ngay để được tư vấn theo từng hồ sơ cụ thể – nhận visa Đài Loan
+                    dễ
+                    dàng,
+                    an tâm bay đúng lịch!</p>
+            </div>
+        }
+        else
+        {
+            <div class="page-content d-block mb-30">
+                <h1 class="box-title text-center mb-20">FAST TRACK - DỊCH VỤ HỖ TRỢ THỦ TỤC NHANH TẠI SÂN BAY</h1>
+                <p class="box-text mb-30">
+                    Bận rộn với lịch trình bay hay đang tìm kiếm một khởi đầu hành trình thuận tiện không vướng bận
+                    nhiều thủ tục? Fast Track là giải pháp tiện lợi dành cho bạn
+                </p>
+                <p class="box-text mb-30">
+                    Fast Track là dịch vụ tiện ích hỗ trợ hành khách làm thủ tục tại sân bay một cách nhanh chóng –
+                    không cần xếp hàng, không chờ đợi, với sự hỗ trợ tận tình từ nhân viên sân bay chuyên trách
+                </p>
+                <h2 class="box-title">Các gói dịch vụ</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Fast Track đón khách tại sân bay: Nhân viên đón ngay tại cửa máy bay, hỗ trợ làm thủ tục
+                            nhập cảnh, nhận hành lý, đưa ra xe
+                        </li>
+                        <li>Fast Track tiễn khách ra sân bay: Hỗ trợ check-in nhanh, đưa qua cửa an ninh, tiễn đến tận
+                            cổng lên máy bay
+                        </li>
+                        <li>Fast Track VIP + Lounge: Kết hợp ưu tiên thủ tục và sử dụng phòng chờ hạng thương gia sang
+                            trọng
+                        </li>
+                    </ul>
+                </div>
+                <p class="box-text py-10 fw-semibold">Dịch vụ hiện có tại các sân bay lớn tại Việt Nam như sân bay Nội
+                    Bài (Hà Nội), sân bay Tân Sơn Nhất (Tp. Hồ Chí Minh), sân bay Đà Nẵng (DAD)... và các sân bay quốc
+                    tế khác</p>
+                <h4 class="box-title">Ưu điểm:</h4>
+                <div class="checklist">
+                    <ul>
+                        <li>Tiết kiệm thời gian tối đa: Ưu tiên đi làn riêng làm thủ tục check-in, kiểm tra an ninh, hải
+                            quan và nhập cảnhTiết kiệm thời gian tối đa: Ưu tiên đi làn riêng làm thủ tục check-in, kiểm
+                            tra an ninh, hải quan và nhập cảnh
+                        </li>
+                        <li>Có nhân viên hỗ trợ chuyên nghiệp tại sân bay</li>
+                        <li>Phù hợp cho mọi đối tượng</li>
+                        <li>Hỗ trợ hành lý, thủ tục trọn gói</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-content d-block mb-30">
+                <h1 class="box-title text-center mb-20">THUÊ XE DU LỊCH THEO YÊU CẦU</h1>
+                <p class="box-text mb-30">
+                    DTour cung cấp dịch vụ cho thuê xe du lịch theo yêu cầu dành cho cá nhân, gia đình, doanh nghiệp
+                    hoặc tổ chức có nhu cầu di chuyển linh hoạt, tiện nghi và an toàn. DTour cung cấp đa dạng dòng xe từ
+                    4 - 7 - 16 - 29 - 45 chỗ cùng đội ngũ tài xế chuyên nghiệp, cam kết mang đến trải nghiệm di chuyển
+                    trọn vẹn, thoải mái, chất lượng đáp ứng nhu cầu khách hàng
+                </p>
+
+                <h2 class="box-title">Các gói dịch vụ</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Thuê xe đi du lịch gia đình, nhóm bạn, công ty
+                        </li>
+                        <li>Thuê xe đưa đón sân bay, bến xe, nhà ga</li>
+                        <li>Thuê xe đi công tác, hội nghị, khảo sát thị trường</li>
+                        <li>Thuê xe phục vụ sự kiện, lễ hội, team building …</li>
+                    </ul>
+                </div>
+                <h4 class="box-title">Ưu điểm:</h4>
+                <div class="checklist">
+                    <ul>
+                        <li>Linh hoạt theo nhu cầu khách hàng</li>
+                        <li>Đa dạng xe đời mới, đầy đủ tiện nghi</li>
+                        <li>Tài xế king nghiệm và chuyên nghiệp</li>
+                        <li>Chi phí tối ưu và minh bạch</li>
+                        <li>Đội ngũ điều hành hỗ trợ tư vấn nhanh chóng</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-content d-block mb-30">
+                <h1 class="box-title text-center mb-20">BẢO HIỂM DU LỊCH</h1>
+                <p class="box-text mb-30">
+                    Bảo hiểm là người bạn đồng hành, là tấm khiên an toàn không thể thiếu của bạn trong mọi
+                    chuyến du lịch, công tác hay thăm thân.DTour khuyến khích khách hàng nên mua bảo hiểm ngay khi
+                    đặt dịch vụ di chuyển để đảm bảo quyền lợi tối đa trước – trong – và sau chuyến đi
+                </p>
+
+                <h4 class="box-title">Ưu điểm:</h4>
+                <div class="checklist">
+                    <ul>
+                        <li>An tâm khi di chuyển</li>
+                        <li>Bảo vệ sức khỏe và tiết kiệm chi phí</li>
+                        <li>Chi phí thấp - Quyền lợi cao</li>
+                        <li>Đáp ứng điều kiện bắt buộc khi xin Visa một số nước</li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? Id { get; set; }
+}

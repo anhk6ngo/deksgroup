@@ -48,19 +48,24 @@
         <span class="menu-title">@Loc["Agent"]</span><span class="menu-arrow d-lg-none"></span>
        </span>
        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
-        <div class="menu-item">
-         <NavLink href="/agent/top-up" class="menu-link">
-          <span class="menu-bullet">
-           <span class="bullet bullet-dot"></span>
-          </span>
-          <span class="menu-title">@Loc["Top-up"]</span>
-         </NavLink>
-        </div>
+        <AuthorizeView>
+         <div class="menu-item">
+          @if (context.User.IsInRole(RoleConstants.AgentAccountingRole))
+          {
+           <NavLink href="/agent/top-up" class="menu-link">
+            <span class="menu-bullet">
+             <span class="bullet bullet-dot"></span>
+            </span>
+            <span class="menu-title">@Loc["Top-up"]</span>
+           </NavLink>
+          }
+         </div>
+        </AuthorizeView>
         <div class="menu-item">
          <NavLink href="/agent/ticket" class="menu-link">
-          <span class="menu-bullet">
-           <span class="bullet bullet-dot"></span>
-          </span>
+            <span class="menu-bullet">
+             <span class="bullet bullet-dot"></span>
+            </span>
           <span class="menu-title">@Loc["Buy Tickets"]</span>
          </NavLink>
         </div>
@@ -74,119 +79,135 @@
         </div>
        </div>
       </div>
-      <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-           data-kt-menu-placement="bottom-start" data-kt-menu-offset="12,0"
-           class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+      <AuthorizeView Roles="@RoleConstants.AccountingRole">
+       <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+            data-kt-menu-placement="bottom-start" data-kt-menu-offset="12,0"
+            class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
        <span class="menu-link"><span class="menu-icon"><i
           class="fas fa-compass fs-3"></i></span><span
          class="menu-title">@Loc["Operation"]</span><span class="menu-arrow d-lg-none"></span></span>
-       <div
-        class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
-        <div class="menu-item">
-         <NavLink class="menu-link"
-                  href="/agent/approve-top-up">
+        <div
+         class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
+         <div class="menu-item">
+          <NavLink class="menu-link"
+                   href="/agent/approve-top-up">
           <span
            class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
-          <span
-           class="menu-title">@Loc["Approve Top-up"]</span>
-         </NavLink>
-        </div>
-        <div class="menu-item">
-         <NavLink class="menu-link"
-                  href="/agent/agent">
-          <span
-           class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
-          <span
-           class="menu-title">@Loc["Agent"]</span>
-         </NavLink>
-        </div>
-        <div class="menu-item">
-         <NavLink class="menu-link"
-                  href="/agent/currency">
+           <span
+            class="menu-title">@Loc["Approve Top-up"]</span>
+          </NavLink>
+         </div>
+         <div class="menu-item">
+          <NavLink class="menu-link"
+                   href="/agent/agent">
           <span
            class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
-          <span
-           class="menu-title">@Loc["Currency"]</span>
-         </NavLink>
-        </div>
-        <div class="menu-item">
-         <NavLink class="menu-link"
-                  href="/agent/exchange-rate">
-          <span
-           class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
-          <span
-           class="menu-title">@Loc["Exchange rate"]</span>
-         </NavLink>
-        </div>
-        <div class="menu-item">
-         <NavLink class="menu-link"
-                  href="/agent/commission">
+           <span
+            class="menu-title">@Loc["Agent"]</span>
+          </NavLink>
+         </div>
+         <div class="menu-item">
+          <NavLink class="menu-link"
+                   href="/agent/currency">
           <span
            class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
+           <span
+            class="menu-title">@Loc["Currency"]</span>
+          </NavLink>
+         </div>
+         <div class="menu-item">
+          <NavLink class="menu-link"
+                   href="/agent/exchange-rate">
           <span
-           class="menu-title">@Loc["Commission"]</span>
-         </NavLink>
+           class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
+           <span
+            class="menu-title">@Loc["Exchange rate"]</span>
+          </NavLink>
+         </div>
+         <div class="menu-item">
+          <NavLink class="menu-link"
+                   href="/agent/commission">
+          <span
+           class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
+           <span
+            class="menu-title">@Loc["Commission"]</span>
+          </NavLink>
+         </div>
         </div>
        </div>
-      </div>
-      <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-           data-kt-menu-placement="bottom-start" data-kt-menu-offset="12,0"
-           class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
-       <span class="menu-link">
-        <span class="menu-icon">
-         <i class="fas fa-shield-check fs-3"></i>
+      </AuthorizeView>
+      <AuthorizeView Roles="@RoleConstants.AdministratorRole">
+       <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+            data-kt-menu-placement="bottom-start" data-kt-menu-offset="12,0"
+            class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+        <span class="menu-link">
+         <span class="menu-icon">
+          <i class="fas fa-shield-check fs-3"></i>
+         </span>
+         <span class="menu-title">@Loc["Administrator"]</span>
+         <span class="menu-arrow d-lg-none">
+         </span>
         </span>
-        <span class="menu-title">@Loc["Administrator"]</span>
-        <span class="menu-arrow d-lg-none">
-        </span>
-       </span>
-       <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
-        <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
-             data-kt-menu-placement="right-start"
-             class="menu-item menu-lg-down-accordion">
-         <span class="menu-link">
-          <span class="menu-icon"><i class="ki-outline ki-shield-tick fs-2"></i></span><span
-           class="menu-title">@Loc["User Management"]</span>
-          <span class="menu-arrow"></span></span>
-         <div
-          class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
-          <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
-               data-kt-menu-placement="right-start"
-               class="menu-item menu-lg-down-accordion">
-           <span class="menu-link"><span
-             class="menu-bullet"><span
-              class="bullet bullet-dot"></span></span><span
-             class="menu-title">@Loc["Users"]</span><span class="menu-arrow"></span></span>
-           <div
-            class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
-            <div class="menu-item">
-             <NavLink class="menu-link" href="/Account/Register">
-              <span class="menu-bullet">
-               <span class="bullet bullet-dot"></span>
-              </span>
-              <span class="menu-title">@Loc["Register"]</span>
-             </NavLink>
-            </div>
-            <div class="menu-item">
-             <NavLink class="menu-link" href="/Account/Admin-ChangePassword">
-              <span class="menu-bullet">
-               <span class="bullet bullet-dot"></span>
-              </span>
-              <span class="menu-title">@Loc["Reset Password"]</span>
-             </NavLink>
+        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
+         <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+              data-kt-menu-placement="right-start"
+              class="menu-item menu-lg-down-accordion">
+          <span class="menu-link">
+           <span class="menu-icon"><i class="ki-outline ki-shield-tick fs-2"></i></span><span
+            class="menu-title">@Loc["User Management"]</span>
+           <span class="menu-arrow"></span></span>
+          <div
+           class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
+           <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                data-kt-menu-placement="right-start"
+                class="menu-item menu-lg-down-accordion">
+            <span class="menu-link"><span
+              class="menu-bullet"><span
+               class="bullet bullet-dot"></span></span><span
+              class="menu-title">@Loc["Users"]</span><span class="menu-arrow"></span></span>
+            <div
+             class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
+             <div class="menu-item">
+              <NavLink class="menu-link" href="/Account/Register">
+               <span class="menu-bullet">
+                <span class="bullet bullet-dot"></span>
+               </span>
+               <span class="menu-title">@Loc["Register"]</span>
+              </NavLink>
+             </div>
+             <div class="menu-item">
+              <NavLink class="menu-link" href="/Account/Admin-ChangePassword">
+               <span class="menu-bullet">
+                <span class="bullet bullet-dot"></span>
+               </span>
+               <span class="menu-title">@Loc["Reset Password"]</span>
+              </NavLink>
+             </div>
             </div>
            </div>
-          </div>
-          <div class="menu-item">
-           <a class="menu-link" href="/agent/role"><span
-             class="menu-bullet"><span
-              class="bullet bullet-dot"></span></span><span
-             class="menu-title">@Loc["Permissions"]</span></a>
+           <div class="menu-item">
+            <a class="menu-link" href="/agent/role"><span
+              class="menu-bullet"><span
+               class="bullet bullet-dot"></span></span><span
+              class="menu-title">@Loc["Permissions"]</span></a>
+           </div>
           </div>
          </div>
         </div>
        </div>
-      </div>
+      </AuthorizeView>
+      <AuthorizeView Roles="@RoleConstants.ContentRole">
+       <div class="menu-item me-0 me-lg-2">
+        <NavLink href="/agent/post">
+        <span class="menu-link">
+         <span class="menu-icon">
+          <i class="fas fa-code-commit fs-3"></i>
+         </span>
+         <span class="menu-title">@Loc["Posts"]</span>
+        </span>
+        </NavLink>
+       </div>
+      </AuthorizeView>
      </div>
     </div>
    </div>
@@ -237,7 +258,7 @@
           <AntiforgeryToken/>
           <input type="hidden" name="ReturnUrl" value=""/>
           <button type="submit" class="btn btn-sm btn-primary">
-           <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> @Loc["Sign out"] 
+           <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> @Loc["Sign out"]
           </button>
          </form>
         </div>

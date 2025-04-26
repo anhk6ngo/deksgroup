@@ -2,6 +2,8 @@
 
 public class AgentDto:AggregateRoot<Guid>, ICAgent
 {
+    public string? FileContent { get; set; }
+    public string? FileName { get; set; }
     public string? Code { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }
@@ -16,6 +18,8 @@ public class AgentDto:AggregateRoot<Guid>, ICAgent
 
 public interface ICAgent
 {
+    public string? FileContent { get; set; }
+    public string? FileName { get; set; }
     public string? Code { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }

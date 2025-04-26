@@ -7,7 +7,7 @@
     <Breadcrumb TextMuted="true">@Loc["Commission"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
-    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new CommissionDto(), 0)">
+    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(-1, 0)">
         <i class="fa fa-plus-square"></i>@Loc["Add new"]
     </button>
 </SectionContent>
@@ -34,23 +34,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in _items)
+                @foreach (var t in _items.WithIndex())
                 {
                     <tr>
                         <td>
                             <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
-                                    @onclick="@(() => FormAction(item, 1))">
+                                    @onclick="@(() => FormAction(t.index, 1))">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
-                                    @onclick="@(() => FormAction(item, 2))">
+                                    @onclick="@(() => FormAction(t.index, 2))">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
-                        <td>@_agents?.FirstOrDefault(w=>w.Id == $"{item.AgentId}".ToGuid())?.Name</td>
-                        <td>@item.Percent</td>
-                        <td>@item.From.ToDmy()</td>
-                        <td>@item.To.ToDmy()</td>
+                        <td>@_agents?.FirstOrDefault(w => w.Id == $"{t.item.AgentId}".ToGuid())?.Name</td>
+                        <td>@t.item.Percent</td>
+                        <td>@t.item.From.ToDmy()</td>
+                        <td>@t.item.To.ToDmy()</td>
                     </tr>
                 }
                 </tbody>
@@ -119,16 +119,22 @@
             await CallInitialDataTable();
         }
     }
+
     [JSInvokable]
     public void UpdateSelect2(string value, string controlId)
     {
         data!.AgentId = value;
         data!.Email = _agents!.FirstOrDefault(w => w.Id == $"{value}".ToGuid())?.Email;
     }
-    private async Task FormAction(CommissionDto item, int action)
+
+    private async Task FormAction(int index, int action)
     {
         data = new CommissionDto();
-        item.Adapt(data);
+        if (index >= 0)
+        {
+            _items![index].Adapt(data);
+        }
+
         iAction = action;
         Title = action switch
         {

@@ -12,7 +12,7 @@ public class TopUpController : BaseApiController
     {
         var results = await _mediator!.Send(new GetBalanceByUserQuery
         {
-            UserId = User.GetUserId(),
+            UserId = User.GetClaimByName("AgentId"),
         });
         return Ok(results);
     }
@@ -27,7 +27,8 @@ public class TopUpController : BaseApiController
 
         if (input.Data!.UserId.IsNullOrEmpty())
         {
-            input.Data.UserId = User.GetUserId();
+            input.Data.UserId = User.GetClaimByName("AgentId");
+            input.Data.DisplayName = User.GetClaimByName("DisplayName");
         }
 
         var result = await _mediator!.Send(new AddEditTopUpCommand()

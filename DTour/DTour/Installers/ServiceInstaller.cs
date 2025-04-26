@@ -28,6 +28,7 @@ namespace DTour.Installers
             {
                 sp.BaseAddress = new Uri($"{configuration["ApiInfo:Url"]}");
                 sp.DefaultRequestHeaders.Add("X-RailClick-Service-Token", $"{configuration["ApiInfo:Secret"]}");
+                sp.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0");
                 sp.Timeout = TimeSpan.FromMinutes(10);
             });
             services.AddHttpClient("RailOnline", sp =>
@@ -37,8 +38,8 @@ namespace DTour.Installers
                 sp.Timeout = TimeSpan.FromMinutes(10);
             });
             services.AddScoped<IHttpServiceClient, HttpServiceClient>();
-            var vnpConfigSection = configuration.GetSection("VnPayConfig");
-            services.Configure<VnPayConfig>(vnpConfigSection);
+            services.AddOptions<VnPayConfig>()
+                .BindConfiguration(nameof(VnPayConfig));
             services.AddLocalization();
         }
     }

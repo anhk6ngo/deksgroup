@@ -1,0 +1,501 @@
+﻿@page "/agent/post"
+@inject NavigationManager Navigation
+@attribute [Authorize(Roles = $"{RoleConstants.ContentRole}")]
+<PageTitle>@Loc["Content"]</PageTitle>
+<SectionContent SectionName="@NavConstants.TbLeft">
+    <Breadcrumb Slash="true"></Breadcrumb>
+    <Breadcrumb TextMuted="true">@Loc["Content"]</Breadcrumb>
+</SectionContent>
+<SectionContent SectionName="@NavConstants.TbRight">
+    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(-1, 0)">
+        <i class="fa fa-plus-square"></i>@Loc["Add new"]
+    </button>
+</SectionContent>
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<Card Title="@Loc["List of Content"]">
+    @if (_items == null || IsLoading)
+    {
+        <Loading/>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
+                <thead>
+                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                    <th>@Loc["Action"]</th>
+                    <th>@Loc["Title"]</th>
+                    <th>@Loc["Description"]</th>
+                    <th>@Loc["Kind"]</th>
+                    <th>@Loc["Category"]</th>
+                    <th>@Loc["Author"]</th>
+                    <th>@Loc["Tags"]</th>
+                    <th>@Loc["Publish Date"]</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var t in _items.WithIndex())
+                {
+                    <tr>
+                        <td>
+                            @if (t.item.PublicDate is null)
+                            {
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
+                                        @onclick="@(() => FormAction(t.index, 1))">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
+                                        @onclick="@(() => FormAction(t.index, 2))">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-primary"
+                                        @onclick="@(() => FormAction(t.index, 3))">
+                                    Publish
+                                </button>
+                            }
+                            else
+                            {
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-primary"
+                                        @onclick="@(() => FormAction(t.index, 4))">
+                                    Un-publish
+                                </button>
+                            }
+                        </td>
+                        <td>@t.item.Title</td>
+                        <td>@t.item.Description</td>
+                        <td>@(GetKindContent(t.item.Kind))</td>
+                        <td>@t.item.Category</td>
+                        <td>@t.item.Author</td>
+                        <td>@t.item.Tags</td>
+                        <td>@t.item.PublicDate?.ToString("dd-MMM-yyyy")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</Card>
+<CustomModal Title="@($"{Title} Content")" OnClickCallback="SaveData" SaveTitle="@Loc["Save Change"]"
+             CancelTitle="@Loc["Cancel"]" ModalClass="1">
+    <EditForm Model="data" class="form">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+        <ul class="nav nav-pills nav-pills-custom row position-relative mx-0 mb-9 w-lg-50">
+            <li class="nav-item col-3 mx-0 p-0">
+                <a class="nav-link active d-flex justify-content-center w-100 border-0 h-100"
+                   data-bs-toggle="pill"
+                   href="#tour_tab_1">
+                    <span class="nav-text text-gray-800 fw-bold fs-6 mb-3">
+                        Content
+                    </span>
+                    <span
+                        class="bullet-custom position-absolute z-index-2 bottom-0 w-100 h-4px bg-primary rounded"></span>
+                </a>
+            </li>
+            <li class="nav-item col-3 mx-0 p-0">
+                <a class="nav-link d-flex justify-content-center w-100 border-0 h-100" data-bs-toggle="pill"
+                   href="#tour_tab_2">
+                    <span class="nav-text text-gray-800 fw-bold fs-6 mb-3">
+                        Upload Media
+                    </span>
+                    <span
+                        class="bullet-custom position-absolute z-index-2 bottom-0 w-100 h-4px bg-primary rounded"></span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="tourTabContent">
+            <div class="tab-pane fade show active" id="tour_tab_1">
+                <div class="row mb-7">
+                    <div class="col-md-8">
+                        <label class="form-label">@Loc["Title"]</label>
+                        <InputText type="text" @bind-Value="@data!.Title" class="form-control maxlength"
+                                   maxlength="255"/>
+                        <ValidationMessage For="@(() => data.Title)"/>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex justify-content-evenly">
+                            <div class="form-check form-check-custom form-check-solid">
+                                <input class="form-check-input" type="radio" checked="@(data.Kind == 0)"
+                                       @onchange="@(() => data.Kind = 0)" id="gMethod"/>
+                                <label class="form-check-label" for="gMethod">
+                                    @Loc["DTour News"]
+                                </label>
+                            </div>
+                            <div class="form-check form-check-custom form-check-solid">
+                                <input class="form-check-input" type="radio" checked="@(data.Kind == 1)"
+                                       @onchange="@(() => data.Kind = 1)" id="gMethod1"/>
+                                <label class="form-check-label" for="gMethod1">
+                                    @Loc["Travel Guide"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="form-label required">@Loc["Description"]</label>
+                    <InputTextArea type="text" @bind-Value="@data!.Description" class="form-control maxlength"
+                               maxlength="500" rows="4"/>
+                    <ValidationMessage For="@(() => data.Description)"/>
+                </div>
+                <div class="row mb-7">
+                    <div class="col-md-4">
+                        <label class="form-label">@Loc["Author"]</label>
+                        <InputText type="text" @bind-Value="@data!.Author" class="form-control maxlength"
+                                   maxlength="255"/>
+                        <ValidationMessage For="@(() => data.Author)"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Loc["Tags"]</label>
+                        <InputText type="text" @bind-Value="@data!.Tags" class="form-control maxlength"
+                                   maxlength="255"/>
+                        <ValidationMessage For="@(() => data.Tags)"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Loc["Category"]</label>
+                        <InputText type="text" @bind-Value="@data!.Category" class="form-control maxlength"
+                                   maxlength="255"/>
+                        <ValidationMessage For="@(() => data.Category)"/>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <div id="post_content" name="post_content">
+                        @((MarkupString)$"{data.Content}")
+                    </div>
+                </div>
+                @if (IsLoading)
+                {
+                    <Loading Content="The system is processing..."/>
+                }
+                else
+                {
+                    <DetailTemplate TItem="MediaData" Items="data?.Medias" CaptionAdd="Add New Line"
+                                    OnClickCallback="() => { AddEditMediaLine(new MediaData(), 0); }"
+                                    HasScroll="false">
+                        <RowTemplate Context="item">
+                            <div class="row p-2 @(item.iIndex % 2 == 1 ? "bg-gray-200" : "")">
+                                <div class="col-md-8">
+                                    <label class="fs-6 fw-bold form-label">Path @(item.iIndex + 1)</label>
+                                    <input class="form-control maxlength" @bind="@item.data.Url"
+                                           maxlength="255"/>
+                                </div>
+                                <div class="col-md-2 mt-8">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                                <span class="btn btn-icon btn-danger"
+                                                      @onclick="() => AddEditMediaLine(item.data, 1)">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                        </div>
+                                        <div class="col-md-4">
+                                                <span class="btn btn-icon btn-warning"
+                                                      @onclick="() => AddEditMediaLine(item.data, 2)">
+                                                    <i class="fas fa-copy"></i>
+                                                </span>
+                                        </div>
+                                        <div class="col-md-4">
+                                                    <span class="btn btn-icon btn-light-info"
+                                                          @onclick="() => AddEditMediaLine(item.data, 3)">
+                                                        <i class="fas fa-upload"></i>
+                                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </RowTemplate>
+                    </DetailTemplate>
+                }
+            </div>
+            <div class="tab-pane fade" id="tour_tab_2">
+                <Upload IsLoading="IsLoading" BtnClass="btn-custom" IsLoadingFile="IsLoadingFile"
+                        OnChangeUpload="OnChangeLoadFile" OnUploadFileCallback="UploadFile" MultipleFiles="true"
+                        ShowDownload="false"/>
+                @if (_lstImages is { Count: > 0 })
+                {
+                    <div class="row g-3 g-lg-6 m-10">
+                        @foreach (var image in _lstImages)
+                        {
+                            var path = $"{baseUrl}img/content/{image}";
+                            <div class="col-md-2">
+                                <img class="w-125px h-125px" src="@path" alt="img"/>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </EditForm>
+</CustomModal>
+<CustomModal Title="Choose Images" HideSaveButton="true" ModalId="choose_image" AddClass="3" Backdrop="true"
+             ModalClass="3">
+    @if (_lstImages is { Count: > 0 })
+    {
+        <h4>Choose image</h4>
+        <div class="row g-3 g-lg-6 m-10">
+            @foreach (var image in _lstImages)
+            {
+                var path = $"{baseUrl}img/content/{image}";
+                <div class="col-md-2 text-center"
+                     @onclick="async () => {await SetImage(image); }">
+                    <img class="w-125px h-125px" src="@path" alt="img"/>
+                </div>
+            }
+        </div>
+    }
+</CustomModal>
+
+@code {
+    private List<string> _lstImages = [];
+    private List<PostDto>? _items;
+    private PostDto? data = new();
+    private int iAction { get; set; } = 0;
+    private string Title { get; set; } = "Add new";
+    private string baseUrl = "";
+    private FluentValidationValidator _fluentValidationValidator = default!;
+    private MediaData _tmpMediaSource = new();
+    private List<IBrowserFile> _loadedFiles = new();
+
+    private UploadCommandRequest _uploadRequest = new()
+    {
+        TypeUpload = 0,
+        Files = new List<UploadRequest>()
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        _items = await _httpService.GetAsync<List<PostDto>>($"{ShareEndpoints.Post}");
+        InitDataTable = true;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            baseUrl = Navigation.BaseUri;
+        }
+
+        if (InitDataTable)
+        {
+            InitDataTable = false;
+            await CallInitialDataTable();
+        }
+    }
+
+    [JSInvokable]
+    public void EditorCall(string id, string value)
+    {
+        data!.Content = value;
+        StateHasChanged();
+    }
+
+    private async Task FormAction(int index, int action)
+    {
+        data = new PostDto();
+        if (index >= 0)
+        {
+            _items![index].Adapt(data);
+        }
+        data.Medias ??= [];
+        if (action > 2)
+        {
+            IsLoading = true;
+            StateHasChanged();
+            data.PublicDate = action == 3 ? DateTime.UtcNow : null;
+            var result = await _httpService.PostAsync<ResultClient<Guid>>(ShareEndpoints.Post, new AddEditDataRequest<PostDto>()
+            {
+                Data = data!,
+                Action = ActionCommandType.Edit,
+            });
+            if (result.Succeeded)
+            {
+                var oFind = _items!.FirstOrDefault(w => w.Id == data!.Id);
+                if (oFind != null)
+                {
+                    oFind.PublicDate = data.PublicDate;
+                }
+            }
+            await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
+            IsLoading = false;
+            InitDataTable = true;
+            StateHasChanged();
+            return;
+        }
+        iAction = action;
+        Title = action switch
+        {
+            1 => "Edit",
+            2 => "Delete",
+            _ => "Add new"
+        };
+        if (action == 1)
+        {
+            _lstImages = [];
+            foreach (var sPath in data.Medias.Select(media => $"{media.Url}".Trim().ToLower()).Where(sPath => sPath.Length >= 4 && sPath[..4] != "http"))
+            {
+                _lstImages.Add(sPath);
+            }
+        }
+        await ToggleModal();
+        await SetMaxLength();
+        await SetEditor("post_content");
+    }
+
+    private async Task SaveData()
+    {
+        var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
+        if (!isValid) return;
+        IsLoading = true;
+        StateHasChanged();
+        var result = new ResultClient<Guid>();
+        switch (iAction)
+        {
+            case 2:
+                if (data != null)
+                {
+                    result = await _httpService.DeleteAsync<ResultClient<Guid>>($"{ShareEndpoints.Post}/{data.Id}");
+                    if (result.Succeeded)
+                    {
+                        _items?.Remove(data);
+                    }
+                }
+
+                break;
+            default:
+                result = await _httpService.PostAsync<ResultClient<Guid>>(ShareEndpoints.Post, new AddEditDataRequest<PostDto>()
+                {
+                    Data = data!,
+                    Action = iAction == 0 ? ActionCommandType.Add : ActionCommandType.Edit,
+                });
+                if (result.Succeeded)
+                {
+                    if (iAction == 0)
+                    {
+                        data!.Id = result.Data;
+                        _items?.Add(data);
+                    }
+                    else
+                    {
+                        var oFind = _items!.FirstOrDefault(w => w.Id == data!.Id);
+                        if (oFind != null)
+                        {
+                            data.Adapt(oFind);
+                        }
+                    }
+                }
+                break;
+        }
+
+        await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+        await ToggleModal();
+    }
+
+    private string GetKindContent(int iKind)
+    {
+        return iKind switch
+        {
+            1 => "Tip & trick",
+            _ => "News"
+        };
+    }
+
+    private async Task SetImage(string path)
+    {
+        _tmpMediaSource.Url = path;
+        await ToggleModal("#choose_image");
+    }
+
+    private void OnChangeLoadFile(InputFileChangeEventArgs e)
+    {
+        IsLoadingFile = true;
+        _loadedFiles.Clear();
+        foreach (var file in e.GetMultipleFiles(20))
+        {
+            try
+            {
+                _loadedFiles.Add(file);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        IsLoadingFile = false;
+    }
+
+    public async Task UploadFile(MouseEventArgs eventArgs)
+    {
+        IsLoading = true;
+        long maxFileSize = 1024 * 1024 * 100;
+        var upload = false;
+
+        foreach (var iFile in _loadedFiles)
+        {
+            try
+            {
+                var memoryStream = new MemoryStream();
+                await iFile.OpenReadStream(maxFileSize).CopyToAsync(memoryStream);
+                _uploadRequest.Files!.Add(new UploadRequest()
+                {
+                    Data = memoryStream.ToArray(),
+                    FileName = iFile.Name
+                });
+                upload = true;
+            }
+            catch (Exception ex)
+            {
+                await ShowAlert(ex.Message, 1);
+                return;
+            }
+        }
+
+        if (upload)
+        {
+            var results = await _httpService.PostAsync<List<UploadResult>>(ShareEndpoints.UpDown, _uploadRequest);
+            foreach (var uploadResult in results.Where(w => w.Uploaded && w.FileName.NotIsNullOrEmpty()))
+            {
+                _lstImages.Add($"{uploadResult.FileName}");
+            }
+        }
+
+        _uploadRequest.Files = new List<UploadRequest>();
+        IsLoading = false;
+    }
+
+    private void AddEditMediaLine(MediaData item, int iAction)
+    {
+        switch (iAction)
+        {
+            case 1:
+                data?.Medias?.Remove(item);
+                break;
+            case 2:
+                var newItem = new MediaData();
+                item.Adapt(newItem);
+                data?.Medias?.Add(newItem);
+                break;
+            case 3:
+                if (_lstImages is { Count: 0 })
+                {
+                    return;
+                }
+
+                _tmpMediaSource = item;
+                ToggleModal("#choose_image").GetAwaiter();
+                StateHasChanged();
+                break;
+            default:
+                if (data?.Medias is null)
+                {
+                    data!.Medias = [];
+                }
+                data?.Medias?.Add(item);
+                break;
+        }
+        StateHasChanged();
+    }
+}

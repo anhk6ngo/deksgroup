@@ -1,30 +1,30 @@
 ﻿@inherits SharedComponent.BasePage
 @inject IHttpServiceClient _httpService
-<div class="form position-relative bg-white px-3 px-sm-4 pt-4 mb-4 mb-sm-10">
+<div class="form position-relative @(Vertical ? "": "bg-white") px-3 px-sm-4 pt-4 mb-4 mb-sm-10">
     <div class="row g-4 position-relative">
         <div class="col-lg-3">
             <div class="btn-group w-100" data-kt-buttons="true">
-                <label
-                    class="btn btn-outline btn-active-success btn-color-muted @(iApp == 0 ? "active" : "")"
-                    data-kt-button="true">
-                    <input class="btn-check" type="radio" checked="@(iApp == 0)" @onchange="() => iApp =0"/>
-                    @Loc["Air"]
-                </label>
+                @* <label *@
+                @*     class="btn btn-outline btn-active-success btn-color-muted @(iApp == 0 ? "active" : "")" *@
+                @*     data-kt-button="true"> *@
+                @*     <input class="btn-check" type="radio" checked="@(iApp == 0)" @onchange="() => iApp =0"/> *@
+                @*     @Loc["Ticket"] @Loc["Air"] *@
+                @* </label> *@
                 <label
                     class="btn btn-outline btn-active-success btn-color-muted @(iApp == 1 ? "active" : "")"
                     data-kt-button="true">
                     <input class="btn-check" type="radio" checked="@(iApp == 1)" @onchange="() => iApp =1"/>
-                    @Loc["Train"]
+                    @Loc["Ticket"] @Loc["Train"]
                 </label>
-                <label
-                    class="btn btn-outline btn-active-success btn-color-muted @(iApp == 2 ? "active" : "")"
-                    data-kt-button="true">
-                    <input class="btn-check" type="radio" checked="@(iApp == 2)" @onchange="() => iApp =2"/>
-                    @Loc["Tour"]
-                </label>
+                @* <label *@
+                @*     class="btn btn-outline btn-active-success btn-color-muted @(iApp == 2 ? "active" : "")" *@
+                @*     data-kt-button="true"> *@
+                @*     <input class="btn-check" type="radio" checked="@(iApp == 2)" @onchange="() => iApp =2"/> *@
+                @*     @Loc["Ticket"] @Loc["Tour"] *@
+                @* </label> *@
             </div>
         </div>
-        <div class="col-lg-3 ms-auto">
+        <div class="col-lg-@(Vertical ? "9": "3") ms-auto">
             <div class="btn-group w-100" data-kt-buttons="true">
                 <label
                     class="btn btn-outline btn-active-primary btn-color-muted @(iTripType == 0 ? "active" : "")"
@@ -42,12 +42,12 @@
                 </label>
             </div>
         </div>
-        <div class="col-lg-3 ms-auto">
+        <div class="col-lg-@(Vertical ? "6": "3") ms-auto">
             <input @bind="_dRange" class="form-control bg-white" data-control="date-picker"
                    id="_dateInput"/>
 
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-@(Vertical ? "6": "3")">
             <div class="form-control-border form-control-transparent form-fs-md d-flex w-100">
                 <div class="dropdown me-2">
                     <input type="text" class="form-control"
@@ -114,10 +114,10 @@
         </div>
         <div class="col-lg-12 mb-6">
             <div class="row g-4">
-                <div class="col-md-6 col-lg-5 position-relative">
+                <div class="col-md-6 col-lg-@(Vertical ? "12": "5") position-relative">
                     <div
-                        class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-6">
-                        <label class="form-label mb-3">
+                        class="form-border-transparent form-fs-lg @(Vertical ? "border border-white": "bg-light") rounded-3 h-100 p-6">
+                        <label class="form-label mb-3 @(Vertical ? "text-white": "")">
                             <i class="ki-duotone ki-geolocation text-info fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
@@ -126,9 +126,8 @@
                             <input type="text" class="form-control form-control-lg bg-light-primary px-10"
                                    placeholder="@Loc["From: City, Airport, Station"]"
                                    @bind:event="oninput" @bind="_Dep" @onkeyup="DepKeyHandler"
-                                   data-kt-menu-trigger="click"
-                                   data-kt-menu-placement="bottom-start" autocomplete="off"
-                                   aria-autocomplete="none"/>
+                                   autocomplete="off" aria-autocomplete="none" data-bs-auto-close="outside"
+                                   data-bs-toggle="dropdown" id="_depInput"/>
                             <div
                                 class="dropdown-menu w-auto fw-bold py-3"
                                 data-kt-menu="true" id="dep_menu">
@@ -196,7 +195,7 @@
                             }
                         </div>
                     </div>
-                    <div class="btn-flip-icon mt-3 mt-md-0">
+                    <div class="btn-flip-icon@(Vertical ? "-v": "") mt-3 mt-md-0">
                         <button class="btn btn-icon btn-light-warning btn-circle shadow mb-0"
                                 @onclick="ChangeRoute">
                             <i
@@ -204,10 +203,10 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-5">
+                <div class="col-md-6 col-lg-@(Vertical ? "12": "5")">
                     <div
-                        class="form-fs-lg bg-light rounded-3 h-100 p-6">
-                        <label class="form-label mb-3">
+                        class="form-fs-lg @(Vertical ? "border border-white": "bg-light") rounded-3 h-100 p-6">
+                        <label class="form-label mb-3 @(Vertical ? "text-white": "")">
                             <i class="ki-duotone ki-send text-success fs-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
@@ -285,13 +284,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 d-flex align-items-center">
-                    <button class="btn btn-lg btn-custom w-100" @onclick="SearchTicket">@Loc["Find tickets"]</button>
+                <div class="col-lg-@(Vertical ? "12": "2") d-flex align-items-center">
+                    <button class="th-btn style1 th-icon w-100" @onclick="SearchTicket">@Loc["Find tickets"]</button>
                 </div>
             </div>
         </div>
     </div>
-    <a href="/get-ticket-by-pnr" class="fs-1">@Loc["Download Tickets by Booking code"]</a>
+    <a href="/get-ticket-by-pnr" class="@(Vertical ? "text-white": "")">@Loc["Download Tickets by Booking code"]</a>
 </div>
 
 @code {
@@ -312,6 +311,8 @@
     private List<RailLocationOnline> _filterArrcities = [];
     public List<RailStation> DefaultCities { get; set; } = [];
     public RailResult<List<RailStationList>> _stationsResult = new();
+    [Parameter]
+    public bool Vertical { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {

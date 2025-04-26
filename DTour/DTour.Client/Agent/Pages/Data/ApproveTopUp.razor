@@ -1,5 +1,6 @@
 ﻿@page "/agent/approve-top-up"
 <PageTitle>@Loc["Approve Top-up"]</PageTitle>
+@attribute [Authorize(Roles = RoleConstants.AccountingRole)]
 <SectionContent SectionName="@NavConstants.TbLeft">
     <Breadcrumb Slash="true"></Breadcrumb>
     <Breadcrumb>@Loc["Approve Top-up"]</Breadcrumb>
@@ -10,11 +11,11 @@
 }
 
 <Card Title="@Loc["List of Request Top-up"]">
-    <ToolbarRight>
-        <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new TopUpDto(), 0)">
-            <i class="fa fa-plus-square"></i>@Loc["Add new"]
-        </button>
-    </ToolbarRight>
+    @* <ToolbarRight> *@
+    @*     <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new TopUpDto(), 0)"> *@
+    @*         <i class="fa fa-plus-square"></i>@Loc["Add new"] *@
+    @*     </button> *@
+    @* </ToolbarRight> *@
     <ChildContent>
         @if (_items == null || IsLoading)
         {
@@ -34,23 +35,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in _items)
+                    @foreach (var t in _items.WithIndex())
                     {
                         <tr>
                             <td>
                                 <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
-                                        @onclick="(e) => FormAction(item, 1)">
+                                        @onclick="(e) => FormAction(t.index, 1)">
                                     <i class="fas fa-check-circle"></i>
                                 </button>
                                 <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
-                                        @onclick="@(() => FormAction(item, 2))">
+                                        @onclick="@(() => FormAction(t.index, 2))">
                                     <i class="fas fa-cancel"></i>
                                 </button>
+                                @if (t.item.FileContent.NotIsNullOrEmpty())
+                                {
+                                    <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-warning ms-2"
+                                            @onclick="@(() => FormAction(t.index, 5))">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                }
                             </td>
-                            <td>@item.RequestDate.ToLocalTime().ToDmy()</td>
-                            <td>@item.DisplayName</td>
-                            <td>@item.RequestAmount.ToString("N2")</td>
-                            <td class="w-50">@item.Note</td>
+                            <td>@t.item.RequestDate.ToLocalTime().ToDmy()</td>
+                            <td>@t.item.DisplayName</td>
+                            <td>@t.item.RequestAmount.ToString("N2")</td>
+                            <td class="w-25">@t.item.Note</td>
                         </tr>
                     }
                     </tbody>
@@ -79,9 +87,10 @@
                 <select class="form-select bg-light-warning" data-control="select2" data-id="config"
                         data-dropdown-parent="#@UiConstants.GetModalNameDefault">
                     <option value="">Select Item</option>
-                    @foreach (var iUser in SelectUsers)
+                    @foreach (var iUser in _agents)
                     {
-                        <option value="@iUser.id" selected="@(iUser.id == data.UserId)">@iUser.text</option>
+                        <option value="@iUser.Id"
+                                selected="@($"{iUser.Id}" == data.UserId)">@iUser.Code @iUser.Name</option>
                     }
                 </select>
             </div>
@@ -109,7 +118,7 @@
     private TopUpDto? data = new();
     private int iAction { get; set; } = 0;
     private string Title { get; set; } = "Approve Top-up";
-    private List<RoleUserDto> SelectUsers = new();
+    private List<AgentDto> _agents = new();
     private FluentValidationValidator _fluentValidationValidator = default!;
     [CascadingParameter] private UserInfo? ShareUserInfo { get; set; }
 
@@ -121,7 +130,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        SelectUsers = await _httpService.GetAsync<List<RoleUserDto>>($"{ShareEndpoints.Role}/By?action=0&claimType={DisplayConstants.Full}");
+        _agents = await _httpService.GetAsync<List<AgentDto>>($"{ShareEndpoints.Agent}");
         await GetData();
     }
 
@@ -145,8 +154,17 @@
         StateHasChanged();
     }
 
-    private async Task FormAction(TopUpDto item, int action)
+    private async Task FormAction(int index, int action)
     {
+        var item = _items![index];
+        if (action == 5)
+        {
+            if (item.FileContent.IsNullOrEmpty()) return;
+            var content = Convert.FromBase64String(item.FileContent!);
+            await BlazorDownloadFile(item.FileName, "application/octet-stream", content);
+            return;
+        }
+
         data = new TopUpDto();
         item.Adapt(data);
         iAction = action;
@@ -159,7 +177,8 @@
         switch (action)
         {
             case 0:
-                data.UserId = SelectUsers[0].id;
+                data.UserId = $"{_agents[0].Id}";
+                data.DisplayName = _agents[0].Name;
                 break;
             default:
                 data.ApproveAmount = data.RequestAmount;
@@ -174,6 +193,7 @@
     public void UpdateSelect2(string value, string controlId)
     {
         data!.UserId = value;
+        data.DisplayName = _agents.FirstOrDefault(w => w.Id.ToString() == value)?.Name;
     }
 
     private async Task SaveData()

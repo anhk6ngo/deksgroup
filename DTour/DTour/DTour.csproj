@@ -11,128 +11,15 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Libraries\SharedKernel\SharedKernel.csproj" />
     <ProjectReference Include="..\DTour.Client\DTour.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\AccessDenied.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ConfirmEmail.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ConfirmEmailChange.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ExternalLogin.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ForgotPassword.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ForgotPasswordConfirmation.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\InvalidPasswordReset.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\InvalidUser.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Lockout.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Login.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\LoginWith2fa.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\LoginWithRecoveryCode.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\ChangePassword.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\DeletePersonalData.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\Disable2fa.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\Email.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\EnableAuthenticator.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\ExternalLogins.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\GenerateRecoveryCodes.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\Index.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\PersonalData.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\ResetAuthenticator.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\SetPassword.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\TwoFactorAuthentication.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Manage\_Imports.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\Register.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\RegisterConfirmation.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ResendEmailConfirmation.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ResetPassword.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\ResetPasswordConfirmation.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Pages\_Imports.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Shared\ExternalLoginPicker.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Shared\ManageLayout.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Shared\ManageNavMenu.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Shared\ShowRecoveryCodes.razor" />
-    <_ContentIncludedByDefault Remove="Components\Account\Shared\StatusMessage.razor" />
-    <_ContentIncludedByDefault Remove="Components\App.razor" />
-    <_ContentIncludedByDefault Remove="Components\Pages\Error.razor" />
-    <_ContentIncludedByDefault Remove="Components\_Imports.razor" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\fontawesome.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\magnific-popup.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\style.bundle.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\style.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\sweetalert2.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\swiper-bundle.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\bootstrap.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\circle-progress.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\gsap.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\imagesloaded.pkgd.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\isotope.pkgd.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\jquery-3.6.0.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\jquery-ui.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\jquery.counterup.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\jquery.magnific-popup.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\main.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\matter.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\matterjs-custom.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\nice-select.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\sweetalert2.all.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\swiper-bundle.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\fa-brands-400.woff2" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\fa-light-300.woff2" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\fa-regular-400.woff" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\fa-regular-400.woff2" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\fa-solid-900.woff2" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\icomoon.eot" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\icomoon.svg" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\icomoon.ttf" />
-    <_ContentIncludedByDefault Remove="wwwroot\webfonts\icomoon.woff" />
+    <Folder Include="wwwroot\img\content\" />
   </ItemGroup>
 
 </Project>

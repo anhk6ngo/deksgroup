@@ -7,7 +7,7 @@
     <Breadcrumb TextMuted="true">@Loc["Currency"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
-    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new CurrencyDto(), 0)">
+    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(-1, 0)">
         <i class="fa fa-plus-square"></i>@Loc["Add new"]
     </button>
 </SectionContent>
@@ -32,21 +32,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in _items)
+                @foreach (var t in _items.WithIndex())
                 {
                     <tr>
                         <td>
                             <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
-                                    @onclick="@(() => FormAction(item, 1))">
+                                    @onclick="@(() => FormAction(t.index, 1))">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
-                                    @onclick="@(() => FormAction(item, 2))">
+                                    @onclick="@(() => FormAction(t.index, 2))">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
-                        <td>@item.Code</td>
-                        <td>@item.Name</td>
+                        <td>@t.item.Code</td>
+                        <td>@t.item.Name</td>
                     </tr>
                 }
                 </tbody>
@@ -93,10 +93,13 @@
         }
     }
 
-    private async Task FormAction(CurrencyDto item, int action)
+    private async Task FormAction(int index, int action)
     {
         data = new CurrencyDto();
-        item.Adapt(data);
+        if (index >= 0)
+        {
+            _items![index].Adapt(data);
+        }
         iAction = action;
         Title = action switch
         {

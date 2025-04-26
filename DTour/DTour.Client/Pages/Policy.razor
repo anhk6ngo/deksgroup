@@ -1,0 +1,296 @@
+﻿@page "/policy/{id?}"
+<div class="breadcumb-wrapper background-image" style="background-image: url('img/bg/policy_header.jpg')">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">@Loc["Policy"]</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="/">Home</a></li>
+                <li>@Loc[(Id.IsNullOrEmpty() ? "Policy payment - security" : "Policy delivery")]</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="space">
+    <div class="container shape-mockup-wrap">
+        @if (Id.IsNullOrEmpty())
+        {
+            <div class="page-content d-block mb-30">
+                <p class="box-text mb-30">
+                    Website này thuộc quyền sở hữu và quản lý của Công ty cổ phần du lịch và lữ hành DEKS AIR Việt Nam.
+                    Việc quý khách truy cập và sử dụng website này có nghĩa là quý khách đã chấp thuận các điều khoản và
+                    điều kiện đề ra sau đây. Do vậy đề nghị quý khách đọc và nghiên cứu kỹ trước khi sử dụng tiếp
+                </p>
+                <h1 class="text-center fs-4hx">Thanh toán</h1>
+                <p class="box-text mb-30">
+                    Khi đăng ký, quý khách vui lòng cung cấp đầy đủ thông tin và đóng một khoản tiền cọc để giữ chỗ. Số
+                    tiền cọc khác nhau tùy theo chương trình mà quý khách tùy chọn, số tiền còn lại sẽ thanh toán trước
+                    ngày khởi hành là 10 ngày làm việc (có thể thay đổi phụ thuộc vào gói dịch vụ mà Quý khách đăng ký
+                    mua), có 3 hình thức thanh toán:
+                </p>
+                <h2 class="box-title">1. Thanh toán tiền mặt tại văn phòng của DTour</h2>
+                <h4 class="box-title">Địa chỉ:</h4>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Hà Nội: Tầng 4, 28 Tăng Bạt Hổ, Q. Hai Bà Trưng.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> TP HCM: Tầng 3, toà nhà Thiên Sơn, 5 Nguyễn Gia
+                        Thiều, Quận 3.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Đà Nẵng: 497 Điện Biên Phủ, Phường Thanh Khê Đông ,
+                        Quận Thanh Khê.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Phòng 1201, Tầng 12, 309 Phố Pitt, Sydney, Úc.
+                    </li>
+                </div>
+                <h4 class="box-title">Điện thoại:</h4>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Hà Nội: 84 243 820 2626.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Tp. Hồ Chí Minh: 8428 3820 2525.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Đà Nẵng: 84 2363 566357.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Sydney: 1300 309 117.
+                    </li>
+                </div>
+                <p>
+                    Email: sale@dtour.vn<br/>
+                    Nhân viên công ty sẽ trực tiếp thu phí theo đăng ký mua hàng của Quý khách.<br/>
+                    Lưu ý: Quý khách kiểm tra giao dịch cần thận trước khi rời đi.
+                </p>
+                <h2 class="box-title">2. Chuyển khoản vào tài khoản của Dtour</h2>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Tên tài khoản: Công ty cổ phần dịch vụ Deks Air Việt Nam.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Số tài khoản: 19039926898021.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Mở tại: Ngân hàng TMCP Kỹ Thương Việt Nam – Chi nhánh: Hà
+                        Thành.
+                    </li>
+                </div>
+                <p>
+                    Nội dung chuyển khoản: [Mã đơn hàng] [số điện thoại đặt hàng]<br/>
+                    Việc thanh toán xem là hoàn tất khi Dtour.vn nhận được đủ tiền tour trước ngày khởi hành hoặc theo
+                    hợp đồng thỏa thuận giữa 2 bên. Bất kỳ việc thanh toán chậm trễ dẫn đến việc hủy dịch vụ không thuộc
+                    trách nhiệm của Dtour.vn
+                </p>
+                <h2 class="box-title">3. Thanh toán trực tuyến</h2>
+                <p>Khách hàng có thể thanh toán trực tuyến khi đặt tour trên website DTour thông qua ví điện tử Momo và
+                    VNPAY. Tất cả giao dịch được thực hiện thông qua cổng thanh toán trung gian được bảo mật và mã hóa
+                    theo tiêu chuẩn PCI DSS</p>
+                <h2 class="box-title">4. Chính sách thay đổi, hoàn, huỷ tour</h2>
+                <p>Nếu quý khách muốn thay đổi thông tin đặt tour, vui lòng liên hệ qua hotline:</p>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Hà Nội: 84 243 820 2626.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Tp. Hồ Chí Minh: 8428 3820 2525.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Đà Nẵng: 84 2363 566357.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet bullet-dot me-5"></span> Văn phòng Sydney: 1300 309 117.
+                    </li>
+                </div>
+                <p>Chúng tôi sẽ hỗ trợ quý khách một cách tốt nhất, tuy nhiên chúng tôi không đảm bảo mọi yêu cầu thay
+                    đổi sẽ được thực hiện. Xin xem những thông tin ghi chú sau:</p>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Điều kiện hủy và thay đổi sẽ áp dụng tùy theo từng chương
+                        trình tour hoặc theo xác nhận dịch vụ của Công ty gửi cho Quý khách.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Trường hợp tour bị hủy do hoặc thay đổi ngày khởi hành chuyến
+                        du lịch, chúng tôi sẽ báo ngay cho quý khách biết sau khi nhận được thông tin và hỗ trợ quý
+                        khách thay đổi hoặc hoàn lại tiền nếu quý khách yêu cầu hủy tour.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Trường hợp bất khả kháng: Nếu chương trình du lịch bị hủy bỏ
+                        hoặc thay đổi bởi lý do bất khả kháng (chiến tranh, thiên tai, khủng bố…),Dtour.vn có trách
+                        nhiệm hỗ trợ quý khách tối đa để xử lý các vấn đề phát sinh, nhưng không có nghĩa vụ phải bồi
+                        thường thiệt hại.
+                    </li>
+                </div>
+                <h1 class="text-center fs-4hx">Chính sách bảo mật</h1>
+                <h2 class="box-title">1. Mục đích và phạm vi thu thập</h2>
+                <p>Việc thu thập dữ liệu chủ yếu trên website Dtour.vn bao gồm: họ tên, email, điện thoại. Đây là các
+                    thông tin cần thiết cần thành viên cung cấp bắt buộc để dtour.vn liên hệ xác nhận khi khách hàng sử
+                    dụng dịch vụ trên website nhằm đảm bảo quyền lợi cho các khách hàng.
+                    Các khách hàng sẽ tự chịu trách nhiệm về bảo mật và lưu giữ mọi hoạt động sử dụng dịch vụ dưới tên
+                    và email của mình. Ngoài ra khách hàng có trách nhiệm thông báo kịp thời cho dtour.vn về những hành
+                    vi sử dụng trái phép, lạm dụng, vi phạm bảo mật, lưu giữ tên và mật khẩu của bên thứ ba để có biện
+                    pháp giải quyết phù hợp.
+                </p>
+                <h2 class="box-title">2. Phạm vi sử dụng thông tin</h2>
+                <p>Các thông tin cá nhân được khách hàng cung cấp có thể dùng vào các mục đích sau:</p>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Cung cấp các dịch vụ đến khách hàng.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Gửi các thông báo về các hoạt động trao đổi thông tin giữa
+                        khách hàng và Dtour.vn.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Ngăn ngừa các hoạt động phá lộ thông tin cá nhân hoặc các hoạt
+                        động giả mạo khách hàng.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Liên lạc và giải quyết với khách hàng trong những trường hợp
+                        đặc biệt. Không sử dụng thông tin cá nhân của khách hàng ngoài mục đích xác nhận và liên hệ có
+                        liên quan đến giao dịch tại dtour.vn.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Trong trường hợp có yêu cầu của pháp luật: Dtour.vn có trách
+                        nhiệm hợp tác cung cấp thông tin cá nhân của khách hàng khi có yêu cầu từ cơ quan tư pháp bao
+                        gồm: Viện kiểm sát, tòa án, cơ quan công an điều tra liên quan đến hành vi vi phạm pháp luật nào
+                        đó của khách hàng. Ngoài ra, không ai có quyền xâm phạm vào thông tin cá nhân của khách hàng.
+                    </li>
+                </div>
+                <h2 class="box-title">3. Thời gian lưu giữ thông tin</h2>
+                <p>Dữ liệu cá nhân của khách hàng sẽ được lưu trữ cho đến khi có yêu cầu hủy bỏ hoặc tự thành viên đăng
+                    nhập và thực hiện hủy bỏ. Còn lại trong mọi trường hợp thông tin cá nhân của khách hàng sẽ được bảo
+                    mật</p>
+                <h2 class="box-title">4. Những người hoặc tổ chức có thể được tiếp cận với thông tin đó</h2>
+                <p>Khách hàng đồng ý rằng: trong trường hợp cần thiết, các cơ quan/tổ chức/cá nhân sau có quyền được
+                    tiếp cận và thu thập các thông tin của mình, bao gồm:</p>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Ban Quản Trị Dtour.vn.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Cơ quan nhà nước có thẩm quyền (trong trường hợp có yêu cầu
+                        của pháp luật).
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Bên khiếu nại chứng minh được hành vi vi phạm của khách hàng
+                        (nếu có).
+                    </li>
+                </div>
+                <h2 class="box-title">5. Địa chỉ của đơn vị thu thập và quản lý thông tin cá nhân</h2>
+                <p>Công ty CP Dịch vụ Deks Air Việt Nam</p>
+                <p>Địa chỉ: Tầng 4, 28 Tăng Bạt Hổ, Q. Hai Bà Trưng</p>
+                <p>Điện thoại: +8424 3820 2828</p>
+                <p>Email: sale@dtour.vn</p>
+                <h2 class="box-title">6. Phương tiện và công cụ</h2>
+                <p>Khách hàng có quyền tự kiểm tra, cập nhật, điều chỉnh hoặc hủy bỏ thông tin cá nhân của mình hoặc yêu
+                    cầu dtour.vn thực hiện việc này.<br/>
+                    Khách hàng có quyền gửi khiếu nại về việc lộ thông tin cá nhân cho bên thứ 3 đến ban quản trị của
+                    Dtour.vn. Khi tiếp nhận những phản hồi này, dtour.vn sẽ xác nhận lại thông tin, phải có trách nhiệm
+                    trả lời lý do và hướng dẫn khách hàng khôi phục và bảo mật lại thông tin.<br/>
+                    Email: sale@dtour.vn
+                </p>
+                <h2 class="box-title">7. Cam kết bảo mật thông tin cá nhân khách hàng</h2>
+                <p>Thông tin cá nhân của khách hàng trên dtour.vn được cam kết bảo mật tuyệt đối theo chính sách bảo vệ
+                    thông tin cá nhân của khách hàng. Việc thu nhập và sử dụng thông tin của mỗi khách hàng chỉ được
+                    thực hiện khi có sự đồng ý của khách hàng đó trừ những trường hợp pháp luật quy định khác.<br/>
+                    Không sử dụng, không chuyển giao, cung cấp hay tiết lộ cho bên thứ 3 nào về thông tin cá nhân của
+                    khách hàng khi không có sự cho phép đồng ý từ thành viên.<br/>
+                    Trong trường hợp máy chủ lưu lưu trữ thông tin bị hacker tấn công dẫn đến mất mát dữ liệu cá nhân
+                    của khách hàng, Dtour.vn sẽ có trách nhiệm thông báo vụ việc cho cơ quan chức năng điều tra xử lý
+                    kịp thời và thông báo cho thành viên được biết.<br/>
+                    Bảo mật tuyệt đối mọi thông tin giao dịch trực tuyến của khách hàng bao gồm thông tin hóa đơn kế
+                    toán chứng từ số hóa tại khu vực dữ liệu trung tâm an toàn cấp 1 của dtour.vn.<br/>
+                    Ban quản lý dtour.vn yêu cầu các cá nhân khi đăng ký/ mua hàng phải cung cấp đầy đủ thông tin cá
+                    nhân có liên quan như: Họ và tên, email, số điện thoại và chịu trách nhiệm về tính pháp lý của những
+                    thông tin trên. Ban quản lý dtour.vn không chịu trách nhiệm cũng như không giải quyết mọi khiếu nại
+                    có liên quan đến quyền lợi của khách hàng đó nếu xét thấy tất cả thông tin cá nhân của khách hàng đó
+                    cung cấp khi đăng ký ban đầu là không chính xác.
+                </p>
+                <h2 class="box-title">8. Cơ chế tiếp nhận và giải quyết khiếu nại</h2>
+                <p>
+                    Thông tin cá nhân của khách hàng được cam kết bảo mật tuyệt đối theo chính sách bảo vệ thông tin cá
+                    nhân. Việc thu thập và sử dụng thông tin của mỗi khách hàng chỉ được thực hiện khi có sự đồng ý của
+                    khách hàng đó trừ những trường hợp pháp luật có quy định khác.<br/>
+                    Không sử dụng, không chuyển giao, cung cấp hay tiết lộ cho bên thứ 3 nào về thông tin cá nhân của
+                    thành viên khi không có sự cho phép đồng ý từ khách hàng.<br/>
+                    Trong trường hợp máy chủ lưu trữ thông tin bị hacker tấn công dẫn đến mất mát dữ liệu cá nhân của
+                    khách hàng, chúng tôi sẽ có trách nhiệm thông báo vụ việc cho cơ quan chức năng điều tra xử lý kịp
+                    thời và thông báo cho khách hàng được biết.<br/>
+                    Ban quản lý yêu cầu các cá nhân khi đăng ký/mua hàng phải cung cấp đầy đủ thông tin cá nhân có liên
+                    quan như: Họ và tên, email, điện thoại, và chịu trách nhiệm về tính pháp lý của những thông tin
+                    trên. Ban quản lý dtour.vn không chịu trách nhiệm cũng như không giải quyết mọi khiếu nại có liên
+                    quan đến quyền lợi của khách hàng đó nếu xét thấy tất cả thông tin cá nhân của thành viên đó cung
+                    cấp khi đăng ký ban đầu là không chính xác.<br/>
+                    Khách hàng có quyền gửi khiếu nại về việc lộ thông tin cá nhân cho bên thứ 3 đến ban quản trị của
+                    Dtour.vn đến địa chỉ công ty:
+                </p>
+                <p class="fw-bold">Công ty Cổ phần Dịch vụ Deks Air Việt Nam</p>
+                <div class="d-flex flex-column">
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Địa chỉ: Tầng 4, 28 Tăng Bạt Hổ, Q. Hai Bà Trưng.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Điện thoại: +8424 3820 2828.
+                    </li>
+                    <li class="d-flex align-items-center py-2">
+                        <span class="bullet me-5"></span> Email: sale@dtour.vn.
+                    </li>
+                </div>
+                <p>Công ty có trách nhiệm thực hiện các biện pháp kỹ thuật, nghiệp vụ để xác minh các nội dung được phản
+                    ánh.</p>
+                <h2 class="box-title">9. Bản quyền</h2>
+                <p>Tất cả nội dung và hình ảnh trên website Dtour.vn đều không được sao chép dưới bất kỳ hình thức nào
+                    mà chỉ được sử dụng trên trang web của chúng tôi.</p>
+            </div>
+        }
+        else
+        {
+            <div class="page-content d-block mb-30">
+                <h2 class="box-title">1. Phương Thức Cung Ứng Dịch Vụ</h2>
+                <p>Chúng tôi cung cấp các phương thức cung ứng dịch vụ như sau:<br/>
+                    Đặt tour trực tuyến: Khách hàng có thể đặt tour trực tiếp trên website và nhận xác nhận qua
+                    email/sms sau khi thanh toán thành công.<br/>
+                    Tư vấn và đặt tour qua hotline: Đội ngũ tư vấn viên sẽ hỗ trợ khách hàng lựa chọn và đặt tour phù
+                    hợp qua điện thoại.<br/>
+                    Đặt tour trực tiếp tại văn phòng của DTour: Đội ngũ tư vấn viên sẽ hỗ trợ khách hàng lựa chọn và đặt
+                    tour và xác nhận dịch vụ ngay tại văn phòng.
+                </p>
+                <h2 class="box-title">2. Thời Hạn Ước Tính Cho Việc Cung Ứng Dịch Vụ</h2>
+                <p>Thời gian xác nhận dịch vụ phụ thuộc vào từng loại tour và khoảng cách địa lý:<br/>
+                    Tour trong nước: Xác nhận trong vòng 48 giờ<br/>
+                    Tour quốc tế: Xác nhận trong vòng 3 – 5 ngày làm việc, tùy thuộc vào thủ tục visa và các yếu tố
+                    khác.
+                </p>
+                <h2 class="box-title">3. Giới Hạn Địa Lý Cho Việc Cung Ứng Dịch Vụ</h2>
+                <p>
+                    Chúng tôi cung cấp dịch vụ du lịch trong nước và quốc tế theo danh sách tour có sẵn trên
+                    website<br/>
+                    Dịch vụ tour trong nước và quốc tế được thiết kế riêng cho khách hàng sẽ theo thỏa thuận cụ thể
+                    riêng với khách hàng.
+                </p>
+                <h2 class="box-title">4. Trách Nhiệm Của Công Ty Du Lịch</h2>
+                <p>Chúng tôi có trách nhiệm cung cấp đầy đủ các dịch vụ bao gồm trong gói dịch vụ cung ứng cho khách
+                    hàng.<br/>
+                    Khách hàng có quyền kiểm tra kỹ thông tin trước khi khởi hành và yêu cầu điều chỉnh nếu có sai
+                    sót.<br/>
+                    Trường hợp có vấn đề phát sinh về lịch trình, chúng tôi sẽ hỗ trợ khách hàng điều chỉnh hoặc hoàn
+                    phí theo chính sách được nêu ra trong thỏa thuận với khách hàng đối trong từng gói dịch vụ cụ thể
+                </p>
+                <h2 class="box-title">5. Xử Lý Trường Hợp Chậm Trễ</h2>
+                <p>Nếu có bất kỳ sự chậm trễ nào trong việc cung ứng dịch vụ bởi lý do bất khả kháng (chiến tranh, thiên
+                    tai, khủng bố…), Dtour có trách nhiệm thông báo kịp thời và hỗ trợ quý khách tối đa để xử lý các vấn
+                    đề phát sinh, nhưng không có nghĩa vụ phải bồi thường thiệt hại.<br/>
+                    Chúng tôi cam kết hỗ trợ khách hàng giải quyết các vấn đề phát sinh một cách nhanh chóng và minh
+                    bạch để đảm bảo trải nghiệm du lịch tốt nhất.
+                </p>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? Id { get; set; }
+}

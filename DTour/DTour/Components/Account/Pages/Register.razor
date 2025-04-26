@@ -58,6 +58,15 @@
         <label for="confirm-password">@Loc["Confirm Password"]</label>
         <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
     </div>
+    <div class="row mb-3">
+        <div class="form-check form-switch form-check-custom form-check-warning form-check-solid me-6">
+            <input class="form-check-input" type="checkbox"
+                   @bind="@Input.IsAccounting" id="flexSwitchShareRoom"/>
+            <label class="form-check-label" for="flexSwitchShareRoom">
+                @Loc["Is Accounting"]
+            </label>
+        </div>
+    </div>
     <button type="submit" class="w-100 btn btn-lg btn-custom">@Loc["Register"]</button>
 </EditForm>
 <SectionContent SectionName="@NavConstants.TopRight">
@@ -100,6 +109,10 @@
 
         Logger.LogInformation("User created a new account with password.");
         await UserManager.AddClaimAsync(user, new Claim("DisplayName", Input.DisplayName));
+        if (Input.IsAccounting)
+        {
+            await UserManager.AddToRoleAsync(user, RoleConstants.AgentAccountingRole);
+        }
         var code = await UserManager.GenerateEmailConfirmationTokenAsync(user);
         await UserManager.ConfirmEmailAsync(user, code);
         RedirectManager.RedirectTo(ReturnUrl);
@@ -148,5 +161,6 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = "";
+        public bool IsAccounting { get; set; } = false;
     }
 }

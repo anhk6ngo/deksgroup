@@ -14,6 +14,15 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
         var result = loadFile!.LoadFileAsync<RailResult<List<RailStationList>>>("station");
         return Ok(result);
     }
+    [HttpGet("content")]
+    public IActionResult GetContent()
+    {
+        var result = loadFile.LoadFileAsync("content-vi");
+        return Ok(new Result<string>()
+        {
+            Data = result
+        });
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetLocation([FromQuery] string search)
@@ -73,7 +82,7 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
             }
         }
 
-        var sUserId = User.GetUserId();
+        var sUserId = User.GetClaimByName("AgentId");
         saveBooking.UserId = sUserId;
         saveBooking.ApiProviderId = input.ApiProviderId;
         saveBooking.DisplayName = User.GetClaimByName("DisplayName");
@@ -121,10 +130,10 @@ public class RailController(ILoadFile loadFile, IRailBookingService bookingServi
     [Authorize]
     public async Task<IActionResult> IssueTicket(RailCreateBooking input)
     {
-        var sUserId = User.GetUserId();
+        var sUserId = User.GetClaimByName("AgentId");
         var checkBalance = await _mediator!.Send(new GetBalanceByUserQuery
         {
-            UserId = User.GetUserId(),
+            UserId = sUserId,
         });
         ;
         if (checkBalance == null || checkBalance.Amount < input.Amount)

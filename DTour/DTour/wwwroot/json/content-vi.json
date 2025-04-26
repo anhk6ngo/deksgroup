@@ -1,0 +1,303 @@
+﻿{
+  "heros": [
+    {
+      "imagePath": "hero/hero_1.png",
+      "title": "Thế giới trong tầm tay",
+      "detail": "Trải nghiệm du lịch đẳng cấp từ nhà điều hành tour 10 năm kinh nghiệm tại Việt Nam - thành viên tập đoàn Deks Air quốc tế với lịch sử 50 năm hoạt động trong ngành Hàng không và Du lịch"
+    },
+    {
+      "imagePath": "hero/hero_2.png",
+      "title": "Ngồi tàu ngắm trời Âu",
+      "detail": "Khám phá Châu Âu không giới hạn với hành trình nối liền qua từng đường ray."
+    },
+    {
+      "imagePath": "hero/hero_3.png",
+      "title": "Bay dễ dàng – Giá ưu đãi",
+      "detail": "Đặt vé trong tích tắc và bay cùng DTour."
+    }
+  ],
+  "packages": {
+    "title": "Điểm đến trong mơ",
+    "items": [
+      {
+        "location": "Thái Lan",
+        "imagePath": "category/thai.png",
+        "desc": "Water Bungalows",
+        "price": 5990000
+      },
+      {
+        "location": "Brunei",
+        "imagePath": "category/brunei.png",
+        "desc": "Garibaldi Lake",
+        "price": 13990000
+      },
+      {
+        "location": "Malaysia",
+        "imagePath": "category/malaysia.png",
+        "desc": "Sok national park",
+        "price": 17990000
+      },
+      {
+        "location": "Hàn Quốc",
+        "imagePath": "category/korea.png",
+        "desc": "Water Bungalows",
+        "price": 14990000
+      },
+      {
+        "location": "Nhật Bản",
+        "imagePath": "category/japan.png",
+        "desc": "Garibaldi Lake",
+        "price": 31990000
+      },
+      {
+        "location": "Ấn Độ",
+        "imagePath": "category/india.png",
+        "desc": "Sok national park",
+        "price": 25950000
+      }
+    ]
+  },
+  "abouts": {
+    "title": "DTour đồng hành cùng các bạn",
+    "subtitle": "Thiết kế hành trình trong mơ",
+    "detail": "There are many variations of passages of available but the majority have suffered alteration in some form, by injected hum randomised words.",
+    "imagePath": ["icon/about_1_1.svg", "icon/about_1_2.svg", "icon/about_1_3.svg"],
+    "items": [
+      {
+        "title": "Chương trình tham quan",
+        "detail": "Cung cấp đa dạng các tour hấp dẫn, phù hợp với nhiều đối tượng khách hàng và thiết kế chương trình tùy chỉnh theo nhu cầu riêng của từng khách hàng."
+      },
+      {
+        "title": "Vé tàu hỏa",
+        "detail": "Đại diện độc quyền của RailClick tại Việt Nam - Nền tảng tiện lợi hỗ trợ du khách đặt vé tại các hàng tàu ở Châu Âu, Châu Mỹ và Châu Á."
+      },
+      {
+        "title": "Tư vấn Visa",
+        "detail": "Đội ngũ chuyên môn có kiến thức vững vàng và kinh nghiệm lâu năm mang đến dịch vụ hỗ trợ toàn diện và thái độ tận tâm, chuyên nghiệp giúp khách hàng tiết kiệm thời gian, giảm thiểu rủi ro và tăng cơ hội được cấp visa thành công."
+      }
+    ]
+  },
+  "tours": {
+    "title": "Trải nghiệm đáng nhớ",
+    "subtitle": "Các hành trình nổi bật",
+    "items": [
+      {
+        "imagePath": "tour/tour_thai.png",
+        "desc": "Vương quốc chùa Vàng - Thái Lan",
+        "price": 5990000,
+        "star": 4.8,
+        "duration": "5 Ngày 4 Đêm"
+      },
+      {
+        "imagePath": "tour/tour_malaysia.png",
+        "desc": "Malaysia All-In-One: Hành trình khám phá văn hoá Peranakan",
+        "price": 17990000,
+        "star": 4.8,
+        "duration": "5 Ngày 4 Đêm"
+      },
+      {
+        "imagePath": "tour/tour_dubai.png",
+        "desc": "Hành trình 2 quốc gia xa hoa: Brunei – Dubai – Abu Dhabi",
+        "price": 26990000,
+        "star": 4.8,
+        "duration": "6 Ngày 5 Đêm"
+      },
+      {
+        "imagePath": "tour/tour_india.png",
+        "desc": "Hành Trình Khám Phá Tứ Diệu Ký",
+        "price": 25950000,
+        "star": 4.8,
+        "duration": "7 Ngày 6 Đêm"
+      }
+    ]
+  },
+  "gallery": {
+    "title": "Khoảnh khắc ấn tượng",
+    "subtitle": "Thư viện ảnh DTour",
+    "items": [
+      "gallery/gallery_1_1.jpg",
+      "gallery/gallery_1_2.jpg",
+      "gallery/gallery_1_3.jpg",
+      "gallery/gallery_1_4.jpg",
+      "gallery/gallery_1_5.jpg",
+      "gallery/gallery_1_6.jpg",
+      "gallery/gallery_1_7.jpg"
+    ]
+  },
+  "counters": [
+    {
+      "title": "Văn phòng",
+      "counterNumber": 4
+    },
+    {
+      "title": "Năm kinh nghiệm",
+      "counterNumber": 10,
+      "unit": "%"
+    },
+    {
+      "title": "Khách hàng nội địa",
+      "counterNumber": 43,
+      "unit": "k"
+    },
+    {
+      "title": "Khách hàng quốc tế",
+      "counterNumber": 6,
+      "unit": "k"
+    }
+  ],
+  "destinations": {
+    "title": "Điểm đến yêu thích",
+    "subtitle": "Các địa danh nổi bật",
+    "items": [
+      {
+        "imagePath": "destination/destination_japan.png",
+        "title": "Nhật Bản"
+      },
+      {
+        "imagePath": "destination/destination_korea.png",
+        "title": "Hàn Quốc"
+      },
+      {
+        "imagePath": "destination/destination_dubai.png",
+        "title": "Dubai"
+      },
+      {
+        "imagePath": "destination/destination_brunei.png",
+        "title": "Brunei"
+      }
+    ]
+  },
+  "chooseUs": {
+    "title": "Vì sao chọn DTour?",
+    "subtitle": "Thế giới trong tầm tay",
+    "detail": "DTour tin rằng dịch vụ chất lượng là khởi đầu của mọi hành trình đáng nhớ.",
+    "items": [
+      {
+        "imagePath": "icon/choose_2_1.svg",
+        "title": "Sản phẩm đa dạng",
+        "detail": "Muôn kiểu hành trình, ngập tràn ưu đãi."
+      },
+      {
+        "imagePath": "icon/choose_2_2.svg",
+        "title": "Dịch vụ chất lượng & an toàn",
+        "detail": "Trải nghiệm trọn vẹn chuyến đi với dịch vụ uy tín và ưu tiên sự an toàn."
+      },
+      {
+        "imagePath": "icon/choose_2_3.svg",
+        "title": "Đội ngũ giàu kinh nghiệm",
+        "detail": "Hỗ trợ nhanh chóng."
+      }
+    ]
+  },
+  "tourGuide": {
+    "title": "Đội ngũ DTour",
+    "subtitle": "Các chuyên viên của DTour",
+    "items": [
+      {
+        "imagePath": "team/team_hoa.png",
+        "title": "Nguyễn Quỳnh Hoa",
+        "detail": "Trưởng phòng vé",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      },
+      {
+        "imagePath": "team/team_thu.png",
+        "title": "Hoàng Lệ Thư",
+        "detail": "Trưởng phòng kinh doanh Hà Nội",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      },
+      {
+        "imagePath": "team/team_thoa.png",
+        "title": "Nguyễn Ngọc Thoa",
+        "detail": "Trưởng phòng điều hành",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      },
+      {
+        "imagePath": "team/team_van.png",
+        "title": "Lê Nguyễn Ngọc Vân",
+        "detail": "Chuyên viên tư vấn Visa",
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": ""
+      }
+    ]
+  },
+  "askQuestion": {
+    "title": "Câu hỏi thường gặp",
+    "subtitle": "Bạn hỏi - DTour trả lời!",
+    "items": [
+      {
+        "title": "DTour cung cấp những dịch vụ gì?",
+        "detail": "DTour mang đến cho khách hàng những dịch vụ du lịch chuyên nghiệp bao gồm thiết kế chương trình thăm quan, đặt phòng khách sạn, du thuyền, vé máy bay, vé tàu, tư vấn Visa du lịch... và các gói du lịch."
+      },
+      {
+        "title": "Tôi có thể đặt tour thiết kế theo yêu cầu không?",
+        "detail": "DTour nhận thiết kế chương trình tour theo yêu cầu cụ thể, tạo ra chuyến đi phù hợp với sở thích, thời gian và ngân sách của bạn. Vui lòng để lại yêu cầu tại đây (hyperlink contact page), DTour sẽ liên hệ trực tiếp tư vấn và xây dựng chương trình phù hợp nhất cho bạn."
+      },
+      {
+        "title": "Làm thế nào để có thể đặt dịch vụ của DTour?",
+        "detail": "Quý khách có thể đặt dịch vụ trực tuyến trên các nền tảng mảng xã hội của DTour hoặc ghé thăm các văn phòng DTour để đặt dịch vụ trực tiếp."
+      },
+      {
+        "title": "Tôi có thể thay đổi lịch trình hoặc huỷ tour sau khi đặt hay không?",
+        "detail": "Việc hoàn, huỷ hay thay đổi chương trình tour sau khi đặt phụ thuộc vào chính sách của từng gói du lịch. Để được tư vấn chi tiết, Quý khách vui lòng liên hệ DTour nhé."
+      }
+    ]
+  },
+  "testimonial": {
+    "title": "Cảm nhận khách hàng",
+    "subtitle": "Khách hàng nói về DTour",
+    "items": [
+      {
+        "message": "Khách sạn và nhà hàng ăn uống rất tốt, thực đơn phong phú. Dịch vụ DTOUR rất chuyên nghiệp.",
+        "title": "Anh Hiền - Chánh văn phòng Nasco",
+        "place": "Đoàn CBNV Hải Châu đi Mỹ.",
+        "star": 4.5
+      },
+      {
+        "message": "Hướng dẫn viên của DTOUR là hướng dẫn viên tốt nhất từ trước tới nay. Rất cảm ơn các bạn.",
+        "title": "Anh Nguyên - Trưởng phòng",
+        "place": "Đoàn CBNV đi Hà Tĩnh.",
+        "star": 5
+      },
+      {
+        "message": "Đội ngũ của DTOUR làm việc rất chuyên nghiệp, nhiệt tình, chu đáo. Thực sự yên tâm khi có các bạn.",
+        "title": "Anh Hùng - Trưởng phòng AITS",
+        "place": "Đoàn CBNV đi Đà Nẵng.",
+        "star": 5
+      },
+      {
+        "message": "Chuyến du lịch được suôn sẻ nhờ sự nhiệt tình làm việc của các thành viên ban điều hành, tài xế, HDV… Thay mặt anh chị em gửi lời cám ơn tới các thành viên công ty DTOUR nhiều nhé.",
+        "title": "Anh Việt - VAECO",
+        "place": "Đoàn CBNV đi Đà Lạt.",
+        "star": 5
+      },
+      {
+        "message": "Chuyến đi lần này thực sự khiến chúng tôi hài lòng về dịch vụ của Dtour, đặc biệt HDV rất am hiểu lịch sử và nhiệt tình giúp đỡ chúng tôi trong suốt kỳ nghỉ.",
+        "title": "Trường PTTH Xuân Đỉnh",
+        "place": "Đoàn giáo viên đi Đà Nẵng.",
+        "star": 5
+      },
+      {
+        "message": "Mình rất hài lòng về kỳ nghỉ của vợ chồng mình vừa rồi. Cảm ơn Dtour đã làm nên kỷ niệm đáng nhớ cho chúng mình.",
+        "title": "Chị Quỳnh - Techcombank Hội sở",
+        "place": "Kỳ nghỉ trăng mật.",
+        "star": 5
+      }
+    ]
+  },
+  "subscribe": {
+    "imagePath": "bg/subscribe_bg_2.jpg",
+    "title": "Đăng ký nhận bản tin từ DTour",
+    "detail": "Bằng cách nhấn nút đăng ký, bạn đồng ý được thêm vào danh sách nhận bản tin của chúng tôi."
+  }
+}

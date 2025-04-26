@@ -7,7 +7,19 @@
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
     <input @bind="DateRange" class="form-control form-control-sm w-200px" placeholder="Pick date range" id="RangeDate"/>
-    <button class="btn btn-sm btn-primary" @onclick="GetData">@Loc["Get Data"]</button>
+    <div class="d-flex">
+        @if (iRole > 0)
+        {
+            <div class="form-check form-switch form-check-custom form-check-warning form-check-solid me-6">
+                <input class="form-check-input" type="checkbox"
+                       @bind="@isDetail" id="flexSwitchShareRoom" @bind:after="ChageView"/>
+                <label class="form-check-label" for="flexSwitchShareRoom">
+                    @Loc["Is Detail"]
+                </label>
+            </div>
+        }
+        <button class="btn btn-sm btn-primary" @onclick="GetData">@Loc["Get Data"]</button>
+    </div>
 </SectionContent>
 
 @if (IsLoading)
@@ -23,44 +35,57 @@
         else
         {
             <div class="table-responsive">
-                <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
+                <table class="table table-hover table-rounded table-striped border gy-7 gs-7"
+                       id="@UiConstants.TableId">
                     <thead>
                     <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                        <th class="min-w-150px">@Loc["Action"]</th>
-                        <th class="min-w-100px">@Loc["Pnr"]</th>
-                        <th class="min-w-150px">@Loc["Date"]</th>
-                        <th class="min-w-250px">@Loc["Route"]</th>
-                        <th class="min-w-150px">@Loc["Amount"]</th>
-                        <th class="min-w-150px">@Loc["Fare"]</th>
-                        <th class="min-w-150px">@Loc["Bank, transaction fee"]</th>
-                        <th class="min-w-150px">@Loc["System fee"]</th>
-                        <th class="min-w-150px">@Loc["Management fee"]</th>
-                        <th class="min-w-150px">@Loc["Service fee"]</th>
-                        <th class="min-w-150px">@Loc["Payment Type"]</th>
-                        <th class="min-w-150px">@Loc["Ticket Type"]</th>
+                        @if (iRole > 0)
+                        {
+                            <th class="min-w-25">@Loc["Name"]</th>
+                        }
+                        @if(isDetail)
+                        {
+                            <th class="min-w-150px">@Loc["Date"]</th>
+                            <th class="min-w-100px">@Loc["Pnr"]</th>
+                        }
+                        <th class="min-w-250px">@Loc["In"]</th>
+                        <th class="min-w-150px">@Loc["Out"]</th>
+                        @if (isDetail)
+                        {
+                            <th class="min-w-150px">@Loc["Payment Type"]</th>
+                        }
+                        <th class="min-w-150px">@Loc["Balance"]</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach (var item in _items)
                     {
                         <tr>
-                            <td>
-                                @if (item.BookingSessionId.NotIsNullOrEmpty())
-                                {
-                                    <a class="btn btn-primary" href="/agent/cancel-booking/@item.BookingSessionId">@Loc["Cancel"]</a>
-                                }
-                            </td>
-                            <td>@item.Pnr</td>
-                            <td>@item.DepartDate.ToLocalTime().ToDmy()</td>
-                            <td>@item.From - @item.To</td>
-                            <td>@item.Amount.ToString("N2")</td>
-                            <td>@item.Price?.ToString("N2")</td>
-                            <td>@item.TranFee?.ToString("N2")</td>
-                            <td>@item.SystemFee?.ToString("N2")</td>
-                            <td>@item.ManagementFee?.ToString("N2")</td>
-                            <td>@item.ServiceFee?.ToString("N2")</td>
-                            <th>@Loc[(item.PaymentType == 0 ? "Card" : "Cash")]</th>
-                            <th>@Loc[(item.TicketType == 0 ? "Air" : "Train")]</th>
+                            @if (iRole > 0)
+                            {
+                                <td>@_agents.FirstOrDefault(w => w.Id.ToString() == item.UserId)?.Name</td>
+                            }
+                            @if (isDetail)
+                            {
+                                <td>
+                                    @if (item.TranDate.HasValue)
+                                    {
+                                        @item.TranDate.Value.ToLocalTime().ToDmy()
+                                    }
+                                </td>
+                                <td>@item.Pnr</td>
+                            }
+                            <td>@item.In.AutoFormat()</td>
+                            <td>@item.Out.AutoFormat()</td>
+                            @if (isDetail)
+                            {
+                                <td>@if (item.Out > 0)
+                                    {
+                                        @Loc[item.PaymentType == 0 ? "Card" : "Cash"]
+                                    }
+                                </td>
+                            }
+                            <td>@item.Balance.AutoFormat()</td>
                         </tr>
                     }
                     </tbody>
@@ -71,12 +96,23 @@
 </Card>
 
 @code {
-    private List<StoreBookingDto>? _items = [];
+    private List<CashFlowResponse>? _items = [];
+    private List<CashFlowResponse>? _saveItems = [];
     private GetReportRequest _request = new();
+    private List<AgentDto> _agents = [];
+    private bool isDetail = true;
+    private int iRole = 0;
+    [CascadingParameter] private UserInfo? ShareUserInfo { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         DateRange = "".InitDateRange();
+        if (ShareUserInfo?.Role != null && ShareUserInfo.Role.Contains(RoleConstants.AccountingRole))
+        {
+            _agents = await _httpService.GetAsync<List<AgentDto>>($"{ShareEndpoints.Agent}");
+            iRole = 2;
+        }
+
         await GetData();
     }
 
@@ -99,7 +135,33 @@
         IsLoading = true;
         StateHasChanged();
         _request.DateRange = DateRange;
-        _items = await _httpService.PostAsync<List<StoreBookingDto>>($"{ShareEndpoints.Report}", _request);
+        _saveItems = await _httpService.PostAsync<List<CashFlowResponse>>($"{ShareEndpoints.Report}/cash-flow", _request);
+        _items = _saveItems.OrderBy(w => w.UserId).ThenBy(o => o.TranDate).ToList();
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+    }
+
+    private async Task ChageView()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        if (isDetail)
+        {
+            _items = _saveItems?.OrderBy(w => w.UserId).ThenBy(o => o.TranDate).ToList();
+        }
+        else
+        {
+            _items = _saveItems?.GroupBy(g => g.UserId).Select(s => new CashFlowResponse()
+            {
+                UserId = s.Key,
+                In = s.Sum(sm => sm.In),
+                Out = s.Sum(sm => sm.Out),
+                Balance = s.Sum(sm => sm.Balance),
+            }).ToList();
+        }
+
+        await Task.Delay(500);
         IsLoading = false;
         InitDataTable = true;
         StateHasChanged();

@@ -20,4 +20,18 @@ public class LoadFile(IWebHostEnvironment host) : ILoadFile
             return default!;
         }
     }
+
+    public string LoadFileAsync(string filePath)
+    {
+        try
+        {
+            var path = Path.Combine(host.WebRootPath, "json", $"{filePath}.json");
+            return File.ReadAllText(path);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return string.Empty;
+        }
+    }
 }

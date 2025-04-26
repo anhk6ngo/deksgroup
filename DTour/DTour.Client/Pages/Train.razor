@@ -586,7 +586,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <h4>@Loc["Bank, transaction fee"]</h4>
+                                                                <h4>@Loc["Transaction fee"]</h4>
                                                                 <div class="fs-3">@dTran.AutoFormat()</div>
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
@@ -594,12 +594,8 @@
                                                                 <div class="fs-3">@dSys.AutoFormat()</div>
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
-                                                                <h4>@Loc["Management fee"]</h4>
-                                                                <div class="fs-3">@dMan.AutoFormat()</div>
-                                                            </div>
-                                                            <div class="d-flex align-items-center justify-content-between">
                                                                 <h4>@Loc["Service fee"]</h4>
-                                                                <div class="fs-3">@dSer.AutoFormat()</div>
+                                                                <div class="fs-3">@dSer.PlusNumber(dMan).AutoFormat()</div>
                                                             </div>
                                                         </div>
                                                     </div>

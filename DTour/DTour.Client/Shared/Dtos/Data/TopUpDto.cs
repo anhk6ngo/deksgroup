@@ -14,6 +14,8 @@ public class TopUpDto : AggregateRoot<Guid>, ITopUpDto
     public string? DisplayName { get; set; }
     public string? TranId { get; set; }
     public string? Gateway { get; set; }
+    public string? FileContent { get; set; }
+    public string? FileName { get; set; }
     public bool IsDeposit { get; set; }
 }
 
@@ -31,5 +33,7 @@ public interface ITopUpDto
     public string? DisplayName { get; set; }
     public string? TranId { get; set; }
     public string? Gateway { get; set; }
+    public string? FileContent { get; set; }
+    public string? FileName { get; set; }
     public bool IsDeposit { get; set; }
 }

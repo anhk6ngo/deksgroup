@@ -8,6 +8,7 @@ namespace DTour.Client
         public required string Email { get; set; }
         public List<string>? Role { get; set; }
         public string? FullName { get; set; }
+        public string? AgentId { get; set; }
         public string? Receiver { get; set; }
         public string? SentTo { get; set; }
         public string? Phone { get; set; }

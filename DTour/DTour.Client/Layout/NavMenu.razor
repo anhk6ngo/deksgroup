@@ -101,7 +101,7 @@
         class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
         <div class="menu-item">
          <NavLink class="menu-link"
-                  href="/visa">
+                  href="/service/visa">
           <span
            class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
           <span
@@ -110,7 +110,7 @@
         </div>
         <div class="menu-item">
          <NavLink class="menu-link"
-                  href="/ancillary">
+                  href="/service/ancillary">
           <span
            class="menu-bullet"><span class="bullet bullet-dot fs-2"></span></span>
           <span
@@ -148,12 +148,30 @@
              class="menu-title">@Loc["Careers"]</span>
            </NavLink>
           </div>
+          <div class="menu-item">
+           <NavLink class="menu-link"
+                    href="/policy" Match="NavLinkMatch.All">
+            <span
+             class="menu-bullet"><span class="bullet bullet-line fs-2"></span></span>
+            <span
+             class="menu-title">@Loc["Policy payment - security"]</span>
+           </NavLink>
+          </div>
+          <div class="menu-item">
+           <NavLink class="menu-link"
+                    href="/policy/delivery">
+            <span
+             class="menu-bullet"><span class="bullet bullet-line fs-2"></span></span>
+            <span
+             class="menu-title">@Loc["Policy delivery"]</span>
+           </NavLink>
+          </div>
          </div>
          <div class="col-md-4">
           <h4 class="fs-6 fs-lg-4 fw-bold mb-3 ms-4">@Loc["News"]</h4>
           <div class="menu-item">
            <NavLink class="menu-link"
-                    href="/mice">
+                    href="/blog/0">
             <span
              class="menu-bullet"><span class="bullet bullet-line fs-2"></span></span>
             <span
@@ -162,7 +180,7 @@
           </div>
           <div class="menu-item">
            <NavLink class="menu-link"
-                    href="/team-building">
+                    href="/blog/1">
             <span
              class="menu-bullet"><span class="bullet bullet-line fs-2"></span></span>
             <span
@@ -205,7 +223,7 @@
        </div>
       </div>
       <div class="menu-item me-0 me-lg-2">
-       <NavLink href="/">
+       <NavLink href="/contact-us">
         <span class="menu-link">
          <span class="menu-icon">
           <i class="fas fa-contact-card fs-3"></i>
@@ -219,10 +237,11 @@
    </div>
    <div class="app-navbar flex-shrink-0">
     <div class="app-navbar-item me-3">
-     <div class="btn btn-icon btn-icon-gray-600 border border-dashed border-gray-300 w-35px h-35px w-md-40px h-md-40px me-3"
-          data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-          data-kt-menu-attach="parent"
-          data-kt-menu-placement="bottom-end">
+     <div
+      class="btn btn-icon btn-icon-gray-600 border border-dashed border-gray-300 w-35px h-35px w-md-40px h-md-40px me-3"
+      data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+      data-kt-menu-attach="parent"
+      data-kt-menu-placement="bottom-end">
       <img class="h-25 h-md-30px" src="img/@(languageDefault).svg" alt="lang"/>
      </div>
      <div
@@ -312,4 +331,5 @@
     forceLoad: true);
   }
  }
+
 }

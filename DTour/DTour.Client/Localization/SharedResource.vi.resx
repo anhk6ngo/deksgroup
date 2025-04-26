@@ -399,6 +399,9 @@
     <data name="Email Address" xml:space="preserve">
         <value>Địa chỉ email</value>
     </data>
+    <data name="Our Address" xml:space="preserve">
+        <value>Địa chỉ của chúng tôi</value>
+    </data>
     <data name="Birthdate" xml:space="preserve">
         <value>Ngày sinh</value>
     </data>
@@ -666,8 +669,8 @@
     <data name="Departure Date" xml:space="preserve">
         <value>Ngày khởi hành</value>
     </data>
-    <data name="Bank, transaction fee" xml:space="preserve">
-        <value>Phí ngân hàng, phí thanh toán</value>
+    <data name="Transaction fee" xml:space="preserve">
+        <value>Phí giao dịch</value>
     </data>
     <data name="System fee" xml:space="preserve">
         <value>Phí hệ thống</value>
@@ -681,7 +684,50 @@
     <data name="Fare" xml:space="preserve">
         <value>Giá vé</value>
     </data>
+    <data name="Is Accounting" xml:space="preserve">
+        <value>Có phải là kế toán?</value>
+    </data>
+    <data name="Upload" xml:space="preserve">
+        <value>Tải lên</value>
+    </data>
+    <data name="Subscribe" xml:space="preserve">
+        <value>Đặt mua</value>
+    </data>
+    <data name="Subject" xml:space="preserve">
+        <value>Tiêu đề</value>
+    </data>
+    <data name="Message" xml:space="preserve">
+        <value>Nội dung</value>
+    </data>
+    <data name="Service Details" xml:space="preserve">
+        <value>Chi tiết dịch vụ</value>
+    </data>
+    <data name="Policy" xml:space="preserve">
+        <value>Chính sách</value>
+    </data>
+    <data name="Posts" xml:space="preserve">
+        <value>Bài viết</value>
+    </data>
+    <data name="Policy payment - security" xml:space="preserve">
+        <value>Chính sách thanh toán - bảo mật</value>
+    </data>
+    <data name="Policy delivery" xml:space="preserve">
+        <value>Chính sách giao nhận</value>
+    </data>
+    <data name="Our Contact Information" xml:space="preserve">
+        <value>Thông tin liên hệ của chúng tôi</value>
+    </data>
+    <data name="Send Us Email" xml:space="preserve">
+        <value>Gửi email tới chúng tôi</value>
+    </data>
+    <data name="Book now" xml:space="preserve">
+        <value>Đặt ngay</value>
+    </data>
+    <data name="Explore Tours" xml:space="preserve">
+        <value>Khám phá tours</value>
+    </data>
     <data name="Identity, Passport No" xml:space="preserve">
         <value>Thẻ căn cước/Hộ chiếú</value>
     </data>
+    
 </root>

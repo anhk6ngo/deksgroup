@@ -12,6 +12,7 @@ public class TopUpConfiguration : IEntityTypeConfiguration<TopUp>
         builder.Property(p => p.DisplayName).HasMaxLength(255);
         builder.Property(p => p.Gateway).HasMaxLength(255);
         builder.Property(p => p.TranId).HasMaxLength(255);
+        builder.Property(p => p.FileName).HasMaxLength(255);
         builder.HasIndex(u => new {u.IsActive, u.RequestDate, u.Status, u.UserId});
     }
 }

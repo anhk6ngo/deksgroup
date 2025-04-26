@@ -200,7 +200,6 @@
     protected override void OnInitialized()
     {
         DateRange = "".InitDateRange();
-        _request.UserId = $"{ShareUserInfo?.UserId}";
         base.OnInitialized();
     }
 
@@ -262,12 +261,11 @@
         IsLoading = true;
         StateHasChanged();
         _items = await _httpService.PostAsync<List<SumBookingResponse>>($"{ShareEndpoints.Report}/sum-by", _request);
-        if (ShareUserInfo?.Role != null && ShareUserInfo.Role.Contains(RoleConstants.OperationRole))
+        if (ShareUserInfo?.Role != null)
         {
             _data = await _httpService.PostAsync<List<StoreBookingDto>>($"{ShareEndpoints.Report}", _request);
             _data = _data.OrderBy(o => o.TranDate).ToList();
         }
-
         IsLoading = false;
         InitDataTable = true;
         _initChart = true;

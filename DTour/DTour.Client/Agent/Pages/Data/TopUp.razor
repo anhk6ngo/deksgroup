@@ -1,5 +1,5 @@
 ﻿@page "/agent/top-up"
-
+@attribute [Authorize(Roles = RoleConstants.AgentAccountingRole)]
 <PageTitle>@Loc["Top-up"]</PageTitle>
 <SectionContent SectionName="@NavConstants.TbLeft">
     <Breadcrumb Slash="true"></Breadcrumb>
@@ -15,7 +15,7 @@
 }
 <Card Title="@Loc["List of Top-up"]">
     <ToolbarRight>
-        <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new TopUpDto(), 0)">
+        <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(-1, 0)">
             <i class="fa fa-plus-square"></i>@Loc["Add new"]
         </button>
     </ToolbarRight>
@@ -39,35 +39,44 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in _items)
+                    @foreach (var t in _items.WithIndex())
                     {
                         <tr>
                             <td>
-                                @if (item.Status == 0)
+                                @if (t.item.Status == 0)
                                 {
                                     <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
-                                            @onclick="(e) => FormAction(item, 1)">
+                                            @onclick="(e) => FormAction(t.index, 1)">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
-                                            @onclick="@(() => FormAction(item, 2))">
+                                            @onclick="@(() => FormAction(t.index, 2))">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                     <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-warning"
-                                            @onclick="@(() => FormAction(item, 4))">
+                                            @onclick="@(() => FormAction(t.index, 4))">
                                         <i class="fas fa-envelope"></i>
                                     </button>
                                 }
-                            </td>
-                            <td>@item.RequestDate.ToLocalTime().ToDmy()</td>
-                            <td>@item.RequestAmount.ToString("N2")</td>
-                            <td>@item.ApproveAmount.ToString("N2")</td>
-                            <td>@Loc[item.Status.ToTopUpStatus()]</td>
-                            <td class="w-50">
-                                @item.Note
-                                @if (item.ApproveNote.NotIsNullOrEmpty())
+                                @if (t.item.FileContent.NotIsNullOrEmpty())
                                 {
-                                    <p>Approve Note: @item.ApproveNote</p>
+                                    <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-warning ms-2"
+                                            @onclick="@(() => FormAction(t.index, 5))">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                }
+                            </td>
+                            <td>@t.item.RequestDate.ToLocalTime().ToDmy()</td>
+                            <td>@t.item.RequestAmount.ToString("N2")</td>
+                            <td>@t.item.ApproveAmount.ToString("N2")</td>
+                            <td><span
+                                    class="@(t.item.Status == 2 ? "badge badge-success p-4" : "")">@Loc[t.item.Status.ToTopUpStatus()]</span>
+                            </td>
+                            <td class="w-25">
+                                @t.item.Note
+                                @if (t.item.ApproveNote.NotIsNullOrEmpty())
+                                {
+                                    <p>Approve Note: @t.item.ApproveNote</p>
                                 }
                             </td>
                         </tr>
@@ -100,12 +109,17 @@
             <ValidationMessage For="@(() => data.Note)"/>
         </div>
         <div class="row">
-            <div class="form-check form-switch form-check-custom form-check-warning form-check-solid me-6 mt-9">
-                <input class="form-check-input" type="checkbox"
-                       @bind="@data.IsDeposit" id="flexSwitchShareRoom"/>
-                <label class="form-check-label" for="flexSwitchShareRoom">
-                    @Loc["Is Deposit"]
-                </label>
+            <div class="col-md-3">
+                <div class="form-check form-switch form-check-custom form-check-warning form-check-solid me-6 mt-9">
+                    <input class="form-check-input" type="checkbox"
+                           @bind="@data.IsDeposit" id="flexSwitchShareRoom"/>
+                    <label class="form-check-label" for="flexSwitchShareRoom">
+                        @Loc["Is Deposit"]
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <Upload MaxFile="" OnChangeUpload="OnChangeLoadFile" OnlyFile="true"/>
             </div>
         </div>
     </EditForm>
@@ -117,6 +131,7 @@
     private int iAction { get; set; } = 0;
     private string Title { get; set; } = "Add new";
     private FluentValidationValidator _fluentValidationValidator = default!;
+    private List<IBrowserFile> _loadedFiles = new();
     [CascadingParameter] private UserInfo? ShareUserInfo { get; set; }
 
     private GetReportRequest _request = new();
@@ -138,8 +153,28 @@
         if (InitDataTable)
         {
             InitDataTable = false;
-            await CallInitialDataTable();
+            if (_items is { Count: > 0 })
+                await CallInitialDataTable();
         }
+    }
+
+    private void OnChangeLoadFile(InputFileChangeEventArgs e)
+    {
+        IsLoadingFile = true;
+        _loadedFiles.Clear();
+        foreach (var file in e.GetMultipleFiles(20))
+        {
+            try
+            {
+                _loadedFiles.Add(file);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        IsLoadingFile = false;
     }
 
     private async Task GetData()
@@ -153,18 +188,30 @@
         StateHasChanged();
     }
 
-    private async Task FormAction(TopUpDto item, int action)
+    private async Task FormAction(int index, int action)
     {
+        var item = new TopUpDto();
+        if (index >= 0)
+        {
+            _items?[index].Adapt(item);
+        }
+
+        if (action == 5)
+        {
+            if (item.FileContent.IsNullOrEmpty()) return;
+            var content = Convert.FromBase64String(item.FileContent!);
+            await BlazorDownloadFile(item.FileName, "application/octet-stream", content);
+            return;
+        }
+
         iAction = action;
-        data = item.Adapt<TopUpDto>();
+        data = item;
         switch (action)
         {
             case 4:
                 data.Status = 1;
                 break;
             case 0:
-                data.UserId = ShareUserInfo?.UserId;
-                data.DisplayName = ShareUserInfo?.FullName;
                 data.RequestDate = DateTime.Today;
                 break;
             default:
@@ -188,8 +235,19 @@
     {
         var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
         if (!isValid) return;
+        long maxFileSize = 1024 * 1024 * 20;
         IsLoading = true;
         StateHasChanged();
+        if (_loadedFiles is { Count: > 0 })
+        {
+            var iFile = _loadedFiles[0];
+            var memoryStream = new MemoryStream();
+            await iFile.OpenReadStream(maxFileSize).CopyToAsync(memoryStream);
+            data!.FileName = iFile.Name;
+            data.FileContent = Convert.ToBase64String(memoryStream.ToArray());
+            _loadedFiles = [];
+        }
+
         if (data!.RequestDate != data.RequestDate.ToUniversalTime())
         {
             data.RequestDate = data.RequestDate.ToUniversalTime();
@@ -234,12 +292,10 @@
 
                 break;
         }
-
         await ToggleModal();
         await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
         IsLoading = false;
         InitDataTable = true;
         StateHasChanged();
     }
-
 }

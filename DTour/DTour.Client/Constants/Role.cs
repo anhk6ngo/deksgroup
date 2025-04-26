@@ -7,6 +7,7 @@ public static class RoleConstants
     public const string GsRole = "GoogleSheet";
     public const string BasicRole = "Basic";
     public const string AccountingRole = "Accounting";
+    public const string AgentAccountingRole = "AgentAccounting";
     public const string ManagerRole = "Manager";
     public const string AdvanceBookingRole = "AdvanceBooking";
     public const string SaleRole = "Sale";
@@ -15,6 +16,7 @@ public static class RoleConstants
     public const string InputData = "InputData";
     public const string Ticketing = "Ticketing";
     public const string BanRole = "Ban";
+    public const string ContentRole = "Content";
     public const string LimitIssueTicketRole = "LimitIT";
 }
 

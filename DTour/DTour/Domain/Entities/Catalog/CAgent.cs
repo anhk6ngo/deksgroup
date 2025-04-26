@@ -2,6 +2,8 @@
 
 public class CAgent: AuditableEntityNew<Guid>, ICAgent
 {
+    public string? FileContent { get; set; }
+    public string? FileName { get; set; }
     public string? Code { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }

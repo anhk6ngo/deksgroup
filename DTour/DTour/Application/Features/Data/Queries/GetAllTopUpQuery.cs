@@ -30,7 +30,7 @@ internal class GetAllTopUpQueryHandler(IUnitOfWork<Guid, PortalContext> unitOfWo
 
                 break;
             case ActionCommandType.GetData:
-                oFilter = oFilter.And(w => w.UserId == request.Input.UserId);
+                oFilter = oFilter.And(w => w.CreatedBy == request.Input.UserId);
                 break;
         }
 

@@ -7,7 +7,7 @@
     <Breadcrumb TextMuted="true">@Loc["Agent"]</Breadcrumb>
 </SectionContent>
 <SectionContent SectionName="@NavConstants.TbRight">
-    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(new AgentDto(), 0)">
+    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(-1, 0)">
         <i class="fa fa-plus-square"></i>@Loc["Add new"]
     </button>
 </SectionContent>
@@ -34,23 +34,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in _items)
+                @foreach (var t in _items.WithIndex())
                 {
                     <tr>
                         <td>
                             <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
-                                    @onclick="@(() => FormAction(item, 1))">
+                                    @onclick="@(() => FormAction(t.index, 1))">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
-                                    @onclick="@(() => FormAction(item, 2))">
+                                    @onclick="@(() => FormAction(t.index, 2))">
                                 <i class="fas fa-trash"></i>
                             </button>
+                            @if (t.item.FileContent.NotIsNullOrEmpty())
+                            {
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-warning ms-2"
+                                        @onclick="@(() => FormAction(t.index, 5))">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            }
                         </td>
-                        <td>@item.Code</td>
-                        <td>@item.Name</td>
-                        <td>@item.Email</td>
-                        <td>@item.Phone</td>
+                        <td>@t.item.Code</td>
+                        <td>@t.item.Name</td>
+                        <td>@t.item.Email</td>
+                        <td>@t.item.Phone</td>
                     </tr>
                 }
                 </tbody>
@@ -69,12 +76,15 @@
                 <ValidationMessage For="@(() => data.Code)"/>
             </div>
             <div class="col-md-9">
-                <div class="row mb-7">
-                    <label class="form-label required">@Loc["Name"]</label>
-                    <InputText type="text" @bind-Value="@data.Name" class="form-control maxlength" maxlength="255"/>
-                    <ValidationMessage For="@(() => data.Name)"/>
-                </div>
+                <label class="form-label required">@Loc["Name"]</label>
+                <InputText type="text" @bind-Value="@data.Name" class="form-control maxlength" maxlength="255"/>
+                <ValidationMessage For="@(() => data.Name)"/>
             </div>
+        </div>
+        <div class="row mb-7">
+            <label class="form-label required">@Loc["Address"]</label>
+            <InputText type="text" @bind-Value="@data.Address" class="form-control maxlength" maxlength="255"/>
+            <ValidationMessage For="@(() => data.Address)"/>
         </div>
         <div class="row mb-7">
             <div class="col-md-3">
@@ -83,16 +93,14 @@
                 <ValidationMessage For="@(() => data.Phone)"/>
             </div>
             <div class="col-md-9">
-                <div class="row mb-7">
-                    <label class="form-label required">Email</label>
-                    <InputText type="text" @bind-Value="@data.Email" class="form-control maxlength" maxlength="500"/>
-                    <ValidationMessage For="@(() => data.Email)"/>
-                </div>
+                <label class="form-label required">Email</label>
+                <InputText type="text" @bind-Value="@data.Email" class="form-control maxlength" maxlength="500"/>
+                <ValidationMessage For="@(() => data.Email)"/>
             </div>
         </div>
         <div class="row mb-7">
             <div class="col-md-3">
-                <label class="required">@Loc["Sign Date"] (mm/dd/yyyy)</label>
+                <label class="required">@Loc["Sign Date"]</label>
                 <InputDate @bind-Value="@data!.SignContract" class="form-control" data-control="date-picker"/>
                 <ValidationMessage For="@(() => data.SignContract)"/>
             </div>
@@ -102,12 +110,10 @@
                 <ValidationMessage For="@(() => data.TaxNo)"/>
             </div>
             <div class="col-md-6">
-                <div class="row mb-7">
-                    <label class="form-label">@Loc["Contact Personal"]</label>
-                    <InputText type="text" @bind-Value="@data.ContactPerson" class="form-control maxlength"
-                               maxlength="255"/>
-                    <ValidationMessage For="@(() => data.ContactPerson)"/>
-                </div>
+                <label class="form-label">@Loc["Contact Personal"]</label>
+                <InputText type="text" @bind-Value="@data.ContactPerson" class="form-control maxlength"
+                           maxlength="255"/>
+                <ValidationMessage For="@(() => data.ContactPerson)"/>
             </div>
         </div>
         <div class="row mb-7">
@@ -117,12 +123,13 @@
                 <ValidationMessage For="@(() => data.BankAccount)"/>
             </div>
             <div class="col-md-9">
-                <div class="row mb-7">
-                    <label class="form-label">@Loc["Bank Name"]</label>
-                    <InputText type="text" @bind-Value="@data.BankName" class="form-control maxlength" maxlength="255"/>
-                    <ValidationMessage For="@(() => data.BankName)"/>
-                </div>
+                <label class="form-label">@Loc["Bank Name"]</label>
+                <InputText type="text" @bind-Value="@data.BankName" class="form-control maxlength" maxlength="255"/>
+                <ValidationMessage For="@(() => data.BankName)"/>
             </div>
+        </div>
+        <div class="row mb-7">
+            <Upload MaxFile="" OnChangeUpload="OnChangeLoadFile" OnlyFile="true"/>
         </div>
     </EditForm>
 </CustomModal>
@@ -132,6 +139,7 @@
     private AgentDto? data = new();
     private int iAction { get; set; } = 0;
     private string Title { get; set; } = "Add new";
+    private List<IBrowserFile> _loadedFiles = new();
     private FluentValidationValidator _fluentValidationValidator = default!;
 
     protected override async Task OnInitializedAsync()
@@ -149,10 +157,41 @@
         }
     }
 
-    private async Task FormAction(AgentDto item, int action)
+    private void OnChangeLoadFile(InputFileChangeEventArgs e)
+    {
+        IsLoadingFile = true;
+        _loadedFiles.Clear();
+        foreach (var file in e.GetMultipleFiles(20))
+        {
+            try
+            {
+                _loadedFiles.Add(file);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        IsLoadingFile = false;
+    }
+
+    private async Task FormAction(int index, int action)
     {
         data = new AgentDto();
-        item.Adapt(data);
+        if (index >= 0)
+        {
+            _items![index].Adapt(data);
+        }
+
+        if (action == 5)
+        {
+            if (data.FileContent.IsNullOrEmpty()) return;
+            var content = Convert.FromBase64String(data.FileContent!);
+            await BlazorDownloadFile(data.FileName, "application/octet-stream", content);
+            return;
+        }
+
         iAction = action;
         Title = action switch
         {
@@ -169,8 +208,19 @@
     {
         var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
         if (!isValid) return;
+        long maxFileSize = 1024 * 1024 * 20;
         IsLoading = true;
         StateHasChanged();
+        if (_loadedFiles is { Count: > 0 })
+        {
+            var iFile = _loadedFiles[0];
+            var memoryStream = new MemoryStream();
+            await iFile.OpenReadStream(maxFileSize).CopyToAsync(memoryStream);
+            data!.FileName = iFile.Name;
+            data.FileContent = Convert.ToBase64String(memoryStream.ToArray());
+            _loadedFiles = [];
+        }
+
         var result = new ResultClient<Guid>();
         switch (iAction)
         {

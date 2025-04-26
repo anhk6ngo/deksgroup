@@ -1,0 +1,121 @@
+﻿@page "/contact-us"
+@inject IHttpServiceClient _httpService
+<div class="card">
+    <div class="card-body">
+        <div class="about-area position-relative overflow-hidden my-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="mb-20">@Loc["Send Us Email"]</h1>
+                        <EditForm Model="data" class="form">
+                            <FluentValidationValidator @ref="_fluentValidationValidator"/>
+                            <div class="row mb-7">
+                                <div class="col-md-6">
+                                    <label class="form-label required">@Loc["Full Name"]</label>
+                                    <InputText type="text" @bind-Value="@data!.FullName" class="form-control maxlength"
+                                               maxlength="255"/>
+                                    <ValidationMessage For="@(() => data.FullName)"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row mb-7">
+                                        <label class="form-label required">Email</label>
+                                        <InputText type="text" @bind-Value="@data.Email" class="form-control maxlength"
+                                                   maxlength="255"/>
+                                        <ValidationMessage For="@(() => data.Email)"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="form-label required">@Loc["Subject"]</label>
+                                <InputText type="text" @bind-Value="@data!.Title" class="form-control maxlength"
+                                           maxlength="255"/>
+                                <ValidationMessage For="@(() => data.Title)"/>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="form-label required">@Loc["Message"]</label>
+                                <InputTextArea type="text" @bind-Value="@data!.Message" class="form-control maxlength"
+                                               maxlength="2000" rows="6"></InputTextArea>
+                                <ValidationMessage For="@(() => data.Title)"/>
+                            </div>
+                            @if (IsLoading)
+                            {
+                                <Loading/>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary" @onclick="SaveData">
+                                    Send Feedback
+                                </button>
+                            }
+
+                        </EditForm>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="title-area text-center">
+                            <h6 class="sec-title mb-10">@Loc["Get In Touch"]</h6>
+                        </div>
+                        <div class="about-item-wrap px-10">
+                            <div class="about-contact-grid style2">
+                                <div class="about-contact-icon">
+                                    <img src="img/icon/location-dot.svg" alt="">
+                                </div>
+                                <div class="about-contact-details">
+                                    <h6 class="box-title">@Loc["Our Address"]</h6>
+                                    <p>Hà Nội: Tầng 4, 28 Tăng Bạt Hổ, Q. Hai Bà Trưng.</p>
+                                    <p>TP HCM: Tầng 3, toà nhà Thiên Sơn, 5 Nguyễn Gia Thiều, Quận 3</p>
+                                    <p>Đà Nẵng: 497 Điện Biên Phủ, Phường Thanh Khê Đông , Quận Thanh Khê</p>
+                                    <p>Sydney: Phòng 1201, Tầng 12, 309 Phố Pitt, Sydney, Úc</p>
+                                </div>
+                            </div>
+                            <div class="about-contact-grid style2">
+                                <div class="about-contact-icon"><img src="img/icon/phone.svg" alt="">
+                                </div>
+                                <div class="about-contact-details">
+                                    <h6 class="box-title">@Loc["Phone number"]</h6>
+                                    <p>
+                                        <a href="tel:+01234567890" class="info-box_link">+8424 3820
+                                            2828</a> @Loc["Ha Noi"]</p>
+                                    <p>
+                                        <a href="tel:+09876543210" class="info-box_link">+8428 3820
+                                            2525</a> @Loc["Ho Chi Minh"]</p>
+                                </div>
+                            </div>
+                            <div class="about-contact-grid style2">
+                                <div class="about-contact-icon">
+                                    <img src="img/icon/envelope.svg" alt="">
+                                </div>
+                                <div class="about-contact-details">
+                                    <h6 class="box-title">@Loc["Email Address"]</h6>
+                                    <p class="about-contact-details-text">contact@dtour.vn</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CustomerRequestDto? data = new();
+    private FluentValidationValidator _fluentValidationValidator = default!;
+
+    private async Task SaveData()
+    {
+        var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
+        if (!isValid) return;
+        IsLoading = true;
+        StateHasChanged();
+        var result = await _httpService.PostAsync<ResultClient<Guid>>(ShareEndpoints.Other, new AddEditDataRequest<CustomerRequestDto>()
+        {
+            Data = data!,
+            Action = ActionCommandType.Add,
+        });
+
+        await ShowAlert(result.Succeeded ? "Thank for your contacting us" : result.Messages[0], result.Succeeded ? 0 : 1);
+        IsLoading = false;
+        data = new();
+        StateHasChanged();
+    }
+}

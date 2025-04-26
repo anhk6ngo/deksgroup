@@ -3,6 +3,7 @@
 public static class RailEndpoints
 {
     public static string GetDefaultLocation = "/default-location";
+    public static string GetContent = "/content";
     public static string Search = "/search";
     public static string Amenity = "/amenity";
     public static string OfferValidate = "/offer-validate";
@@ -14,6 +15,7 @@ public static class RailEndpoints
 
 public static class ShareEndpoints
 {
+    public static string Other = "api/other";
     public static string Role = "api/role";
     public static string Vnp = "api/vnpay";
     public static string TopUp = "api/topup";
@@ -22,4 +24,6 @@ public static class ShareEndpoints
     public static string ExchangeRate = "api/exchangerate";
     public static string Currency = "api/currency";
     public static string Report = "api/report";
+    public static string Post = "api/post";
+    public static string UpDown = "api/updown";
 }
