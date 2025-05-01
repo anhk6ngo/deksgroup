@@ -172,7 +172,9 @@
                                     <td>@item.CommitAmount.ToString("N2")</td>
                                     <th>@Loc[(item.PaymentType == 0 ? "Card" : "Cash")]</th>
                                     <th>@Loc[(item.TicketType == 0 ? "Air" : "Train")]</th>
-                                    <td>@item.TransactionId</td>
+                                    <td>@item.TransactionId
+                                        <a href="@($"/agent/cancel-booking/{item.BookingSessionId}")">Cancel Booking</a>
+                                        </td>
                                 </tr>
                             }
                         }

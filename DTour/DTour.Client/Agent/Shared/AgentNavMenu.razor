@@ -199,12 +199,22 @@
       <AuthorizeView Roles="@RoleConstants.ContentRole">
        <div class="menu-item me-0 me-lg-2">
         <NavLink href="/agent/post">
-        <span class="menu-link">
-         <span class="menu-icon">
-          <i class="fas fa-code-commit fs-3"></i>
+         <span class="menu-link">
+          <span class="menu-icon">
+           <i class="fas fa-code-commit fs-3"></i>
+          </span>
+          <span class="menu-title">@Loc["Posts"]</span>
          </span>
-         <span class="menu-title">@Loc["Posts"]</span>
-        </span>
+        </NavLink>
+       </div>
+       <div class="menu-item me-0 me-lg-2">
+        <NavLink href="/agent/tour-production">
+         <span class="menu-link">
+          <span class="menu-icon">
+           <i class="fas fa-book-journal-whills fs-3"></i>
+          </span>
+          <span class="menu-title">@Loc["Tours"]</span>
+         </span>
         </NavLink>
        </div>
       </AuthorizeView>

@@ -25,5 +25,6 @@ public static class ShareEndpoints
     public static string Currency = "api/currency";
     public static string Report = "api/report";
     public static string Post = "api/post";
+    public static string Tour = "api/tour";
     public static string UpDown = "api/updown";
 }

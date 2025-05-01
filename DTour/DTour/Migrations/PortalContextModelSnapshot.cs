@@ -17,7 +17,7 @@ namespace DTour.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -392,8 +392,7 @@ namespace DTour.Migrations
                         .HasColumnType("timestamp(6)");
 
                     b.Property<string>("SaveObject")
-                        .HasMaxLength(4000)
-                        .HasColumnType("character varying(4000)");
+                        .HasColumnType("text");
 
                     b.Property<double?>("ServiceFee")
                         .HasColumnType("double precision");
@@ -519,6 +518,91 @@ namespace DTour.Migrations
                     b.ToTable("topups");
                 });
 
+            modelBuilder.Entity("DTour.Domain.Entities.Data.TourProduction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Airlines")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Brand")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Departure")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("DurationDetail")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Hotel")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<bool>("Inbound")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Language")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Objective")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("PriceSymbol")
+                        .HasMaxLength(1)
+                        .HasColumnType("character varying(1)");
+
+                    b.Property<DateTime?>("PublicDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Schedule")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Size")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("TourGroup")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tourproductions", (string)null);
+                });
+
             modelBuilder.Entity("DTour.Domain.Entities.Data.UserBalance", b =>
                 {
                     b.Property<Guid>("Id")
@@ -567,6 +651,39 @@ namespace DTour.Migrations
                         });
 
                     b.Navigation("Medias");
+                });
+
+            modelBuilder.Entity("DTour.Domain.Entities.Data.TourProduction", b =>
+                {
+                    b.OwnsMany("DTour.Client.Shared.Dtos.Data.ContentDetail", "ContentDetails", b1 =>
+                        {
+                            b1.Property<Guid>("TourProductionId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("__synthesizedOrdinal")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Description")
+                                .HasColumnType("text");
+
+                            b1.Property<int>("Group")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Title")
+                                .HasColumnType("text");
+
+                            b1.HasKey("TourProductionId", "__synthesizedOrdinal");
+
+                            b1.ToTable("tourproductions");
+
+                            b1.ToJson("ContentDetails");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TourProductionId");
+                        });
+
+                    b.Navigation("ContentDetails");
                 });
 #pragma warning restore 612, 618
         }

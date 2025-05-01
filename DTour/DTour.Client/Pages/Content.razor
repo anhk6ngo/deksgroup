@@ -1,0 +1,345 @@
+﻿@page "/content/{id:int}"
+@inject IHttpServiceClient _httpService
+<div class="breadcumb-wrapper background-image" style="background-image: url('img/bg/blog@(Id > 2 ? "1" : "").jpg')">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">@Loc[Helper.GetKindTitle(Id)]</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="/">Home</a></li>
+                <li>@Loc[Helper.GetKindTitle(Id)]</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<section class="th-blog-wrapper space-top space-extra-bottom">
+    <div class="container">
+        @if (_items is { Count: > 0 })
+        {
+            <div class="row">
+                @switch (Id)
+                {
+                    case < 2:
+                    {
+                        <div class="col-xxl-8 col-lg-7">
+                            @if (_showDetail)
+                            {
+                                var item = _items[_iSelected];
+                                var aTags = $"{item.Tags}".SplitExt();
+                                <div class="th-blog blog-single has-post-thumbnail">
+                                    @if (item.Medias is { Count: > 0 })
+                                    {
+                                        <div class="blog-img">
+                                            <a class="cursor-pointer"
+                                               @onclick="() => { _showDetail = false; StateHasChanged(); }">
+                                                <img src="img/content/@item.Medias[0].Url"
+                                                     alt="Blog Image">
+                                            </a>
+                                        </div>
+                                    }
+                                    <div class="blog-content">
+                                        <div class="blog-meta">
+                                            <a class="author cursor-pointer"
+                                               @onclick="() => { _showDetail = false; StateHasChanged(); }">
+                                                <i
+                                                    class="fas fa-user"></i>by
+                                                @item.Author</a>
+                                            <a class="cursor-pointer"
+                                               @onclick="() => { _showDetail = false; StateHasChanged(); }">
+                                                <i
+                                                    class="fa-solid fa-calendar-days"></i>@item.PublicDate!.Value.ToString("dd, MMM yyyy")
+                                            </a>
+                                            <a class="cursor-pointer"
+                                               @onclick="() => { _showDetail = false; StateHasChanged(); }">
+                                                <img
+                                                    src="img/icon/map.svg" alt="">@item.Category</a></div>
+                                        <h2 class="blog-title">
+                                            <a @onclick="() => { _showDetail = false; StateHasChanged(); }">@item.Title</a>
+                                        </h2>
+                                        <p class="blog-text">
+                                            @((MarkupString)$"{item.Content}")
+                                        </p>
+                                        <a @onclick="() => { _showDetail = false; StateHasChanged(); }"
+                                           class="th-btn style4 th-icon cursor-pointer">Go back</a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                foreach (var t in _items.Skip((_pageNumber - 1) * _pageSize).Take(_pageSize).WithIndex())
+                                {
+                                    <div class="th-blog blog-single has-post-thumbnail">
+                                        @if (t.item.Medias is { Count: > 0 })
+                                        {
+                                            <div class="blog-img">
+                                                <a class="cursor-pointer"
+                                                   @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">
+                                                    <img src="img/content/@t.item.Medias[0].Url"
+                                                         alt="Blog Image">
+                                                </a>
+                                            </div>
+                                        }
+                                        <div class="blog-content">
+                                            <div class="blog-meta">
+                                                <a class="cursor-pointer author"
+                                                   @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">
+                                                    <i
+                                                        class="fas fa-user"></i>by
+                                                    @t.item.Author</a>
+                                                <a class="cursor-pointer"
+                                                   @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">
+                                                    <i
+                                                        class="fa-solid fa-calendar-days"></i>@t.item.PublicDate!.Value.ToString("dd, MMM yyyy")
+                                                </a>
+                                                <a class="cursor-pointer"
+                                                   @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">
+                                                    <img
+                                                        src="img/icon/map.svg" alt="">@t.item.Category</a></div>
+                                            <h2 class="blog-title">
+                                                <a class="cursor-pointer"
+                                                   @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">@t.item.Title</a>
+                                            </h2>
+                                            <p class="blog-text">@t.item.Description</p>
+                                            <a @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }"
+                                               class="th-btn style4 th-icon cursor-pointer">Read
+                                                More</a></div>
+                                    </div>
+                                    if (_pageCount > 1)
+                                    {
+                                        <div class="th-pagination">
+                                            <ul>
+                                                @for (var i = 1; i <= _pageCount; i++)
+                                                {
+                                                    <li>
+                                                        @{
+                                                            var i1 = i;
+                                                        }
+                                                        <a class="@(_pageNumber == i ? "active" : "")"
+                                                           @onclick="() => { _pageNumber = i1; }">@i</a>
+                                                    </li>
+                                                }
+                                                @if (_pageNumber < _pageCount)
+                                                {
+                                                    <li>
+                                                        <a class="next-page cursor-pointer"
+                                                           @onclick="() => { _pageNumber++; }">Next
+                                                            <img src="img/icon/arrow-right4.svg"
+                                                                 alt=""></a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <div class="col-xxl-4 col-lg-5">
+                            <aside class="sidebar-area">
+                                <div class="widget_blog widget_search">
+                                    <form class="search-form">
+                                        <input type="text" placeholder="Search" class="h-55px p-4">
+                                        <button type="submit"><i class="fas fa-search"></i></button>
+                                    </form>
+                                </div>
+                                <div class="widget_blog">
+                                    <h3 class="widget_title">Recent Posts</h3>
+                                    <div class="recent-post-wrap">
+                                        @foreach (var item in _items.OrderByDescending(o => o.PublicDate).Take(3))
+                                        {
+                                            <div class="recent-post">
+                                                <div class="media-img">
+                                                    <a href="/">
+                                                        <img
+                                                            src="img/content/@item.Medias?.FirstOrDefault()?.Url"
+                                                            alt="Blog Image"></a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="post-title">
+                                                        <a class="text-inherit"
+                                                           href="/">@item.Title</a></h4>
+                                                    <div class="recent-post-meta">
+                                                        <a href="/">
+                                                            <i class="fas fa-calendar"></i>@item.PublicDate!.Value.ToString("dd-MMM-yy")
+                                                        </a></div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="widget_blog widget_tag_cloud">
+                                    <h3 class="widget_title">Popular Tags</h3>
+                                    <div class="tagcloud"><a href="/">Tour</a> <a href="/">Adventure</a>
+                                        <a
+                                            href="/">Rent</a> <a href="/">Innovate</a> <a href="/">Hotel</a>
+                                        <a href="/">Modern</a> <a href="/">Luxury</a> <a href="/">Travel</a>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                        break;
+                    }
+                    case 2 when _showDetail:
+                    {
+                        var item = _items[_iSelected];
+                        var aTags = $"{item.Tags}".SplitExt();
+                        <div class="th-blog blog-single has-post-thumbnail">
+                            @if (item.Medias is { Count: > 0 })
+                            {
+                                <div class="blog-img">
+                                    <a class="cursor-pointer"
+                                       @onclick="() => { _showDetail = false; StateHasChanged(); }">
+                                        <img src="img/content/@item.Medias[0].Url"
+                                             alt="Blog Image">
+                                    </a>
+                                </div>
+                            }
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <a class="cursor-pointer"
+                                       @onclick="() => { _showDetail = false; StateHasChanged(); }">
+                                        <i
+                                            class="fa-solid fa-calendar-days"></i>@item.PublicDate!.Value.ToString("dd, MMM yyyy")
+                                    </a>
+                                </div>
+                                <h2 class="blog-title">
+                                    <a @onclick="() => { _showDetail = false; StateHasChanged(); }">@item.Title</a>
+                                </h2>
+                                <p class="blog-text">
+                                    @((MarkupString)$"{item.Content}")
+                                </p>
+                                <a @onclick="() => { _showDetail = false; StateHasChanged(); }"
+                                   class="th-btn style4 th-icon cursor-pointer">Go back</a>
+                            </div>
+                        </div>
+                        break;
+                    }
+                    case 2:
+                    {
+                        foreach (var t in _items.Skip((_pageNumber - 1) * _pageSize).Take(_pageSize).WithIndex())
+                        {
+                            <div class="col-md-4 th-blog blog-single has-post-thumbnail">
+                                @if (t.item.Medias is { Count: > 0 })
+                                {
+                                    <div class="blog-img">
+                                        <a class="cursor-pointer"
+                                           @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">
+                                            <img src="img/content/@t.item.Medias[0].Url"
+                                                 alt="Blog Image">
+                                        </a>
+                                    </div>
+                                }
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <a class="cursor-pointer"
+                                           @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">
+                                            <i
+                                                class="fa-solid fa-calendar-days"></i>@t.item.PublicDate!.Value.ToString("dd, MMM yyyy")
+                                        </a>
+                                        <a class="cursor-pointer"
+                                           @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">
+                                            <img
+                                                src="img/icon/map.svg" alt="">@t.item.Category</a>
+                                    </div>
+                                    <h2 class="blog-title">
+                                        <a class="cursor-pointer"
+                                           @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }">@t.item.Title</a>
+                                    </h2>
+                                    <a @onclick="() => { _showDetail = true; _iSelected = t.index; StateHasChanged(); }"
+                                       class="th-btn style4 th-icon cursor-pointer">Read
+                                        More</a></div>
+                            </div>
+                            if (_pageCount > 1)
+                            {
+                                <div class="th-pagination">
+                                    <ul>
+                                        @for (var i = 1; i <= _pageCount; i++)
+                                        {
+                                            <li>
+                                                @{
+                                                    var i1 = i;
+                                                }
+                                                <a class="@(_pageNumber == i ? "active" : "")"
+                                                   @onclick="() => { _pageNumber = i1; }">@i</a>
+                                            </li>
+                                        }
+                                        @if (_pageNumber < _pageCount)
+                                        {
+                                            <li>
+                                                <a class="next-page cursor-pointer"
+                                                   @onclick="() => { _pageNumber++; }">Next
+                                                    <img src="img/icon/arrow-right4.svg"
+                                                         alt=""></a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        }
+
+                        break;
+                    }
+                    case > 2:
+                    {
+                        if (_items is { Count: > 0 })
+                        {
+                            <div class="overflow-hidden space" id="gallery-sec">
+                                <div class="container-fluid">
+                                    <div class="row gy-4 gallery-row4">
+                                        @foreach (var item in _items)
+                                        {
+                                            if (item.Medias is { Count: 0 }) continue;
+                                            foreach (var img in item.Medias!)
+                                            {
+                                                <div class="col-auto">
+                                                    <div class="gallery-box style5">
+                                                        <div class="gallery-img global-img">
+                                                            <img src="img/content/@img" alt="gallery image">
+                                                            <a href="img/content/@img" class="icon-btn popup-image">
+                                                                <i class="fas fa-magnifying-glass-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="box-content text-center">
+                                                            <h3 class="text-white">@item.Title</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        break;
+                    }
+                }
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private List<PostDto>? _items = [];
+    private bool _showDetail = false;
+    private int _iSelected = 0;
+    private int _pageCount = 0;
+    private int _pageNumber = 1;
+    private int _pageSize = 4;
+    private bool _initPopup = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _items = await _httpService.GetAsync<List<PostDto>>($"{ShareEndpoints.Other}/{Id}");
+        _pageCount = (int)Math.Ceiling(_items.Count / (double)_pageSize);
+        _initPopup = true;
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_initPopup)
+        {
+            _initPopup = false;
+            await JsRuntime.InvokeVoidAsync("initMagnificPopup");
+        }
+    }
+
+}

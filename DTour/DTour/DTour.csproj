@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\content\" />
+    <Folder Include="wwwroot\img\dtour\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,271 @@
+﻿@page "/tour/{id:int}"
+@inject IHttpServiceClient _httpService
+
+@if (_showDetail)
+{
+    var tourInfo = data.ContentDetails?.FirstOrDefault(w => w.Group == 0) ?? new ContentDetail() { Group = 0 };
+    var tourInclude = data.ContentDetails?.FirstOrDefault(w => w.Group == 1) ?? new ContentDetail() { Group = 1 };
+    var tourNotInclude = data.ContentDetails?.FirstOrDefault(w => w.Group == 2) ?? new ContentDetail() { Group = 2 };
+    var images = data.ContentDetails?.Where(w => w.Group == 3).Select(s => s.Description).ToList() ?? [];
+    var tourDays = data.ContentDetails?.Where(w => w.Group == 4).ToList() ?? [];
+    var tourHelps = data.ContentDetails?.Where(w => w.Group == 5).ToList() ?? [];
+    var sImage = "";
+    if (images is { Count: > 0 })
+    {
+        var rnd = new Random().Next(images.Count);
+        sImage = images[rnd];
+    }
+
+    <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-300px h-md-600px"
+         style="background-size: 100% 100%;background-image:url('img/dtour/@sImage')">
+    </div>
+    <div class="container my-10 fs-4">
+        <h1>@tourInfo.Title</h1>
+        <div class="tour-snapshot">
+            <h2>Information</h2>
+            <div class="tour-snap-wrapp">
+                <div class="tour-snap">
+                    <div class="icon"><i class="fa fa-clock"></i></div>
+                    <div class="content">
+                        <span>@data.DurationDetail</span>
+                    </div>
+                </div>
+                <div class="tour-snap">
+                    <div class="icon"><i class="fa fa-calendar-days"></i></div>
+                    <div class="content">
+                        <span>@data.Schedule</span>
+                    </div>
+                </div>
+                <div class="tour-snap">
+                    <div class="icon"><i class="fa fa-user-group"></i></div>
+                    <div class="content">
+                        <span>@data.Size</span>
+                    </div>
+                </div>
+                <div class="tour-snap">
+                    <div class="icon"><i class="fa fa-user"></i></div>
+                    <div class="content">
+                        <span>@data.Language</span>
+                    </div>
+                </div>
+                <div class="tour-snap">
+                    <div class="icon"><i class="fa fa-plane-departure"></i></div>
+                    <div class="content">
+                        <span>@data.Airlines</span>
+                    </div>
+                </div>
+                <div class="tour-snap">
+                    <div class="icon"><i class="fa fa-location-circle"></i></div>
+                    <div class="content">
+                        <span>@data.Location</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border border-bottom-2 my-4">
+            <div class="w-25">Điểm khởi hành</div>
+            <div class="w-75">@data.Departure</div>
+        </div>
+        <div class="row border border-bottom-2 my-4">
+            <div class="w-25">Khách sạn</div>
+            <div class="w-75">@data.Hotel</div>
+        </div>
+        <div class="row border border-bottom-2 my-4">
+            <div class="w-25">Dành cho</div>
+            <div class="w-75">@data.Objective</div>
+        </div>
+        <div class="row border border-bottom-2 my-4">
+            <div class="w-25">Thương hiệu</div>
+            <div class="w-75">@data.Brand</div>
+        </div>
+        <div class="row border border-bottom-2 my-4">
+            <div class="w-25">Giá bao gồm</div>
+            <div class="w-75">@((MarkupString)$"{tourInclude.Description}")</div>
+        </div>
+        <div class="row border border-bottom-2 my-4">
+            <div class="w-25">Giá không bao gồm</div>
+            <div class="w-75">@((MarkupString)$"{tourNotInclude.Description}")</div>
+        </div>
+        <h2 class="sec-title">Hoạt động nổi bật</h2>
+        <div class="fs-5 fw-semibold text-gray-600">
+            <p class="mb-8">
+                @((MarkupString)$"{tourInfo.Description}")
+            </p>
+        </div>
+        <div class="position-relative overflow-hidden">
+            <h2 class="sec-title">Thư viện</h2>
+            <div class="slider-area">
+                <div
+                    class="swiper th-slider destination-slider13"
+                    data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"4"}},"effect":"coverflow","coverflowEffect":{"rotate":"35","stretch":"0","depth":"100","modifier":"1","slideShadows":"false"},"centeredSlides":"true"}'>
+                    <div class="swiper-wrapper">
+                        @foreach (var image in images)
+                        {
+                            <div class="swiper-slide">
+                                <div class="destination-box3">
+                                    <div class="destination-img">
+                                        <img src="img/dtour/@image" alt="tour image">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator separator-dotted separator-content border-dark my-15">
+            <i class="ki-duotone ki-abstract-19 fs-1 text-primary">
+                <span class="path1"></span>
+                <span class="path2"></span>
+            </i>
+        </div>
+        <h2 class="sec-title">Lịch trình</h2>
+        <div class="timeline timeline-border-dashed">
+            @foreach (var day in tourDays)
+            {
+                <div class="timeline-item">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-icon">
+                        <i class="ki-duotone ki-geolocation text-black-50 fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <div class="timeline-content mb-10 mt-n1">
+                        <div class="pe-3 mb-5">
+                            <div class="fs-5 fw-semibold mb-2">@day.Title</div>
+                        </div>
+                        <div class="overflow-auto pb-5">
+                            @((MarkupString)$"{day.Description}")
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <h2 class="sec-title">Trợ giúp</h2>
+        <div class="position-relative space-bottom overflow-hidden overflow-hidden mt-20" id="faq-sec">
+            <div class="container">
+                <div class="row gy-4 align-items-center justify-content-between">
+                    @if (tourHelps is{Count: > 0})
+                    {
+                        var i = 0;
+                        <div class="accordion" id="faqAccordion">
+                            @foreach (var item in tourHelps)
+                            {
+                                <div class="accordion-card style3">
+                                    <div class="accordion-header" id="collapse-item-1">
+                                        <button class="accordion-button"
+                                                type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapse-@i"
+                                                aria-expanded="true" aria-controls="collapse-1">
+                                            @item.Title
+                                        </button>
+                                    </div>
+                                    <div id="collapse-@i"
+                                         class="accordion-collapse collapse @(i == 0 ? "show" : "")"
+                                         aria-labelledby="collapse-item-@i" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            <p class="faq-text">@((MarkupString)$"{item.Description}")</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <button @onclick="() => { _showDetail = false; StateHasChanged(); }"
+           class="th-btn style4 th-icon cursor-pointer">Go back</button>
+    </div>
+}
+else
+{
+    <div class="breadcumb-wrapper background-image"
+         style="background-image: url('img/bg/blog@(Id > 2 ? "1" : "").jpg')">
+        <div class="container">
+            <div class="breadcumb-content">
+                <h1 class="breadcumb-title">@Loc[Helper.GetTourGroup(Id)]</h1>
+                <ul class="breadcumb-menu">
+                    <li><a href="/">Home</a></li>
+                    <li>@Loc[Helper.GetTourGroup(Id)]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container my-10">
+        <div class="row gy-4">
+            @if (_items is { Count: > 0 })
+            {
+                foreach (var item in _items)
+                {
+                    var tourInfo = item.ContentDetails?.FirstOrDefault(w => w.Group == 0);
+                    var images = item.ContentDetails?.Where(w => w.Group == 3).ToList();
+                    var sImage = "";
+                    if (images is { Count: > 0 })
+                    {
+                        var rnd = new Random().Next(images.Count);
+                        sImage = images[rnd].Description;
+                    }
+
+                    <div class="col-md-4">
+                        <div class="tour-box style4">
+                            <div class="tour-box_img global-img">
+                                <img src="img/dtour/@sImage" alt="image">
+                            </div>
+                            <div class="tour-content">
+                                <h3 class="box-title">
+                                    @tourInfo?.Title
+                                </h3>
+                                <h4 class="tour-box_price">
+                                            <span
+                                                class="currency">@(item?.Price.AutoFormat()) @item?.PriceSymbol</span>/Person
+                                </h4>
+                                <div class="tour-action">
+                                            <span>
+                                                <i class="fas fa-clock"></i>
+                                                @item?.DurationDetail
+                                            </span>
+                                    <button class="th-btn style4 th-icon"
+                                            @onclick="() => { SetItem(item); }">@Loc["Book now"]</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private List<TourProductionDto>? _items = [];
+    private TourProductionDto data = new();
+    private bool _showDetail = false;
+    private bool initSlider = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _items = await _httpService.GetAsync<List<TourProductionDto>>($"{ShareEndpoints.Other}/tour/{Id}");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (initSlider)
+        {
+            initSlider = false;
+            await JsRuntime.InvokeVoidAsync("initTheme");
+        }
+    }
+
+    private void SetItem(TourProductionDto? item)
+    {
+        data = item!;
+        _showDetail = true;
+        initSlider = true;
+        StateHasChanged();
+    }
+
+}

@@ -1,0 +1,822 @@
+﻿@page "/agent/tour-production"
+@inject NavigationManager Navigation
+@attribute [Authorize(Roles = $"{RoleConstants.ContentRole}")]
+<PageTitle>@Loc["Content"]</PageTitle>
+<SectionContent SectionName="@NavConstants.TbLeft">
+    <Breadcrumb Slash="true"></Breadcrumb>
+    <Breadcrumb TextMuted="true">@Loc["Content"]</Breadcrumb>
+</SectionContent>
+<SectionContent SectionName="@NavConstants.TbRight">
+    <button class="btn btm-sm btn-custom align-self-center" @onclick="() => FormAction(-1, 0)">
+        <i class="fa fa-plus-square"></i>@Loc["Add new"]
+    </button>
+</SectionContent>
+@if (IsLoading)
+{
+    <LoadingRotate/>
+}
+<Card Title="@Loc["List of Content"]">
+    @if (_items == null || IsLoading)
+    {
+        <Loading/>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7" id="@UiConstants.TableId">
+                <thead>
+                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                    <th>@Loc["Action"]</th>
+                    <th>@Loc["Title"]</th>
+                    <th>@Loc["Schedule"]</th>
+                    <th>@Loc["Group"]</th>
+                    <th>@Loc["Publish Date"]</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var t in _items.WithIndex())
+                {
+                    <tr>
+                        <td>
+                            @if (t.item.PublicDate is null)
+                            {
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-success"
+                                        @onclick="@(() => FormAction(t.index, 1))">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-icon btn-danger"
+                                        @onclick="@(() => FormAction(t.index, 2))">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-primary"
+                                        @onclick="@(() => FormAction(t.index, 3))">
+                                    Publish
+                                </button>
+                            }
+                            else
+                            {
+                                <button @key="Guid.NewGuid()" class="btn btn-sm btn-primary"
+                                        @onclick="@(() => FormAction(t.index, 4))">
+                                    Un-publish
+                                </button>
+                            }
+                        </td>
+                        <td>@t.item.ContentDetails?.FirstOrDefault(w => w.Group == 0)?.Title</td>
+                        <td>@t.item.Schedule</td>
+                        <td>@(Loc[Helper.GetTourGroup(t.item.TourGroup)])</td>
+                        <td>@t.item.PublicDate?.ToString("dd-MMM-yyyy")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</Card>
+<CustomModal Title="@($"{Title} Content")" OnClickCallback="SaveData" SaveTitle="@Loc["Save Change"]"
+             CancelTitle="@Loc["Cancel"]" ModalClass="1">
+    <EditForm Model="data" class="form">
+        <FluentValidationValidator @ref="_fluentValidationValidator"/>
+        <ul class="nav nav-pills nav-pills-custom row position-relative mx-0 mb-9 w-lg-50">
+            <li class="nav-item col-3 mx-0 p-0">
+                <a class="nav-link active d-flex justify-content-center w-100 border-0 h-100"
+                   data-bs-toggle="pill"
+                   href="#tour_tab_1">
+                    <span class="nav-text text-gray-800 fw-bold fs-6 mb-3">
+                        Content
+                    </span>
+                    <span
+                        class="bullet-custom position-absolute z-index-2 bottom-0 w-100 h-4px bg-primary rounded"></span>
+                </a>
+            </li>
+            <li class="nav-item col-3 mx-0 p-0">
+                <a class="nav-link d-flex justify-content-center w-100 border-0 h-100" data-bs-toggle="pill"
+                   href="#tour_tab_2">
+                    <span class="nav-text text-gray-800 fw-bold fs-6 mb-3">
+                        Days
+                    </span>
+                    <span
+                        class="bullet-custom position-absolute z-index-2 bottom-0 w-100 h-4px bg-primary rounded"></span>
+                </a>
+            </li>
+            <li class="nav-item col-3 mx-0 p-0">
+                <a class="nav-link d-flex justify-content-center w-100 border-0 h-100" data-bs-toggle="pill"
+                   href="#tour_tab_3">
+                    <span class="nav-text text-gray-800 fw-bold fs-6 mb-3">
+                        Helps
+                    </span>
+                    <span
+                        class="bullet-custom position-absolute z-index-2 bottom-0 w-100 h-4px bg-primary rounded"></span>
+                </a>
+            </li>
+            <li class="nav-item col-3 mx-0 p-0">
+                <a class="nav-link d-flex justify-content-center w-100 border-0 h-100" data-bs-toggle="pill"
+                   href="#tour_tab_4">
+                    <span class="nav-text text-gray-800 fw-bold fs-6 mb-3">
+                        Upload Media
+                    </span>
+                    <span
+                        class="bullet-custom position-absolute z-index-2 bottom-0 w-100 h-4px bg-primary rounded"></span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="tourTabContent">
+            <div class="tab-pane fade show active" id="tour_tab_1">
+                <div class="row mb-7">
+                    <div class="col-md-8">
+                        <label class="form-label">@Loc["Title"]</label>
+                        <InputText type="text" @bind-Value="@_tourInfo.Title" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">@Loc["Kind"]</label>
+                        <select class="form-select bg-light-warning" data-control="select2" data-id="config"
+                                data-dropdown-parent="#@UiConstants.GetModalNameDefault">
+                            <option value="">Select Item</option>
+                            @for (var i = 0; i < 6; i++)
+                            {
+                                <option value="@i"
+                                        selected="@(i == data!.TourGroup)">@(Loc[Helper.GetTourGroup(i)])</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="form-label">Description</label>
+                    <div id="tour_info" name="tour_info">
+                        @((MarkupString)$"{_tourInfo.Description}")
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <div class="col-md-2">
+                        <label class="form-label">Duration</label>
+                        <InputText type="text" @bind-Value="@data!.DurationDetail" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Schedule</label>
+                        <InputText type="text" @bind-Value="@data!.Schedule" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Group Size</label>
+                        <InputText type="text" @bind-Value="@data!.Size" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Language</label>
+                        <InputText type="text" @bind-Value="@data!.Language" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Airlines</label>
+                        <InputText type="text" @bind-Value="@data!.Airlines" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Location</label>
+                        <InputText type="text" @bind-Value="@data!.Location" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Departure</label>
+                        <InputText type="text" @bind-Value="@data!.Departure" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Hotel</label>
+                        <InputText type="text" @bind-Value="@data!.Hotel" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Objective</label>
+                        <InputText type="text" @bind-Value="@data!.Objective" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Brand</label>
+                        <InputText type="text" @bind-Value="@data!.Brand" class="form-control maxlength"
+                                   maxlength="255"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Price</label>
+                        <input type="text" @bind="@data.Price" class="form-control numberinputmask"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Symbol Currency</label>
+                        <InputText type="text" @bind-Value="@data!.PriceSymbol" class="form-control maxlength"
+                                   maxlength="1"/>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <div class="col-md-6">
+                        <label class="form-label">Include</label>
+                        <div id="tour_include" name="tour_include">
+                            @((MarkupString)$"{_tourInclude.Description}")
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Not include</label>
+                        <div id="tour_not_include" name="tour_not_include">
+                            @((MarkupString)$"{_tourNotInclude.Description}")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tour_tab_2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <DetailTemplate TItem="ContentDetail" Items="_tourDays" CaptionAdd="Add New Line"
+                                        OnClickCallback="async () => {await  AddEditMediaLine(new ContentDetail() { Group = 4 }, 0, 1); }"
+                                        HasScroll="false">
+                            <RowTemplate Context="item">
+                                <div class="row p-2 @(item.iIndex % 2 == 1 ? "bg-gray-200" : "")">
+                                    <div class="col-md-9">
+                                        @item.data.Title
+                                    </div>
+                                    <div class="col-md-3 mt-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="btn btn-icon btn-danger"
+                                                      @onclick="async () => await AddEditMediaLine(item.data, 1, 1)">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span class="btn btn-icon btn-primary"
+                                                      @onclick="async () => await AddEditMediaLine(item.data, 2, 1)">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </RowTemplate>
+                        </DetailTemplate>
+                    </div>
+                    <div class="col-md-6">
+                        @if (IsLoading)
+                        {
+                            <Loading/>
+                        }
+                        else
+                        {
+                            <div class="row mb-7">
+                                <label class="form-label">@Loc["Title"]</label>
+                                <InputText type="text" @bind-Value="@_tmpDay.Title" class="form-control maxlength"
+                                           maxlength="255"/>
+                            </div>
+                            <div class="row">
+                                <label class="form-label">Description</label>
+                                <div id="tour_day" name="tour_day">
+                                    @((MarkupString)$"{_tmpDay.Description}")
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tour_tab_3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <DetailTemplate TItem="ContentDetail" Items="_tourHelps" CaptionAdd="Add New Line"
+                                        OnClickCallback="async () => {await  AddEditMediaLine(new ContentDetail() { Group = 5 }, 0, 2); }"
+                                        HasScroll="false">
+                            <RowTemplate Context="item">
+                                <div class="row p-2 @(item.iIndex % 2 == 1 ? "bg-gray-200" : "")">
+                                    <div class="col-md-9">
+                                        @item.data.Title
+                                    </div>
+                                    <div class="col-md-3 mt-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="btn btn-icon btn-danger"
+                                                      @onclick="async () => await AddEditMediaLine(item.data, 1, 2)">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span class="btn btn-icon btn-primary"
+                                                      @onclick="async () => await AddEditMediaLine(item.data, 2, 2)">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </RowTemplate>
+                        </DetailTemplate>
+                    </div>
+                    <div class="col-md-6">
+                        @if (IsLoading)
+                        {
+                            <Loading/>
+                        }
+                        else
+                        {
+                            <div class="row mb-7">
+                                <label class="form-label">@Loc["Title"]</label>
+                                <InputText type="text" @bind-Value="@_tmpHelp.Title" class="form-control maxlength"
+                                           maxlength="255"/>
+                            </div>
+                            <div class="row">
+                                <label class="form-label">Description</label>
+                                <div id="tour_help" name="tour_help">
+                                    @((MarkupString)$"{_tmpHelp.Description}")
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tour_tab_4">
+                <Upload IsLoading="IsLoading" BtnClass="btn-custom" IsLoadingFile="IsLoadingFile"
+                        OnChangeUpload="OnChangeLoadFile" OnUploadFileCallback="UploadFile" MultipleFiles="true"
+                        ShowDownload="false"/>
+                @if (_lstImages is { Count: > 0 })
+                {
+                    <div class="row g-3 g-lg-6 m-10">
+                        @foreach (var image in _lstImages)
+                        {
+                            var path = $"{baseUrl}img/dtour/{image}";
+                            <div class="col-md-2">
+                                <img class="w-125px h-125px" src="@path" alt="img"/>
+                                <p>@image</p>
+                            </div>
+                        }
+                    </div>
+                }
+                <DetailTemplate TItem="ContentDetail" Items="_tourMedias" CaptionAdd="Add New Line"
+                                OnClickCallback="async () => { await AddEditMediaLine(new ContentDetail(){Group = 3}, 0); }"
+                                HasScroll="false">
+                    <RowTemplate Context="item">
+                        <div class="row p-2 @(item.iIndex % 2 == 1 ? "bg-gray-200" : "")">
+                            <div class="col-md-8">
+                                <label class="fs-6 fw-bold form-label">Path @(item.iIndex + 1)</label>
+                                <input class="form-control maxlength" @bind="@item.data.Description"
+                                       maxlength="255"/>
+                            </div>
+                            <div class="col-md-2 mt-8">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span class="btn btn-icon btn-danger"
+                                              @onclick="() => AddEditMediaLine(item.data, 1)">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="btn btn-icon btn-warning"
+                                              @onclick="() => AddEditMediaLine(item.data, 2)">
+                                            <i class="fas fa-copy"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="btn btn-icon btn-light-info"
+                                              @onclick="() => AddEditMediaLine(item.data, 3)">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </RowTemplate>
+                </DetailTemplate>
+            </div>
+        </div>
+    </EditForm>
+</CustomModal>
+<CustomModal Title="Choose Images" HideSaveButton="true" ModalId="choose_image" AddClass="3" Backdrop="true"
+             ModalClass="3">
+    @if (_lstImages is { Count: > 0 })
+    {
+        <h4>Choose image</h4>
+        <div class="row g-3 g-lg-6 m-10">
+            @foreach (var image in _lstImages)
+            {
+                var path = $"{baseUrl}img/dtour/{image}";
+                <div class="col-md-2 text-center"
+                     @onclick="async () => {await SetImage(image); }">
+                    <img class="w-125px h-125px" src="@path" alt="img"/>
+                </div>
+            }
+        </div>
+    }
+</CustomModal>
+
+@code {
+    private List<string> _lstImages = [];
+    private List<TourProductionDto>? _items;
+    private TourProductionDto? data = new();
+    private int iAction { get; set; } = 0;
+    private string Title { get; set; } = "Add new";
+    private string baseUrl = "";
+    private FluentValidationValidator _fluentValidationValidator = default!;
+    private ContentDetail _tmpMediaSource = new();
+    private ContentDetail _tmpHelp = new();
+    private ContentDetail _tmpDay = new();
+    private List<IBrowserFile> _loadedFiles = new();
+    private ContentDetail _tourInfo = new();
+    private ContentDetail _tourInclude = new();
+    private ContentDetail _tourNotInclude = new();
+    private List<ContentDetail> _tourMedias = [];
+    private List<ContentDetail> _tourHelps = [];
+    private List<ContentDetail> _tourDays = [];
+    private bool _initHelpEditor = false;
+    private bool _initDayEditor = false;
+
+    private UploadCommandRequest _uploadRequest = new()
+    {
+        TypeUpload = 0,
+        Folder = "dtour",
+        Files = new List<UploadRequest>()
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        _items = await _httpService.GetAsync<List<TourProductionDto>>($"{ShareEndpoints.Tour}");
+        InitDataTable = true;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            baseUrl = Navigation.BaseUri;
+        }
+
+        if (InitDataTable)
+        {
+            InitDataTable = false;
+            await CallInitialDataTable();
+        }
+
+        if (_initHelpEditor)
+        {
+            _initHelpEditor = false;
+            await SetEditor("tour_help");
+        }
+
+        if (_initDayEditor)
+        {
+            _initDayEditor = false;
+            await SetEditor("tour_day");
+        }
+    }
+
+    [JSInvokable]
+    public void EditorCall(string id, string value)
+    {
+        switch (id)
+        {
+            case "tour_include":
+                _tourInclude.Description = value;
+                break;
+            case "tour_not_include":
+                _tourNotInclude.Description = value;
+                break;
+            case "tour_info":
+                _tourInfo.Description = value;
+                break;
+            case "tour_help":
+                _tmpHelp.Description = value;
+                break;
+            case "tour_day":
+                _tmpDay.Description = value;
+                break;
+            default:
+                break;
+        }
+
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void UpdateSelect2(string value, string controlId)
+    {
+        data!.TourGroup = value.ConvertToInt();
+    }
+
+    private async Task FormAction(int index, int action)
+    {
+        data = new TourProductionDto();
+        if (index >= 0)
+        {
+            _items![index].Adapt(data);
+        }
+        if (action > 2)
+        {
+            IsLoading = true;
+            StateHasChanged();
+            data.PublicDate = action == 3 ? DateTime.UtcNow : null;
+            var result = await _httpService.PostAsync<ResultClient<Guid>>(ShareEndpoints.Tour, new AddEditDataRequest<TourProductionDto>()
+            {
+                Data = data!,
+                Action = ActionCommandType.Edit,
+            });
+            if (result.Succeeded)
+            {
+                var oFind = _items!.FirstOrDefault(w => w.Id == data!.Id);
+                if (oFind != null)
+                {
+                    oFind.PublicDate = data.PublicDate;
+                }
+            }
+            await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
+            IsLoading = false;
+            InitDataTable = true;
+            StateHasChanged();
+            return;
+        }
+        _tourInfo = data.ContentDetails?.FirstOrDefault(w => w.Group == 0) ?? new ContentDetail() { Group = 0 };
+        _tourInclude = data.ContentDetails?.FirstOrDefault(w => w.Group == 1) ?? new ContentDetail() { Group = 1 };
+        _tourNotInclude = data.ContentDetails?.FirstOrDefault(w => w.Group == 2) ?? new ContentDetail() { Group = 2 };
+        _tourMedias = data.ContentDetails?.Where(w => w.Group == 3).ToList() ?? [];
+        _tourDays = data.ContentDetails?.Where(w => w.Group == 4).ToList() ?? [];
+        _tourHelps = data.ContentDetails?.Where(w => w.Group == 5).ToList() ?? [];
+        if (_tourHelps is { Count: 0 })
+        {
+            _tourHelps =
+            [
+                new ContentDetail()
+                {
+                    Group = 5,
+                    Title = "Chính sách trẻ em"
+                },
+
+                new ContentDetail()
+                {
+                    Group = 5,
+                    Title = "Điều kiện hoàn hủy"
+                },
+
+                new ContentDetail()
+                {
+                    Group = 5,
+                    Title = "Mục dành cho khách mang quốc tịch nước ngoài hoặc Việt kiều"
+                },
+
+                new ContentDetail()
+                {
+                    Group = 5,
+                    Title = "Lưu ý"
+                },
+
+                new ContentDetail()
+                {
+                    Group = 5,
+                    Title = "Chuyên viên tư vấn",
+                    Description = "Mọi chi tiết & hỗ trợ vui lòng liên hệ hotline 0283 820 2525"
+                }
+            ];
+        }
+
+        if (_tourHelps is { Count: > 0 })
+        {
+            _tmpHelp = _tourHelps[0];
+        }
+
+        if (_tourDays is { Count: > 0 })
+        {
+            _tmpDay = _tourDays[0];
+        }
+
+        iAction = action;
+        Title = action switch
+        {
+            1 => "Edit",
+            2 => "Delete",
+            _ => "Add new"
+        };
+        if (action == 1)
+        {
+            _lstImages = [];
+            foreach (var sPath in _tourMedias.Select(media => $"{media.Description}".Trim().ToLower()).Where(sPath => sPath.Length >= 4 && sPath[..4] != "http"))
+            {
+                _lstImages.Add(sPath);
+            }
+        }
+
+        await ToggleModal();
+        await SetSelectTextNum();
+        await SetEditor("tour_include");
+        await SetEditor("tour_not_include");
+        await SetEditor("tour_info");
+        await SetEditor("tour_day");
+        await SetEditor("tour_help");
+    }
+
+    private async Task SaveData()
+    {
+        var isValid = _fluentValidationValidator.Validate(o => o.IncludeAllRuleSets());
+        if (!isValid) return;
+        data!.ContentDetails = [];
+        data.ContentDetails.Add(_tourInfo);
+        data.ContentDetails.Add(_tourInclude);
+        data.ContentDetails.Add(_tourNotInclude);
+        data.ContentDetails.AddRange(_tourMedias);
+        data.ContentDetails.AddRange(_tourDays);
+        data.ContentDetails.AddRange(_tourHelps);
+        IsLoading = true;
+        StateHasChanged();
+        var result = new ResultClient<Guid>();
+        switch (iAction)
+        {
+            case 2:
+                if (data != null)
+                {
+                    result = await _httpService.DeleteAsync<ResultClient<Guid>>($"{ShareEndpoints.Tour}/{data.Id}");
+                    if (result.Succeeded)
+                    {
+                        _items?.Remove(data);
+                    }
+                }
+
+                break;
+            default:
+                result = await _httpService.PostAsync<ResultClient<Guid>>(ShareEndpoints.Tour, new AddEditDataRequest<TourProductionDto>()
+                {
+                    Data = data!,
+                    Action = iAction == 0 ? ActionCommandType.Add : ActionCommandType.Edit,
+                });
+                if (result.Succeeded)
+                {
+                    if (iAction == 0)
+                    {
+                        data!.Id = result.Data;
+                        _items?.Add(data);
+                    }
+                    else
+                    {
+                        var oFind = _items!.FirstOrDefault(w => w.Id == data!.Id);
+                        if (oFind != null)
+                        {
+                            data.Adapt(oFind);
+                        }
+                    }
+                }
+
+                break;
+        }
+
+        await ShowAlert(result.Messages[0], result.Succeeded ? 0 : 1);
+        IsLoading = false;
+        InitDataTable = true;
+        StateHasChanged();
+        await ToggleModal();
+    }
+
+    private async Task SetImage(string path)
+    {
+        _tmpMediaSource.Description = path;
+        await ToggleModal("#choose_image");
+    }
+
+    private void OnChangeLoadFile(InputFileChangeEventArgs e)
+    {
+        IsLoadingFile = true;
+        _loadedFiles.Clear();
+        foreach (var file in e.GetMultipleFiles(20))
+        {
+            try
+            {
+                _loadedFiles.Add(file);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        IsLoadingFile = false;
+    }
+
+    public async Task UploadFile(MouseEventArgs eventArgs)
+    {
+        IsLoading = true;
+        long maxFileSize = 1024 * 1024 * 100;
+        var upload = false;
+
+        foreach (var iFile in _loadedFiles)
+        {
+            try
+            {
+                var memoryStream = new MemoryStream();
+                await iFile.OpenReadStream(maxFileSize).CopyToAsync(memoryStream);
+                _uploadRequest.Files!.Add(new UploadRequest()
+                {
+                    Data = memoryStream.ToArray(),
+                    FileName = iFile.Name
+                });
+                upload = true;
+            }
+            catch (Exception ex)
+            {
+                await ShowAlert(ex.Message, 1);
+                return;
+            }
+        }
+
+        if (upload)
+        {
+            var results = await _httpService.PostAsync<List<UploadResult>>(ShareEndpoints.UpDown, _uploadRequest);
+            foreach (var uploadResult in results.Where(w => w.Uploaded && w.FileName.NotIsNullOrEmpty()))
+            {
+                _lstImages.Add($"{uploadResult.FileName}");
+            }
+        }
+
+        _uploadRequest.Files = new List<UploadRequest>();
+        IsLoading = false;
+    }
+
+    private async Task AddEditMediaLine(ContentDetail item, int iAction, int iSource = 0)
+    {
+        switch (iAction)
+        {
+            case 1:
+                switch (iSource)
+                {
+                    case 0:
+                        _tourMedias.Remove(item);
+                        break;
+                    case 1:
+                        _tourDays.Remove(item);
+                        break;
+                    case 2:
+                        _tourHelps.Remove(item);
+                        break;
+                }
+
+                break;
+            case 2:
+                switch (iSource)
+                {
+                    case 0:
+                        var newItem = new ContentDetail();
+                        item.Adapt(newItem);
+                        _tourMedias.Add(newItem);
+                        break;
+                    case 1:
+                        IsLoading = true;
+                        StateHasChanged();
+                        await Task.Delay(200);
+                        _tmpDay = item;
+                        IsLoading = false;
+                        StateHasChanged();
+                        _initDayEditor = true;
+                        break;
+                    case 2:
+                        IsLoading = true;
+                        StateHasChanged();
+                        await Task.Delay(200);
+                        _tmpHelp = item;
+                        IsLoading = false;
+                        StateHasChanged();
+                        _initHelpEditor = true;
+                        break;
+                }
+
+                break;
+            case 3:
+                if (_lstImages is { Count: 0 })
+                {
+                    return;
+                }
+
+                _tmpMediaSource = item;
+                ToggleModal("#choose_image").GetAwaiter();
+                break;
+            default:
+                switch (iSource)
+                {
+                    case 0:
+                        _tourMedias.Add(item);
+                        break;
+                    case 1:
+                        IsLoading = true;
+                        StateHasChanged();
+                        await Task.Delay(200);
+                        _tourDays.Add(item);
+                        _tmpDay = item;
+                        IsLoading = false;
+                        StateHasChanged();
+                        _initDayEditor = true;
+                        break;
+                    case 2:
+                        IsLoading = true;
+                        StateHasChanged();
+                        await Task.Delay(200);
+                        _tourHelps.Add(item);
+                        _tmpHelp = item;
+                        IsLoading = false;
+                        StateHasChanged();
+                        _initHelpEditor = true;
+                        break;
+                }
+
+                break;
+        }
+
+        StateHasChanged();
+    }
+
+}

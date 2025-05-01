@@ -359,6 +359,16 @@
     window.initSlider = function () {
         runSlider()
     }
+    window.initMagnificPopup = () =>{
+        $(".popup-image").magnificPopup({
+            type: "image",
+            mainClass: 'mfp-zoom-in',
+            removalDelay: 260,
+            gallery: {
+                enabled: true,
+            },
+        });
+    };
 })(jQuery);
 
 

@@ -66,7 +66,7 @@
                         </td>
                         <td>@t.item.Title</td>
                         <td>@t.item.Description</td>
-                        <td>@(GetKindContent(t.item.Kind))</td>
+                        <td>@(Loc[Helper.GetKindTitle(t.item.Kind)])</td>
                         <td>@t.item.Category</td>
                         <td>@t.item.Author</td>
                         <td>@t.item.Tags</td>
@@ -115,22 +115,16 @@
                         <ValidationMessage For="@(() => data.Title)"/>
                     </div>
                     <div class="col-md-4">
-                        <div class="d-flex justify-content-evenly">
-                            <div class="form-check form-check-custom form-check-solid">
-                                <input class="form-check-input" type="radio" checked="@(data.Kind == 0)"
-                                       @onchange="@(() => data.Kind = 0)" id="gMethod"/>
-                                <label class="form-check-label" for="gMethod">
-                                    @Loc["DTour News"]
-                                </label>
-                            </div>
-                            <div class="form-check form-check-custom form-check-solid">
-                                <input class="form-check-input" type="radio" checked="@(data.Kind == 1)"
-                                       @onchange="@(() => data.Kind = 1)" id="gMethod1"/>
-                                <label class="form-check-label" for="gMethod1">
-                                    @Loc["Travel Guide"]
-                                </label>
-                            </div>
-                        </div>
+                        <label class="form-label">@Loc["Kind"]</label>
+                        <select class="form-select bg-light-warning" data-control="select2" data-id="config"
+                                data-dropdown-parent="#@UiConstants.GetModalNameDefault">
+                            <option value="">Select Item</option>
+                            @for (var i = 0; i < 6; i++)
+                            {
+                                <option value="@i"
+                                        selected="@(i == data.Kind)">@(Loc[Helper.GetKindTitle(i)])</option>
+                            }
+                        </select>
                     </div>
                 </div>
                 <div class="row mb-7">
@@ -288,6 +282,11 @@
         data!.Content = value;
         StateHasChanged();
     }
+    [JSInvokable]
+    public void UpdateSelect2(string value, string controlId)
+    {
+        data!.Kind = value.ConvertToInt();
+    }
 
     private async Task FormAction(int index, int action)
     {
@@ -337,7 +336,7 @@
             }
         }
         await ToggleModal();
-        await SetMaxLength();
+        await SetSelectTextNum();
         await SetEditor("post_content");
     }
 
@@ -392,16 +391,7 @@
         StateHasChanged();
         await ToggleModal();
     }
-
-    private string GetKindContent(int iKind)
-    {
-        return iKind switch
-        {
-            1 => "Tip & trick",
-            _ => "News"
-        };
-    }
-
+    
     private async Task SetImage(string path)
     {
         _tmpMediaSource.Url = path;

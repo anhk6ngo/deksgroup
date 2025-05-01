@@ -21,4 +21,14 @@ public class OtherController : AnonymousApiController
         });
         return Ok(result);
     }
+    
+    [HttpGet("tour/{id}")]
+    public async Task<IActionResult> GetTour(int id)
+    {
+        var result = await _mediator!.Send(new GetAllTourQuery()
+        {
+            KindTour = id
+        });
+        return Ok(result);
+    }
 }

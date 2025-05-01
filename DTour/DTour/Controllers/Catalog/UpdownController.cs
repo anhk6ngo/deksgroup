@@ -17,7 +17,7 @@
                     try
                     {
                         fileName = $"{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{fileName}"; 
-                        var path = Path.Combine(storeFolder, "img", "content", fileName);
+                        var path = Path.Combine(storeFolder, "img", request.Folder ?? "content", fileName);
                         await System.IO.File.WriteAllBytesAsync(path, file.Data);
                         uploadResult.Uploaded = true;
                         uploadResult.FileName = fileName;
