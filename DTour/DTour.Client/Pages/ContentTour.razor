@@ -9,6 +9,7 @@
     var images = data.ContentDetails?.Where(w => w.Group == 3).Select(s => s.Description).ToList() ?? [];
     var tourDays = data.ContentDetails?.Where(w => w.Group == 4).ToList() ?? [];
     var tourHelps = data.ContentDetails?.Where(w => w.Group == 5).ToList() ?? [];
+    var tourRelation = _items?.Where(w => w.Id != data.Id).ToList();
     var sImage = "";
     if (images is { Count: > 0 })
     {
@@ -87,7 +88,7 @@
             <div class="w-75">@((MarkupString)$"{tourNotInclude.Description}")</div>
         </div>
         <h2 class="sec-title">Hoạt động nổi bật</h2>
-        <div class="fs-5 fw-semibold text-gray-600">
+        <div class="fs-4 fw-semibold text-gray-600">
             <p class="mb-8">
                 @((MarkupString)$"{tourInfo.Description}")
             </p>
@@ -121,32 +122,43 @@
         </div>
         <h2 class="sec-title">Lịch trình</h2>
         <div class="timeline timeline-border-dashed">
-            @foreach (var day in tourDays)
-            {
-                <div class="timeline-item">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-icon">
-                        <i class="ki-duotone ki-geolocation text-black-50 fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                    <div class="timeline-content mb-10 mt-n1">
-                        <div class="pe-3 mb-5">
-                            <div class="fs-5 fw-semibold mb-2">@day.Title</div>
+            <div class="accordion" id="kt_accordion">
+                @foreach (var t in tourDays.WithIndex())
+                {
+                    <div class="timeline-item">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-icon">
+                            <i class="ki-duotone ki-geolocation text-black-50 fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
                         </div>
-                        <div class="overflow-auto pb-5">
-                            @((MarkupString)$"{day.Description}")
+                        <div class="timeline-content mb-10 mt-n1">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header mb-6" id="kt_accordion_header_@t.index">
+                                    <button class="accordion-button fs-2 fw-semibold" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#kt_accordion_body_@t.index"
+                                            aria-expanded="true" aria-controls="kt_accordion_body_@t.index">
+                                        @t.item.Title
+                                    </button>
+                                </h2>
+                                <div id="kt_accordion_body_@t.index" class="accordion-collapse collapse @(t.index == 0 ? "show": "")"
+                                     aria-labelledby="kt_accordion_header_@t.index" data-bs-parent="#kt_accordion">
+                                    <div class="accordion-body">
+                                        @((MarkupString)$"{t.item.Description}")
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
         <h2 class="sec-title">Trợ giúp</h2>
         <div class="position-relative space-bottom overflow-hidden overflow-hidden mt-20" id="faq-sec">
             <div class="container">
                 <div class="row gy-4 align-items-center justify-content-between">
-                    @if (tourHelps is{Count: > 0})
+                    @if (tourHelps is { Count: > 0 })
                     {
                         var i = 0;
                         <div class="accordion" id="faqAccordion">
@@ -177,7 +189,50 @@
             </div>
         </div>
         <button @onclick="() => { _showDetail = false; StateHasChanged(); }"
-           class="th-btn style4 th-icon cursor-pointer">Go back</button>
+                class="th-btn style4 th-icon cursor-pointer">Go back
+        </button>
+        @if (tourRelation is { Count: > 0 })
+        {
+            <h2 class="sec-title">Tour liên quan</h2>
+            <div class="row">
+                @foreach (var item in tourRelation)
+                {
+                    tourInfo = item.ContentDetails?.FirstOrDefault(w => w.Group == 0);
+                    images = item.ContentDetails?.Where(w => w.Group == 3).Select(s => s.Description).ToList();
+                    sImage = "";
+                    if (images is { Count: > 0 })
+                    {
+                        var rnd = new Random().Next(images.Count);
+                        sImage = images[rnd];
+                    }
+
+                    <div class="col-md-4">
+                        <div class="tour-box style4">
+                            <div class="tour-box_img global-img">
+                                <img src="img/dtour/@sImage" alt="image">
+                            </div>
+                            <div class="tour-content">
+                                <h3 class="box-title min-h-125px">
+                                    @tourInfo?.Title
+                                </h3>
+                                <h4 class="tour-box_price">
+                                <span
+                                    class="currency">@(item?.Price.AutoFormat()) @item?.PriceSymbol</span>/Person
+                                </h4>
+                                <div class="tour-action">
+                                <span>
+                                    <i class="fas fa-clock"></i>
+                                    @item?.DurationDetail
+                                </span>
+                                    <button class="th-btn style4 th-icon"
+                                            @onclick="() => { SetItem(item);}">@Loc["Book now"]</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
 }
 else
@@ -215,7 +270,7 @@ else
                                 <img src="img/dtour/@sImage" alt="image">
                             </div>
                             <div class="tour-content">
-                                <h3 class="box-title">
+                                <h3 class="box-title min-h-125px">
                                     @tourInfo?.Title
                                 </h3>
                                 <h4 class="tour-box_price">
@@ -265,6 +320,7 @@ else
         data = item!;
         _showDetail = true;
         initSlider = true;
+        CallJsNoWait("clickItem", "scroll-top");
         StateHasChanged();
     }
 
